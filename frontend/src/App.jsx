@@ -4,6 +4,7 @@ import Home from './pages/Home'
 import ErrorPage from './pages/ErrorPage'
 import Login from './pages/Login'
 import Navbar from './components/myui/Navbar'
+import Footer from './components/myui/Footer'
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
           <Route path='/login' element={<Login />} />
           <Route path='*' element={<ErrorPage />} />
         </Routes>
+        <Footer />
       </BrowserRouter>
     </>
   )
