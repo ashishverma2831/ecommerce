@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Button } from "@/components/ui/button"
 import {
     Card,
@@ -16,8 +16,34 @@ import {
     TabsList,
     TabsTrigger,
 } from "@/components/ui/tabs"
+import { useFormik } from 'formik'
 
 const Login = () => {
+
+    const [loginPassword, setLoginPassword] = useState(true);
+    const [registerPassword, setRegisterPassword] = useState(true);
+
+    const loginForm = useFormik({
+        initialValues: {
+            email: '',
+            password: ''
+        },
+        onSubmit: (values) => {
+            console.log(values)
+        }
+    })
+
+    const registerForm = useFormik({
+        initialValues: {
+            name: '',
+            email: '',
+            password: ''
+        },
+        onSubmit: (values) => {
+            console.log(values)
+        }
+    })
+
     return (
         <>
             <section className='bg-gray-200 h-screen flex justify-center items-center'>
@@ -27,54 +53,64 @@ const Login = () => {
                         <TabsTrigger value="register">Create Account</TabsTrigger>
                     </TabsList>
                     <TabsContent value="login">
-                        <Card>
-                            <CardHeader>
-                                <CardTitle>Login here</CardTitle>
-                                <CardDescription>
-                                    Log in to your account to continue.
-                                </CardDescription>
-                            </CardHeader>
-                            <CardContent className="space-y-2">
-                                <div className="space-y-1">
-                                    <Label htmlFor="email">Email</Label>
-                                    <Input type='email' id="email" defaultValue="example@gmail.com" />
-                                </div>
-                                <div className="space-y-1">
-                                    <Label htmlFor="password">Password</Label>
-                                    <Input type='password' id="password" />
-                                </div>
-                            </CardContent>
-                            <CardFooter>
-                                <Button>Login</Button>
-                            </CardFooter>
-                        </Card>
+                        <form onSubmit={loginForm.handleSubmit}>
+                            <Card>
+                                <CardHeader>
+                                    <CardTitle>Login here</CardTitle>
+                                    <CardDescription>
+                                        Log in to your account to continue.
+                                    </CardDescription>
+                                </CardHeader>
+                                <CardContent className="space-y-2">
+                                    <div className="space-y-1">
+                                        <Label htmlFor="email">Email</Label>
+                                        <Input onChange={loginForm.handleChange} placeholder='example@gmail.com' value={loginForm.values.email} type='email' id="email" />
+                                    </div>
+                                    <div className="space-y-1">
+                                        <Label htmlFor="password">Password</Label>
+                                        <div className='flex relative items-center'>
+                                            <Input onChange={loginForm.handleChange} value={loginForm.values.password} type={loginPassword?'password':'text'} id="password" />
+                                            {loginPassword ? <i onClick={()=>setLoginPassword(false)} className="fa-solid fa-eye absolute right-2 "></i> : <i onClick={()=>setLoginPassword(true)} className="fa-regular fa-eye absolute right-2"></i>}
+                                        </div>
+                                    </div>
+                                </CardContent>
+                                <CardFooter>
+                                    <Button type='submit'>Login</Button>
+                                </CardFooter>
+                            </Card>
+                        </form>
                     </TabsContent>
                     <TabsContent value="register">
-                        <Card>
-                            <CardHeader>
-                                <CardTitle>Register here</CardTitle>
-                                <CardDescription>
-                                    Don't have an account? Register here.
-                                </CardDescription>
-                            </CardHeader>
-                            <CardContent className="space-y-2">
-                                <div className="space-y-1">
-                                    <Label htmlFor="name">Name</Label>
-                                    <Input id="name" type="text" defaultValue='Salman Khan' />
-                                </div>
-                                <div className="space-y-1">
-                                    <Label htmlFor="email">Email</Label>
-                                    <Input id="email" type="email" defaultValue='salmankhan@gmail.com'/>
-                                </div>
-                                <div className="space-y-1">
-                                    <Label htmlFor="password">Password</Label>
-                                    <Input id="password" type="password" />
-                                </div>
-                            </CardContent>
-                            <CardFooter>
-                                <Button>Register</Button>
-                            </CardFooter>
-                        </Card>
+                        <form onSubmit={registerForm.handleSubmit}>
+                            <Card>
+                                <CardHeader>
+                                    <CardTitle>Register here</CardTitle>
+                                    <CardDescription>
+                                        Don't have an account? Register here.
+                                    </CardDescription>
+                                </CardHeader>
+                                <CardContent className="space-y-2">
+                                    <div className="space-y-1">
+                                        <Label htmlFor="name">Name</Label>
+                                        <Input onChange={registerForm.handleChange} value={registerForm.values.name} id="name" type="text" placeholder='Salman Khan' />
+                                    </div>
+                                    <div className="space-y-1">
+                                        <Label htmlFor="email">Email</Label>
+                                        <Input onChange={registerForm.handleChange} value={registerForm.values.email} id="email" type="email" placeholder='salmankhan@gmail.com' />
+                                    </div>
+                                    <div className="space-y-1">
+                                        <Label htmlFor="password">Password</Label>
+                                        <div className='flex relative items-center'>
+                                            <Input onChange={registerForm.handleChange} value={registerForm.values.password} type={registerPassword?'password':'text'} id="password" />
+                                            {registerPassword ? <i onClick={()=>setRegisterPassword(false)} className="fa-solid fa-eye absolute right-2 "></i> : <i onClick={()=>setRegisterPassword(true)} className="fa-regular fa-eye absolute right-2"></i>}
+                                        </div>
+                                    </div>
+                                </CardContent>
+                                <CardFooter>
+                                    <Button type='submit'>Register</Button>
+                                </CardFooter>
+                            </Card>
+                        </form>
                     </TabsContent>
                 </Tabs>
             </section>
