@@ -7,7 +7,7 @@ const Footer = () => {
       <footer className='max-w-screen-lg mx-auto bg-red-300'>
         <div className='p-4 grid grid-cols-2 md:grid-cols-4 gap-4'>
           <div>
-            <h3 className='text-xl font-semibold'>Logo</h3>
+            <img src='src/assets/logo.png' className='w-[88px] mix-blend-multiply' alt='logo' />
             <div className='flex flex-col mt-4 gap-4'>
               <p className='text-gray-500'>Some text here fsflslkf lmfklwekln nwelkfnklwen newkfnklwen ewnfklnwekln wenfklwenfklew  klnewklnf  ewnfklewn neknween ewioweio oewinfne wenfemkj </p>
               <div className='flex text-xl justify-start gap-4'>
@@ -37,7 +37,7 @@ const Footer = () => {
             </ul>
           </div>
           <div>
-          <h3 className='text-xl font-semibold'>About Us</h3>
+            <h3 className='text-xl font-semibold'>About Us</h3>
             <ul className='flex flex-col gap-2 mt-4'>
               <li className='hover:underline hover:translate-x-1 duration-500 w-fit'><Link>Values</Link></li>
               <li className='hover:underline hover:translate-x-1 duration-500 w-fit'><Link>Contact Us</Link></li>

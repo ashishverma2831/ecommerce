@@ -19,3 +19,22 @@ for (let i = 1; i <= 100; i++) {
 }
 
 console.log(tShirts);
+
+export const typeOfTshirts = [
+    {
+        title:'Round Neck',
+        image:'https://printo-s3.dietpixels.net/site/20231117_175412539277_599ebc_Round-neck.jpg?quality=70&format=webp&w=384'
+    },
+    {
+        title:'Polo Neck',
+        image:'https://printo-s3.dietpixels.net/site/20231117_180439005675_d7aa04_Polo.jpg?quality=70&format=webp&w=384'
+    },
+    {
+        title:'V Neck',
+        image:'https://printo-s3.dietpixels.net/site/20231117_175423463304_f22572_V-neck.jpg?quality=70&format=webp&w=384'
+    },
+    {
+        title:'Henley Neck',
+        image:'https://printo-s3.dietpixels.net/site/20231117_184046993287_61603e_Sweat-shirt.jpg?quality=70&format=webp&w=384'
+    }
+]

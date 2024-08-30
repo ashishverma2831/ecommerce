@@ -23,16 +23,16 @@ import './Navbar.css'
 const Navbar = () => {
     return (
         <>
-            <nav className='bg-red-300 text-lg flex justify-between p-4 gap-12 items-center'>
-                <h3 className='italic font-semibold'>Logo</h3>
-                <div className='hidden md:block'>
+            <nav className='bg-background_1 text-lg flex justify-between p-4 gap-12 items-center'>
+                <img src='src/assets/logo.png' className='w-[88px] mix-blend-multiply' alt='logo' />
+                <div className='hidden md:block text-color_2'>
                     <ul className='flex gap-8'>
                         <NavLink to={'/'} >Home</NavLink>
                         <NavLink to={'/login'} >Login</NavLink>
                         <NavLink to={'/shop'} >Shop</NavLink>
                     </ul>
                 </div>
-                <div className='hidden md:block'>
+                <div className='hidden md:block text-color_2'>
                     <ul className='flex gap-8'>
                         <li> <i className="fa-solid fa-magnifying-glass"></i> </li>
                         <li><i className="fa-solid fa-cart-shopping"></i></li>
@@ -48,11 +48,24 @@ const Navbar = () => {
                         </SheetTrigger>
                         <SheetContent>
                             <SheetHeader>
-                                <SheetTitle>Are you absolutely sure?</SheetTitle>
-                                <SheetDescription>
-                                    This action cannot be undone. This will permanently delete your account
-                                    and remove your data from our servers.
+                                <SheetTitle><img src='src/assets/logo.png' className='w-[88px] mix-blend-multiply' alt='logo' /></SheetTitle>
+                                <SheetDescription className='p-2 flex flex-col gap-8 text-lg text-color_2'>
+                                    <div className=''>
+                                        <ul className='flex flex-col gap-8'>
+                                            <NavLink to={'/'} >Home</NavLink>
+                                            <NavLink to={'/login'} >Login</NavLink>
+                                            <NavLink to={'/shop'} >Shop</NavLink>
+                                        </ul>
+                                    </div>
+                                    <div className=''>
+                                        <ul className='flex gap-8'>
+                                            <li> <i className="fa-solid fa-magnifying-glass"></i> </li>
+                                            <li><i className="fa-solid fa-cart-shopping"></i></li>
+                                            <li><i className="fa-solid fa-user"></i></li>
+                                        </ul>
+                                    </div>
                                 </SheetDescription>
+
                             </SheetHeader>
                         </SheetContent>
                     </Sheet>
