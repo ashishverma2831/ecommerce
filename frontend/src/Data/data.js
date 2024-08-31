@@ -10,6 +10,9 @@ const colors = ['Red', 'Blue', 'Green', 'Black', 'White'];
 for (let i = 1; i <= 100; i++) {
     const tShirt = {
         id: i,
+        title: `T-Shirt ${i}`,
+        rating: Math.floor(Math.random() * 5) + 1,
+        description: `This is a description for T-Shirt ${i}`,
         size: sizes[Math.floor(Math.random() * sizes.length)],
         color: colors[Math.floor(Math.random() * colors.length)],
         price: (Math.random() * 20 + 10).toFixed(2), // Random price between 10 and 30

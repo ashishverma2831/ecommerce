@@ -46,17 +46,17 @@ const Login = () => {
 
     return (
         <>
-            <section className='bg-gray-200 h-screen flex justify-center items-center'>
+            <section className='bg-background_1 text-color_2 h-screen flex justify-center items-center'>
                 <Tabs defaultValue="account" className="w-[400px]">
-                    <TabsList className="grid w-full grid-cols-2">
-                        <TabsTrigger value="login">Login</TabsTrigger>
-                        <TabsTrigger value="register">Create Account</TabsTrigger>
+                    <TabsList className="grid w-full grid-cols-2 text-color_2 bg-background_2">
+                        <TabsTrigger value="login" className='text-color_2' >Login</TabsTrigger>
+                        <TabsTrigger value="register" className='text-color_2' >Create Account</TabsTrigger>
                     </TabsList>
                     <TabsContent value="login">
                         <form onSubmit={loginForm.handleSubmit}>
-                            <Card>
-                                <CardHeader>
-                                    <CardTitle>Login here</CardTitle>
+                            <Card className='text-color_2'>
+                                <CardHeader className='text-center'>
+                                    <CardTitle className='text-color_2'>Login here</CardTitle>
                                     <CardDescription>
                                         Log in to your account to continue.
                                     </CardDescription>
@@ -75,16 +75,16 @@ const Login = () => {
                                     </div>
                                 </CardContent>
                                 <CardFooter>
-                                    <Button type='submit'>Login</Button>
+                                    <Button className='bg-color_2 rounded-sm hover:bg-color_1 text-background_1' type='submit'>Login</Button>
                                 </CardFooter>
                             </Card>
                         </form>
                     </TabsContent>
                     <TabsContent value="register">
                         <form onSubmit={registerForm.handleSubmit}>
-                            <Card>
-                                <CardHeader>
-                                    <CardTitle>Register here</CardTitle>
+                            <Card className='text-color_2'>
+                                <CardHeader className='text-center'>
+                                    <CardTitle className='text-color_2'>Register here</CardTitle>
                                     <CardDescription>
                                         Don't have an account? Register here.
                                     </CardDescription>
@@ -107,7 +107,7 @@ const Login = () => {
                                     </div>
                                 </CardContent>
                                 <CardFooter>
-                                    <Button type='submit'>Register</Button>
+                                    <Button className='bg-color_2 rounded-sm hover:bg-color_1 text-background_1' type='submit'>Register</Button>
                                 </CardFooter>
                             </Card>
                         </form>

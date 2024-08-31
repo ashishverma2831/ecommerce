@@ -3,13 +3,13 @@ import { Link } from 'react-router-dom'
 
 const Footer = () => {
   return (
-    <>
-      <footer className='max-w-screen-lg mx-auto bg-red-300'>
+    <footer className='bg-background_1'>
+      <div className='max-w-screen-lg mx-auto bg-background_1 text-color_2'>
         <div className='p-4 grid grid-cols-2 md:grid-cols-4 gap-4'>
           <div>
             <img src='src/assets/logo.png' className='w-[88px] mix-blend-multiply' alt='logo' />
             <div className='flex flex-col mt-4 gap-4'>
-              <p className='text-gray-500'>Some text here fsflslkf lmfklwekln nwelkfnklwen newkfnklwen ewnfklnwekln wenfklwenfklew  klnewklnf  ewnfklewn neknween ewioweio oewinfne wenfemkj </p>
+              <p>Some text here fsflslkf lmfklwekln nwelkfnklwen newkfnklwen ewnfklnwekln wenfklwenfklew  klnewklnf  ewnfklewn neknween ewioweio oewinfne wenfemkj </p>
               <div className='flex text-xl justify-start gap-4'>
                 <Link><i className="fa-brands fa-instagram"></i></Link>
                 <Link><i className="fa-brands fa-facebook"></i></Link>
@@ -45,8 +45,8 @@ const Footer = () => {
           </div>
         </div>
         <p className='text-center p-4'>@copyright belong to its owner</p>
-      </footer>
-    </>
+      </div>
+    </footer>
   )
 }
 
