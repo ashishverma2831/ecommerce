@@ -17,7 +17,7 @@ import {
     SheetTitle,
     SheetTrigger,
 } from "@/components/ui/sheet"
-import { NavLink } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import './Navbar.css'
 
 const Navbar = () => {
@@ -35,7 +35,7 @@ const Navbar = () => {
                 <div className='hidden md:block text-color_2'>
                     <ul className='flex gap-8'>
                         <li> <i className="fa-solid fa-magnifying-glass"></i> </li>
-                        <li><i className="fa-solid fa-cart-shopping"></i></li>
+                        <Link to={'cart'}><i className="fa-solid fa-cart-shopping"></i></Link>
                         <li><i className="fa-solid fa-user"></i></li>
                     </ul>
                 </div>

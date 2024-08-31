@@ -75,7 +75,7 @@ const Login = () => {
                                     </div>
                                 </CardContent>
                                 <CardFooter>
-                                    <Button className='bg-color_2 rounded-sm hover:bg-color_1 text-background_1' type='submit'>Login</Button>
+                                    <Button className='bg-color_1 rounded-sm hover:bg-color_2 text-background_1' type='submit'>Login</Button>
                                 </CardFooter>
                             </Card>
                         </form>
@@ -107,7 +107,7 @@ const Login = () => {
                                     </div>
                                 </CardContent>
                                 <CardFooter>
-                                    <Button className='bg-color_2 rounded-sm hover:bg-color_1 text-background_1' type='submit'>Register</Button>
+                                    <Button className='bg-color_1 rounded-sm hover:bg-color_2 text-background_1' type='submit'>Register</Button>
                                 </CardFooter>
                             </Card>
                         </form>

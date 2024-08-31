@@ -14,23 +14,18 @@ const Shop = () => {
             <section className='bg-background_1'>
                 <div className='bg-background_1 text-color_2 max-w-screen-xl mx-auto p-4'>
                     <h1 className='text-3xl text-center font-semibold'>Shop Tshirts now</h1>
-                    <div className='p-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4'>
-                        {
-                            tshirtList.map((tshirt) => {
-                                return (
-                                    <ShopCard tshirt={tshirt} key={tshirt.id} />
-                                )
-                            })
-                        }
+                    <div>
+                        <div></div>
+                        <div className='p-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4'>
+                            {
+                                tshirtList.map((tshirt) => {
+                                    return (
+                                        <ShopCard tshirt={tshirt} key={tshirt.id} />
+                                    )
+                                })
+                            }
+                        </div>
                     </div>
-                    {/* <div>
-                    <Pagination>
-                        <PaginationContent>
-                            <PaginationItem><PaginationPrevious></PaginationPrevious></PaginationItem>
-                            <PaginationItem><PaginationNext></PaginationNext></PaginationItem>
-                        </PaginationContent>
-                    </Pagination>
-                </div> */}
                 </div>
             </section>
         </>
