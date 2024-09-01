@@ -41,3 +41,66 @@ export const typeOfTshirts = [
         image:'https://printo-s3.dietpixels.net/site/20231117_184046993287_61603e_Sweat-shirt.jpg?quality=70&format=webp&w=384'
     }
 ]
+
+export const newTshirts = [
+    {
+        id:101,
+        title:'T-Shirt 101',
+        rating:5,
+        description:'This is a description for T-Shirt 101',
+        size:'M',
+        color:'Red',
+        price:'15.00',
+        image:'https://image.spreadshirtmedia.com/image-server/v1/products/T210A2PA4301PT17X108Y77D10373966W13622H13622/views/1,width=550,height=550,appearanceId=2,backgroundColor=F2F2F2,modelId=6287,crop=list/preloader-mens-t-shirt.jpg'
+    },
+    {
+        id:102,
+        title:'T-Shirt 102',
+        rating:4,
+        description:'This is a description for T-Shirt 102',
+        size:'L',
+        color:'Blue',
+        price:'20.00',
+        image:'https://image.spreadshirtmedia.com/image-server/v1/products/T210A2PA4301PT17X108Y77D10373966W13622H13622/views/1,width=550,height=550,appearanceId=2,backgroundColor=F2F2F2,modelId=6287,crop=list/preloader-mens-t-shirt.jpg'
+    },
+    {
+        id:103,
+        title:'T-Shirt 103',
+        rating:3,
+        description:'This is a description for T-Shirt 103',
+        size:'S',
+        color:'Green',
+        price:'25.00',
+        image:'https://image.spreadshirtmedia.com/image-server/v1/products/T210A2PA4301PT17X108Y77D10373966W13622H13622/views/1,width=550,height=550,appearanceId=2,backgroundColor=F2F2F2,modelId=6287,crop=list/preloader-mens-t-shirt.jpg'
+    },
+    {
+        id:104,
+        title:'T-Shirt 104',
+        rating:2,
+        description:'This is a description for T-Shirt 104',
+        size:'XL',
+        color:'Black',
+        price:'30.00',
+        image:'https://image.spreadshirtmedia.com/image-server/v1/products/T210A2PA4301PT17X108Y77D10373966W13622H13622/views/1,width=550,height=550,appearanceId=2,backgroundColor=F2F2F2,modelId=6287,crop=list/preloader-mens-t-shirt.jpg'
+    },
+    {
+        id:105,
+        title:'T-Shirt 105',
+        rating:1,
+        description:'This is a description for T-Shirt 105',
+        size:'M',
+        color:'White',
+        price:'35.00',
+        image:'https://image.spreadshirtmedia.com/image-server/v1/products/T210A2PA4301PT17X108Y77D10373966W13622H13622/views/1,width=550,height=550,appearanceId=2,backgroundColor=F2F2F2,modelId=6287,crop=list/preloader-mens-t-shirt.jpg',
+    },
+    {
+        id:106,
+        title:'T-Shirt 106',
+        rating:5,
+        description:'This is a description for T-Shirt 106',
+        size:'M',
+        color:'Red',
+        price:'15.00',
+        image:'https://image.spreadshirtmedia.com/image-server/v1/products/T210A2PA4301PT17X108Y77D10373966W13622H13622/views/1,width=550,height=550,appearanceId=2,backgroundColor=F2F2F2,modelId=6287,crop=list/preloader-mens-t-shirt.jpg'
+    }
+]

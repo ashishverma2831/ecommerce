@@ -22,8 +22,8 @@ import './Navbar.css'
 
 const Navbar = () => {
     return (
-        <>
-            <nav className='bg-background_1 text-lg flex justify-between p-4 gap-12 items-center'>
+        <section className='bg-background_1 z-20 sticky top-0 shadow-lg'>
+            <nav className='bg-background_1 max-w-screen-2xl mx-auto text-lg flex justify-between p-4 gap-12 items-center'>
                 <img src='src/assets/logo.png' className='w-[88px] mix-blend-multiply' alt='logo' />
                 <div className='hidden md:block text-color_2'>
                     <ul className='flex gap-8'>
@@ -65,13 +65,12 @@ const Navbar = () => {
                                         </ul>
                                     </div>
                                 </SheetDescription>
-
                             </SheetHeader>
                         </SheetContent>
                     </Sheet>
                 </div>
             </nav>
-        </>
+        </section>
     )
 }
 
