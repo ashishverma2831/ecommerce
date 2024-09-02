@@ -1,3 +1,4 @@
+
 export const tShirts = [];
 
 const sizes = ['S', 'M', 'L', 'XL'];
@@ -125,5 +126,51 @@ export const services = [
         title:'24/7 Support',
         description:'We provide 24/7 support for your queries.',
         class:"fa-solid fa-headset text-background_1 text-4xl text-center w-12 hover:scale-150 duration-500 hover:duration-500"
+    }
+]
+
+export const howToDesign = [
+    {
+        title:'Choose your t-shirt',
+        description:'Choose your t-shirt from our wide range of collections.',
+        image:'https://cdn.shopify.com/app-store/listing_images/9fb2bc86b0afe492b0c868091ab83300/desktop_screenshot/COO2_IDy9fACEAE=.png?height=900&width=1600'
+    },
+    {
+        title:'Choose your design',
+        description:'Choose your design from our wide range of collections.',
+        image:'https://cdn.shopify.com/app-store/listing_images/9fb2bc86b0afe492b0c868091ab83300/desktop_screenshot/COO2_IDy9fACEAE=.png?height=900&width=1600'
+    },
+    {
+        title:'Customize your design',
+        description:'Customize your design with your own texts, logos and more.',
+        image:'https://cdn.shopify.com/app-store/listing_images/9fb2bc86b0afe492b0c868091ab83300/desktop_screenshot/COO2_IDy9fACEAE=.png?height=900&width=1600'
+    },
+    {
+        title:'Place your order',
+        description:'Place your order and get your customized t-shirt in 3-5 business days.',
+        image:'https://cdn.shopify.com/app-store/listing_images/9fb2bc86b0afe492b0c868091ab83300/desktop_screenshot/COO2_IDy9fACEAE=.png?height=900&width=1600'
+    }
+]
+
+export const bulkOrders = [
+    {
+        image:'https://printo-s3.dietpixels.net/site/20231118_001958747849_18071b_Polo.jpg?quality=70&format=webp&w=384',
+        title:'Embroidered Polo Tshirts',
+        desc:'Embroidered Polo Tshirts for your company, events and more as low as ₹498.',
+    },
+    {
+        image:'https://printo-s3.dietpixels.net/site/20231222_205604712147_d09edd_1.jpg?quality=70&format=webp&w=384',
+        title:'Cotton Classic Tshirts',
+        desc:'Cotton Classic Tshirts for your company, events and more as low as ₹298.',
+    },
+    {
+        image:'https://printo-s3.dietpixels.net/site/20231222_205600616850_a18ddc_2.jpg?quality=70&format=webp&w=384',
+        title:'Cotton Round Neck Tshirts',
+        desc:'Cotton Round Neck Tshirts for your company, events and more as low as ₹198.',
+    },
+    {
+        image:'https://printo-s3.dietpixels.net/site/20231222_205555254451_f85786_3.jpg?quality=70&format=webp&w=384',
+        title:'Cotton V Neck Tshirts',
+        desc:'Cotton V Neck Tshirts for your company, events and more as low as ₹198.',
     }
 ]

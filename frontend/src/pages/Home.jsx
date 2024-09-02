@@ -1,5 +1,5 @@
 import React from 'react'
-import { typeOfTshirts, newTshirts, services } from '@/Data/data'
+import { typeOfTshirts, newTshirts, services , howToDesign, bulkOrders} from '@/Data/data'
 import {
   Carousel,
   CarouselContent,
@@ -68,7 +68,7 @@ const Home = () => {
           </div>
 
           <div className='max-w-screen-xl mx-auto w-full p-4'>
-            <h1 className='text-color_2 mb-8 font-semibold text-4xl text-center'>Our Services</h1>
+            <h1 className='text-color_2 mb-8 font-semibold text-4xl text-center'>Why Us...?</h1>
             <div className='hidden max-w-screen-xl p-4 place-items-center mx-auto sm:grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4'>
               {
                 services.map((service, index) => {
@@ -107,7 +107,54 @@ const Home = () => {
           </div>
 
           <div className='max-w-screen-xl mx-auto w-full p-4'>
-            <h1 className='text-color_2 mb-8 font-semibold text-4xl text-center'>Our Services</h1>
+            <h1 className='text-color_2 mb-8 font-semibold text-4xl text-center capitalize'>How to design your own t-shirt</h1>
+            <div className='flex flex-col p-4 md:flex-row gap-16 items-center justify-center'>
+              <img className='w-full md:w-1/2 shadow-xl' src='https://cdn.shopify.com/app-store/listing_images/9fb2bc86b0afe492b0c868091ab83300/desktop_screenshot/COO2_IDy9fACEAE=.png?height=900&width=1600' alt='image' />
+              <div className='text-color_2 font-normal justify-center items-center flex flex-col gap-8'>
+                <ul className='text-color_2 text-left mt-4 list-disc leading-loose'>
+                  {/* <li>Choose your t-shirt</li>
+                  <li>Choose your design</li>
+                  <li>Customize your design</li>
+                  <li>Place your order</li> */}
+                  {
+                    howToDesign.map((design, index) => {
+                      return (
+                        <li key={index}>
+                          <h1 className='text-lg font-semibold'>{design.title}</h1>
+                          <p className='text-[16px] md:hidden lg:block'>{design.description}</p>
+                        </li>
+                      )
+                    })
+                  }
+                </ul>
+                <Button className='bg-color_1 w-fit hover:bg-color_2 text-background_1 p-2 rounded-md'>Customize Now</Button>
+              </div>
+            </div>
+          </div>
+
+          <div className='max-w-screen-xl text-color_1 mx-auto text-center w-full p-4'>
+            <h1 className='text-color_2 mb-4 font-semibold text-4xl text-center capitalize'>Save Big on Bulk Orders</h1>
+            <p className='text-xl mb-2 font-semibold'>Boundless Opportunities - Big Savings!</p>
+            <p className='text-lg'>Ordering for an extra large group?  Dive into our bulk order category to maximize your savings and elevate your group's style. Whether it's for events, teams, or more, we've got your bulk needs covered.</p>
+          </div>
+
+          <div className='max-w-screen-xl mx-auto w-full p-4'>
+            <h1 className='text-color_2 mb-4 font-semibold text-4xl text-center capitalize'>Shop Bulk T-Shirts</h1>
+            <div className='flex flex-wrap p-4 justify-center items-center gap-8'>
+              {
+                bulkOrders.map((tshirt,index)=>{
+                  return(
+                    <div key={index} className='sm:w-[280px] w-full border hover:shadow-2xl text-center text-color_2'>
+                        <img className='w-full' src={tshirt.image} alt={tshirt.title} />
+                        <div className='p-4'>
+                        <h1 className='text-xl font-semibold'>{tshirt.title}</h1>
+                        <p className='text-md'>{tshirt.desc}</p>
+                          </div>
+                    </div>
+                  )
+                })
+              }
+            </div>
           </div>
 
         </div>

@@ -34,7 +34,7 @@ const Navbar = () => {
     return (
         <section className='bg-background_1 z-20 sticky top-0 shadow-lg'>
             <nav className='bg-background_1 max-w-screen-2xl mx-auto text-lg flex justify-between p-4 gap-12 items-center'>
-                <img src='src/assets/logo.png' className='w-[88px] mix-blend-multiply' alt='logo' />
+                <Link to={'/'}><img src='src/assets/logo.png' className='w-[88px] mix-blend-multiply' alt='logo' /></Link>
                 <div className='hidden md:block text-color_2'>
                     <ul className='flex gap-8 items-center'>
                         <NavLink to={'/'} >Home</NavLink>
@@ -83,18 +83,40 @@ const Navbar = () => {
                         </SheetTrigger>
                         <SheetContent>
                             <SheetHeader>
-                                <SheetTitle><img src='src/assets/logo.png' className='w-[88px] mix-blend-multiply' alt='logo' /></SheetTitle>
+                                <SheetTitle><Link to={'/'}><img src='src/assets/logo.png' className='w-[88px] mix-blend-multiply' alt='logo' /></Link></SheetTitle>
                                 <SheetDescription className='p-2 flex flex-col gap-8 text-lg text-color_2'>
                                     <div className=''>
-                                        <ul className='flex flex-col gap-8'>
+                                        <ul className='flex flex-col items-start gap-4'>
                                             <NavLink to={'/'} >Home</NavLink>
                                             <NavLink to={'/login'} >Login</NavLink>
                                             <NavLink to={'/shop'} >Shop</NavLink>
                                         </ul>
                                     </div>
                                     <div className=''>
-                                        <ul className='flex gap-8'>
-                                            <li> <i className="fa-solid fa-magnifying-glass"></i> </li>
+                                        <ul className='flex items-center gap-8'>
+                                            {/* <li> <i className="fa-solid fa-magnifying-glass"></i> </li> */}
+                                            {
+                                                searchInput ? (
+                                                    <span className='flex relative items-center'>
+                                                        <Input
+                                                            ref={searchRef}
+                                                            type='text'
+                                                            placeholder='Search'
+                                                            className='bg-background_1 border-b-2 border-color_2 text-color_2'
+                                                        />
+                                                        <button
+                                                            className='absolute right-2'
+                                                            onClick={handleSearch}
+                                                        ><i className="fa-solid fa-magnifying-glass"></i> </button>
+                                                    </span>
+                                                ) : (
+                                                    <button
+                                                        onClick={() => {
+                                                            setsearchInput(!searchInput)
+                                                        }}
+                                                    ><i className="fa-solid fa-magnifying-glass"></i> </button>
+                                                )
+                                            }
                                             <Link to={'cart'}><i className="fa-solid fa-cart-shopping"></i></Link>
                                             <Link to={'/login'}><i className="fa-solid fa-user"></i></Link>
                                         </ul>
