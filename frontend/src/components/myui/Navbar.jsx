@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef, useState } from 'react'
 import {
     NavigationMenu,
     NavigationMenuContent,
@@ -19,24 +19,59 @@ import {
 } from "@/components/ui/sheet"
 import { Link, NavLink } from 'react-router-dom'
 import './Navbar.css'
+import { Button } from '../ui/button'
+import { Input } from '../ui/input'
 
 const Navbar = () => {
+
+    const [searchInput, setsearchInput] = useState(false);
+    const searchRef = useRef(null);
+    const handleSearch = () => {
+        setsearchInput(!searchInput);
+        console.log(searchRef.current.value);
+    }
+
     return (
         <section className='bg-background_1 z-20 sticky top-0 shadow-lg'>
             <nav className='bg-background_1 max-w-screen-2xl mx-auto text-lg flex justify-between p-4 gap-12 items-center'>
                 <img src='src/assets/logo.png' className='w-[88px] mix-blend-multiply' alt='logo' />
                 <div className='hidden md:block text-color_2'>
-                    <ul className='flex gap-8'>
+                    <ul className='flex gap-8 items-center'>
                         <NavLink to={'/'} >Home</NavLink>
                         <NavLink to={'/login'} >Login</NavLink>
                         <NavLink to={'/shop'} >Shop</NavLink>
                     </ul>
                 </div>
                 <div className='hidden md:block text-color_2'>
-                    <ul className='flex gap-8'>
-                        <li> <i className="fa-solid fa-magnifying-glass"></i> </li>
+                    <ul className='flex gap-8 items-center'>
+                        {
+                            searchInput ? (
+                                <span className='flex relative items-center'>
+                                    <Input
+                                        ref={searchRef}
+                                        type='text'
+                                        placeholder='Search'
+                                        className='bg-background_1 border-b-2 border-color_2 text-color_2'
+                                    />
+                                    <button
+                                        className='absolute right-2'
+                                        onClick={handleSearch}
+                                    ><i className="fa-solid fa-magnifying-glass"></i> </button>
+                                </span>
+                            ) : (
+                                <button
+                                    onClick={() => {
+                                        setsearchInput(!searchInput)
+                                    }}
+                                ><i className="fa-solid fa-magnifying-glass"></i> </button>
+                            )
+                        }
+                        {/* <button
+                            onClick={() => {setsearchInput(!searchInput)
+                            }}
+                        ><i className="fa-solid fa-magnifying-glass"></i> </button> */}
                         <Link to={'cart'}><i className="fa-solid fa-cart-shopping"></i></Link>
-                        <li><i className="fa-solid fa-user"></i></li>
+                        <Link to={'/login'}><i className="fa-solid fa-user"></i></Link>
                     </ul>
                 </div>
                 <div className='block md:hidden'>
@@ -60,8 +95,8 @@ const Navbar = () => {
                                     <div className=''>
                                         <ul className='flex gap-8'>
                                             <li> <i className="fa-solid fa-magnifying-glass"></i> </li>
-                                            <li><i className="fa-solid fa-cart-shopping"></i></li>
-                                            <li><i className="fa-solid fa-user"></i></li>
+                                            <Link to={'cart'}><i className="fa-solid fa-cart-shopping"></i></Link>
+                                            <Link to={'/login'}><i className="fa-solid fa-user"></i></Link>
                                         </ul>
                                     </div>
                                 </SheetDescription>

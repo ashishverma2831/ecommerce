@@ -47,7 +47,7 @@ const Login = () => {
     return (
         <>
             <section className='bg-background_1 text-color_2 h-screen flex justify-center items-center'>
-                <Tabs defaultValue="account" className="w-[400px]">
+                <Tabs defaultValue="login" className="w-[400px]">
                     <TabsList className="grid w-full grid-cols-2 text-color_2 bg-background_2">
                         <TabsTrigger value="login" className='text-color_2' >Login</TabsTrigger>
                         <TabsTrigger value="register" className='text-color_2' >Create Account</TabsTrigger>

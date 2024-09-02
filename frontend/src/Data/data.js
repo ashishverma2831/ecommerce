@@ -104,3 +104,26 @@ export const newTshirts = [
         image:'https://image.spreadshirtmedia.com/image-server/v1/products/T210A2PA4301PT17X108Y77D10373966W13622H13622/views/1,width=550,height=550,appearanceId=2,backgroundColor=F2F2F2,modelId=6287,crop=list/preloader-mens-t-shirt.jpg'
     }
 ]
+
+export const services = [
+    {
+        title:'Customize Tshirts',
+        description:'Customize your tshirts with your own designs, logos, texts and more.',
+        class:"fa-solid fa-shirt text-background_1 text-4xl text-center w-12 hover:scale-150 duration-500 hover:duration-500"
+    },
+    {
+        title:'Fast Delivery',
+        description:'We deliver your tshirts in 3-5 business days.',
+        class:"fa-solid fa-truck text-background_1 text-4xl text-center w-12 hover:scale-150 duration-500 hover:duration-500"
+    },
+    {
+        title:'Quality Products',
+        description:'We use high quality products for your tshirts.',
+        class:"fa-solid fa-square-check text-background_1 text-4xl text-center w-12 hover:scale-150 duration-500 hover:duration-500"
+    },
+    {
+        title:'24/7 Support',
+        description:'We provide 24/7 support for your queries.',
+        class:"fa-solid fa-headset text-background_1 text-4xl text-center w-12 hover:scale-150 duration-500 hover:duration-500"
+    }
+]
