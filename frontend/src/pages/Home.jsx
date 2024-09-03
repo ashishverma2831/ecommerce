@@ -1,5 +1,5 @@
 import React from 'react'
-import { typeOfTshirts, newTshirts, services , howToDesign, bulkOrders} from '@/Data/data'
+import { typeOfTshirts, newTshirts, services , howToDesign, bulkOrders, topReviews} from '@/Data/data'
 import {
   Carousel,
   CarouselContent,
@@ -16,6 +16,8 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion"
+import TshirtCard from '@/components/myui/TshirtCard'
+import ReviewCard from '@/components/myui/ReviewCard'
 
 
 const Home = () => {
@@ -23,7 +25,7 @@ const Home = () => {
     <>
       <section className='bg-background_1'>
         <div className='flex flex-col gap-16 '>
-          <img src='https://printo-s3.dietpixels.net/site/Web%20banner/Apparel%20CP%20Banner%20Desktop_1717070343.png?quality=70&format=webp&w=1920' alt='hero' />
+          <img className='h-[200px] sm:h-full' src='https://printo-s3.dietpixels.net/site/Web%20banner/Apparel%20CP%20Banner%20Desktop_1717070343.png?quality=70&format=webp&w=1920' alt='hero' />
 
           <div className='max-w-screen-xl mx-auto flex flex-col justify-center items-center'>
             <h1 className='text-color_2 font-semibold text-4xl text-center capitalize'>Make your own customized t-shirts</h1>
@@ -56,7 +58,7 @@ const Home = () => {
                   newTshirts.map((tshirt, id) => {
                     return (
                       <CarouselItem className='sm:basis-1/2 lg:basis-1/3' key={id}>
-                        <ShopCard key={tshirt.id} tshirt={tshirt} />
+                        <TshirtCard key={tshirt.id} tshirt={tshirt} />
                       </CarouselItem>
                     )
                   })
@@ -155,6 +157,30 @@ const Home = () => {
                 })
               }
             </div>
+          </div>
+
+          <div className='sm:max-w-screen-sm w-[calc(100%-110px)] mx-auto mb-8'>
+            <h1 className='text-color_2 mb-8 font-semibold text-4xl text-center'>Top Reviews</h1>
+            <Carousel
+              plugins={[
+                Autoplay({ delay: 4000, stopOnInteraction: true })
+              ]}
+              className='mb-8'
+            >
+              <CarouselContent>
+                {
+                  topReviews.map((review, id) => {
+                    return (
+                      <CarouselItem key={id}>
+                        <ReviewCard key={review.id} review={review} />
+                      </CarouselItem>
+                    )
+                  })
+                }
+              </CarouselContent>
+              <CarouselPrevious />
+              <CarouselNext />
+            </Carousel>
           </div>
 
         </div>

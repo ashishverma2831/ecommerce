@@ -174,3 +174,27 @@ export const bulkOrders = [
         desc:'Cotton V Neck Tshirts for your company, events and more as low as ₹198.',
     }
 ]
+
+export const topReviews = [
+    {
+        id:1,
+        image: 'https://www.zomato.com/partner-with-us/static/media/PawanKumar.fb110f23.png',
+        description: 'We are immensely satisfied with the marketing push Zomato has provided us. We are now exclusive with Zomato and look forward to more growth in our delivery business through online orders.',
+        name: 'Pawan Kumar',
+        owner: 'Chicago BR, Dehradun'
+    },
+    {
+        id:2,
+        image: 'https://www.zomato.com/partner-with-us/static/media/Tushar.6bc47b8a.png',
+        description: 'Zomato delivery fleet saves considerable effort on our part resulting in more fulfilled orders for us. Also, it has now become much easier for customers to discover our brand on Zomato.',
+        name: 'Tushar',
+        owner: 'Concept Shawarma , Delhi NCR'
+    },
+    {
+        id:3,
+        image: 'https://www.zomato.com/partner-with-us/static/media/Jasmeet.7da6a5e1.png',
+        description: 'Earlier, we delivered food orders to our known and repeat customers but now we have been able to create a completely new segment of repeat users - all because of the Zomato app.',
+        name: 'Jasmeet Singh',
+        owner: 'Pick and Move, Udaipur'
+    }
+]
