@@ -27,18 +27,22 @@ console.log(tShirts);
 export const typeOfTshirts = [
     {
         title:'Round Neck',
+        id:'roundneck',
         image:'https://printo-s3.dietpixels.net/site/20231117_175412539277_599ebc_Round-neck.jpg?quality=70&format=webp&w=384'
     },
     {
         title:'Polo Neck',
+        id:'poloneck',
         image:'https://printo-s3.dietpixels.net/site/20231117_180439005675_d7aa04_Polo.jpg?quality=70&format=webp&w=384'
     },
     {
         title:'V Neck',
+        id:'vneck',
         image:'https://printo-s3.dietpixels.net/site/20231117_175423463304_f22572_V-neck.jpg?quality=70&format=webp&w=384'
     },
     {
-        title:'Henley Neck',
+        title:'Hoodies',
+        id:'hoodies',
         image:'https://printo-s3.dietpixels.net/site/20231117_184046993287_61603e_Sweat-shirt.jpg?quality=70&format=webp&w=384'
     }
 ]
@@ -198,3 +202,220 @@ export const topReviews = [
         owner: 'Pick and Move, Udaipur'
     }
 ]
+
+export const typeOfTshirtCollection = {
+    roundneck:[
+        {
+            id:1,
+            title:'Round Neck T-Shirt 1',
+            rating:5,
+            description:'This is a description for Round Neck T-Shirt 1',
+            size:'M',
+            color:'Red',
+            price:'15.00',
+            image:'https://printo-s3.dietpixels.net/site/20231117_175412539277_599ebc_Round-neck.jpg?quality=70&format=webp&w=384'
+        },
+        {
+            id:2,
+            title:'Round Neck T-Shirt 2',
+            rating:4,
+            description:'This is a description for Round Neck T-Shirt 2',
+            size:'L',
+            color:'Blue',
+            price:'20.00',
+            image:'https://printo-s3.dietpixels.net/site/20231117_175412539277_599ebc_Round-neck.jpg?quality=70&format=webp&w=384'
+        },
+        {
+            id:3,
+            title:'Round Neck T-Shirt 3',
+            rating:3,
+            description:'This is a description for Round Neck T-Shirt 3',
+            size:'S',
+            color:'Green',
+            price:'25.00',
+            image:'https://printo-s3.dietpixels.net/site/20231117_175412539277_599ebc_Round-neck.jpg?quality=70&format=webp&w=384'
+        },
+        {
+            id:4,
+            title:'Round Neck T-Shirt 4',
+            rating:2,
+            description:'This is a description for Round Neck T-Shirt 4',
+            size:'XL',
+            color:'Black',
+            price:'30.00',
+            image:'https://printo-s3.dietpixels.net/site/20231117_175412539277_599ebc_Round-neck.jpg?quality=70&format=webp&w=384'
+        },
+        {
+            id:5,
+            title:'Round Neck T-Shirt 5',
+            rating:1,
+            description:'This is a description for Round Neck T-Shirt 5',
+            size:'M',
+            color:'White',
+            price:'35.00',
+            image:'https://printo-s3.dietpixels.net/site/20231117_175412539277_599ebc_Round-neck.jpg?quality=70&format=webp&w=384'
+        }
+    ],
+    poloneck:[
+        {
+            id:6,
+            title:'Polo Neck T-Shirt 1',
+            rating:5,
+            description:'This is a description for Polo Neck T-Shirt 1',
+            size:'M',
+            color:'Red',
+            price:'15.00',
+            image:'https://printo-s3.dietpixels.net/site/20231117_180439005675_d7aa04_Polo.jpg?quality=70&format=webp&w=384'
+        },
+        {
+            id:7,
+            title:'Polo Neck T-Shirt 2',
+            rating:4,
+            description:'This is a description for Polo Neck T-Shirt 2',
+            size:'L',
+            color:'Blue',
+            price:'20.00',
+            image:'https://printo-s3.dietpixels.net/site/20231117_180439005675_d7aa04_Polo.jpg?quality=70&format=webp&w=384'
+        },
+        {
+            id:8,
+            title:'Polo Neck T-Shirt 3',
+            rating:3,
+            description:'This is a description for Polo Neck T-Shirt 3',
+            size:'S',
+            color:'Green',
+            price:'25.00',
+            image:'https://printo-s3.dietpixels.net/site/20231117_180439005675_d7aa04_Polo.jpg?quality=70&format=webp&w=384'
+        },
+        {
+            id:9,
+            title:'Polo Neck T-Shirt 4',
+            rating:2,
+            description:'This is a description for Polo Neck T-Shirt 4',
+            size:'XL',
+            color:'Black',
+            price:'30.00',
+            image:'https://printo-s3.dietpixels.net/site/20231117_180439005675_d7aa04_Polo.jpg?quality=70&format=webp&w=384'
+        },
+        {
+            id:10,
+            title:'Polo Neck T-Shirt 5',
+            rating:1,
+            description:'This is a description for Polo Neck T-Shirt 5',
+            size:'M',
+            color:'White',
+            price:'35.00',
+            image:'https://printo-s3.dietpixels.net/site/20231117_180439005675_d7aa04_Polo.jpg?quality=70&format=webp&w=384'
+        }
+    ],
+    vneck:[
+        {
+            id:11,
+            title:'V Neck T-Shirt 1',
+            rating:5,
+            description:'This is a description for V Neck T-Shirt 1',
+            size:'M',
+            color:'Red',
+            price:'15.00',
+            image:'https://printo-s3.dietpixels.net/site/20231117_175423463304_f22572_V-neck.jpg?quality=70&format=webp&w=384'
+        },
+        {
+            id:12,
+            title:'V Neck T-Shirt 2',
+            rating:4,
+            description:'This is a description for V Neck T-Shirt 2',
+            size:'L',
+            color:'Blue',
+            price:'20.00',
+            image:'https://printo-s3.dietpixels.net/site/20231117_175423463304_f22572_V-neck.jpg?quality=70&format=webp&w=384'
+        },
+        {
+            id:13,
+            title:'V Neck T-Shirt 3',
+            rating:3,
+            description:'This is a description for V Neck T-Shirt 3',
+            size:'S',
+            color:'Green',
+            price:'25.00',
+            image:'https://printo-s3.dietpixels.net/site/20231117_175423463304_f22572_V-neck.jpg?quality=70&format=webp&w=384'
+        },
+        {
+            id:14,
+            title:'V Neck T-Shirt 4',
+            rating:2,
+            description:'This is a description for V Neck T-Shirt 4',
+            size:'XL',
+            color:'Black',
+            price:'30.00',
+            image:'https://printo-s3.dietpixels.net/site/20231117_175423463304_f22572_V-neck.jpg?quality=70&format=webp&w=384'
+        },
+        {
+            id:15,
+            title:'V Neck T-Shirt 5',
+            rating:1,
+            description:'This is a description for V Neck T-Shirt 5',
+            size:'M',
+            color:'White',
+            price:'35.00',
+            image:'https://printo-s3.dietpixels.net/site/20231117_175423463304_f22572_V-neck.jpg?quality=70&format=webp&w=384'
+        }
+    ],
+    hoodies:[
+        {
+            id:16,
+            title:'Hoodie 1',
+            rating:5,
+            description:'This is a description for Hoodie 1',
+            size:'M',
+            color:'Red',
+            price:'15.00',
+            image:'https://printo-s3.dietpixels.net/site/20231117_184046993287_61603e_Sweat-shirt.jpg?quality=70&format=webp&w=384'
+        },
+        {
+            id:17,
+            title:'Hoodie 2',
+            rating:4,
+            description:'This is a description for Hoodie 2',
+            size:'L',
+            color:'Blue',
+            price:'20.00',
+            image:'https://printo-s3.dietpixels.net/site/20231117_184046993287_61603e_Sweat-shirt.jpg?quality=70&format=webp&w=384'
+        },
+        {
+            id:18,
+            title:'Hoodie 3',
+            rating:3,
+            description:'This is a description for Hoodie 3',
+            size:'S',
+            color:'Green',
+            price:'25.00',
+            image:'https://printo-s3.dietpixels.net/site/20231117_184046993287_61603e_Sweat-shirt.jpg?quality=70&format=webp&w=384'
+        },
+        {
+            id:19,
+            title:'Hoodie 4',
+            rating:2,
+            description:'This is a description for Hoodie 4',
+            size:'XL',
+            color:'Black',
+            price:'30.00',
+            image:'https://printo-s3.dietpixels.net/site/20231117_184046993287_61603e_Sweat-shirt.jpg?quality=70&format=webp&w=384'
+        },
+        {
+            id:20,
+            title:'Hoodie 5',
+            rating:1,
+            description:'This is a description for Hoodie 5',
+            size:'M',
+            color:'White',
+            price:'35.00',
+            image:'https://printo-s3.dietpixels.net/site/20231117_184046993287_61603e_Sweat-shirt.jpg?quality=70&format=webp&w=384'
+        }
+    ]
+}
+
+export const tshirtFilters = {
+    size:['S','M','L','XL'],
+    color:['Red','Blue','Green','Black','White'],
+    price:['200-500','500-1000','1000-1500','1500-2000','2500']
+}

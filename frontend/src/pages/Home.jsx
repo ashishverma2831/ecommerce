@@ -1,5 +1,5 @@
-import React from 'react'
-import { typeOfTshirts, newTshirts, services , howToDesign, bulkOrders, topReviews} from '@/Data/data'
+import React, { useState } from 'react'
+import { typeOfTshirts, newTshirts, services, howToDesign, bulkOrders, topReviews, typeOfTshirtCollection } from '@/Data/data'
 import {
   Carousel,
   CarouselContent,
@@ -21,6 +21,9 @@ import ReviewCard from '@/components/myui/ReviewCard'
 
 
 const Home = () => {
+
+  const [typeTshirt, setTypeTshirt] = useState('');
+
   return (
     <>
       <section className='bg-background_1'>
@@ -39,12 +42,33 @@ const Home = () => {
               {
                 typeOfTshirts.map((tshirt, index) => {
                   return (
-                    <img className='' key={index} src={tshirt.image} alt={tshirt.title} />
+                    <img onClick={() => setTypeTshirt(`${tshirt.id}`)} key={index} src={tshirt.image} alt={tshirt.title} />
                   )
                 })
               }
             </div>
           </div>
+
+
+          {
+            typeTshirt && (
+              <div className='max-w-screen-xl mx-auto'>
+                <div className='flex flex-col gap-8 p-4'>
+                  <h1 className='text-color_2 font-semibold text-4xl text-center'>Choose your <span className='uppercase'> '{typeTshirt}'</span></h1>
+                  <div className='flex flex-wrap p-4 justify-center items-center gap-8'>
+                    {
+                      typeOfTshirtCollection[typeTshirt].map((tshirt, index) => {
+                        return (
+                          <TshirtCard key={index} tshirt={tshirt} />
+                        )
+                      })
+                    }
+                  </div>
+                </div>
+              </div>
+
+            )
+          }
 
           <div className='w-[calc(100%-140px)] sm:w-[540px] lg:w-[768px] xl:w-[1024px] 2xl:w-[1340px] mx-auto'>
             <h1 className='text-color_2 mb-8 font-semibold text-4xl text-center'>New Tshirts</h1>
@@ -144,14 +168,14 @@ const Home = () => {
             <h1 className='text-color_2 mb-4 font-semibold text-4xl text-center capitalize'>Shop Bulk T-Shirts</h1>
             <div className='flex flex-wrap p-4 justify-center items-center gap-8'>
               {
-                bulkOrders.map((tshirt,index)=>{
-                  return(
+                bulkOrders.map((tshirt, index) => {
+                  return (
                     <div key={index} className='sm:w-[280px] w-full border hover:shadow-2xl text-center text-color_2'>
-                        <img className='w-full' src={tshirt.image} alt={tshirt.title} />
-                        <div className='p-4'>
+                      <img className='w-full' src={tshirt.image} alt={tshirt.title} />
+                      <div className='p-4'>
                         <h1 className='text-xl font-semibold'>{tshirt.title}</h1>
                         <p className='text-md'>{tshirt.desc}</p>
-                          </div>
+                      </div>
                     </div>
                   )
                 })

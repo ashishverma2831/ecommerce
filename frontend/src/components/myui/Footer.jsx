@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 const Footer = () => {
   return (
     <footer className='bg-background_1'>
-      <div className='max-w-screen-xl mx-auto bg-background_1 text-color_2'>
+      <div className='max-w-screen-lg mx-auto bg-background_1 text-color_2'>
         <div className='p-4 grid grid-cols-2 md:grid-cols-4 gap-4'>
           <div>
             <Link to={'/'}><img src='src/assets/logo.png' className='w-[88px] mix-blend-multiply' alt='logo' /></Link>
@@ -18,7 +18,7 @@ const Footer = () => {
               </div>
             </div>
           </div>
-          <div className='ml-10'>
+          <div className='flex flex-col ml-8'>
             <h3 className='text-xl font-semibold'>Our Shop</h3>
             <ul className='flex flex-col gap-2 mt-4'>
               <li className='hover:underline hover:translate-x-1 duration-500 w-fit'><Link>Home</Link></li>
@@ -27,7 +27,7 @@ const Footer = () => {
               <li className='hover:underline hover:translate-x-1 duration-500 w-fit'><Link>FAQ</Link></li>
             </ul>
           </div>
-          <div>
+          <div className='flex flex-col'>
             <h3 className='text-xl font-semibold'>Help</h3>
             <ul className='flex flex-col gap-2 mt-4'>
               <li className='hover:underline hover:translate-x-1 duration-500 w-fit'><Link>Size guide</Link></li>
@@ -36,7 +36,7 @@ const Footer = () => {
               <li className='hover:underline hover:translate-x-1 duration-500 w-fit'><Link>Wear and Care FAQ</Link></li>
             </ul>
           </div>
-          <div>
+          <div className='flex flex-col'>
             <h3 className='text-xl font-semibold'>About Us</h3>
             <ul className='flex flex-col gap-2 mt-4'>
               <li className='hover:underline hover:translate-x-1 duration-500 w-fit'><Link>Values</Link></li>
