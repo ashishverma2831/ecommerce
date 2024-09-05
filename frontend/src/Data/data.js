@@ -579,3 +579,71 @@ export const recentlViewedProducts = [
         image:'https://printo-s3.dietpixels.net/site/20231117_175412539277_599ebc_Round-neck.jpg?quality=70&format=webp&w=384'
     }
 ]
+
+
+
+
+
+// filters
+export const filterSizes = [
+    {
+        value: "S",
+        label: "Small",
+    },
+    {
+        value: "M",
+        label: "Medium",
+    },
+    {
+        value: "L",
+        label: "Large",
+    },
+    {
+        value: "XL",
+        label: "X-Large",
+    }
+]
+export const filterColors = [
+    {
+        value: "red",
+        label: "Red",
+    },
+    {
+        value: "green",
+        label: "Green",
+    },
+    {
+        value: "blue",
+        label: "Blue",
+    },
+    {
+        value: "black",
+        label: "Black",
+    },
+    {
+        value: "white",
+        label: "White",
+    }
+]
+export const filterPrices = [
+    {
+        value: "500",
+        label: "200-500",
+    },
+    {
+        value: "1000",
+        label: "500-1000",
+    },
+    {
+        value: "1500",
+        label: "1000-1500",
+    },
+    {
+        value: "2000",
+        label: "1500-2000",
+    },
+    {
+        value: "2500",
+        label: "2500",
+    }
+]
