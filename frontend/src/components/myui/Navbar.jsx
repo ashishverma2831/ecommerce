@@ -34,7 +34,7 @@ const Navbar = () => {
     return (
         <section className='bg-background_1 z-20 sticky top-0 shadow-lg'>
             <nav className='bg-background_1 max-w-screen-2xl mx-auto text-lg flex justify-between p-4 gap-12 items-center'>
-                <Link to={'/'}><img src='src/assets/logo.png' className='w-[88px] mix-blend-multiply' alt='logo' /></Link>
+                <Link to={'/'}><img src='/logo.png' className='w-[88px] mix-blend-multiply' alt='logo' /></Link>
                 <div className='hidden md:block text-color_2'>
                     <ul className='flex gap-8 items-center'>
                         <NavLink to={'/'} >Home</NavLink>
