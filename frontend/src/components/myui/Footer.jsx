@@ -7,7 +7,9 @@ const Footer = () => {
       <div className='max-w-screen-lg mx-auto bg-background_1 text-color_2'>
         <div className='p-4 grid grid-cols-2 md:grid-cols-4 gap-4'>
           <div>
-            <Link to={'/'}><img src='src/assets/logo.png' className='w-[88px] mix-blend-multiply' alt='logo' /></Link>
+            <div className='w-fit'>
+              <Link to={'/'} ><img src='src/assets/logo.png' className='w-[88px] mix-blend-multiply' alt='logo' /></Link>
+            </div>
             <div className='flex flex-col mt-4 gap-4'>
               <p>Some text here fsflslkf lmfklwekln nwelkfnklwen newkfnklwen ewnfklnwekln wenfklwenfklew  klnewklnf  ewnfklewn neknween ewioweio oewinfne wenfemkj </p>
               <div className='flex text-xl justify-start gap-4'>

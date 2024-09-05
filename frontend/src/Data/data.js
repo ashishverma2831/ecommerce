@@ -419,3 +419,161 @@ export const tshirtFilters = {
     color:['Red','Blue','Green','Black','White'],
     price:['200-500','500-1000','1000-1500','1500-2000','2500']
 }
+
+export const similarProducts = [
+    {
+        id:1,
+        title:'Similar Product 1',
+        rating:5,
+        description:'This is a description for Similar Product 1',
+        size:'M',
+        color:'Red',
+        price:'15.00',
+        image:'https://printo-s3.dietpixels.net/site/20231117_175412539277_599ebc_Round-neck.jpg?quality=70&format=webp&w=384'
+    },
+    {
+        id:2,
+        title:'Similar Product 2',
+        rating:4,
+        description:'This is a description for Similar Product 2',
+        size:'L',
+        color:'Blue',
+        price:'20.00',
+        image:'https://printo-s3.dietpixels.net/site/20231117_175412539277_599ebc_Round-neck.jpg?quality=70&format=webp&w=384'
+    },
+    {
+        id:3,
+        title:'Similar Product 3',
+        rating:3,
+        description:'This is a description for Similar Product 3',
+        size:'S',
+        color:'Green',
+        price:'25.00',
+        image:'https://printo-s3.dietpixels.net/site/20231117_175412539277_599ebc_Round-neck.jpg?quality=70&format=webp&w=384'
+    },
+    {
+        id:4,
+        title:'Similar Product 4',
+        rating:2,
+        description:'This is a description for Similar Product 4',
+        size:'XL',
+        color:'Black',
+        price:'30.00',
+        image:'https://printo-s3.dietpixels.net/site/20231117_175412539277_599ebc_Round-neck.jpg?quality=70&format=webp&w=384'
+    },
+    {
+        id:5,
+        title:'Similar Product 5',
+        rating:1,
+        description:'This is a description for Similar Product 5',
+        size:'M',
+        color:'White',
+        price:'35.00',
+        image:'https://printo-s3.dietpixels.net/site/20231117_175412539277_599ebc_Round-neck.jpg?quality=70&format=webp&w=384'
+    }
+]
+export const recommendedProducts = [
+    {
+        id:1,
+        title:'Recommended Product 1',
+        rating:5,
+        description:'This is a description for Recommended Product 1',
+        size:'M',
+        color:'Red',
+        price:'15.00',
+        image:'https://printo-s3.dietpixels.net/site/20231117_175412539277_599ebc_Round-neck.jpg?quality=70&format=webp&w=384'
+    },
+    {
+        id:2,
+        title:'Recommended Product 2',
+        rating:4,
+        description:'This is a description for Recommended Product 2',
+        size:'L',
+        color:'Blue',
+        price:'20.00',
+        image:'https://printo-s3.dietpixels.net/site/20231117_175412539277_599ebc_Round-neck.jpg?quality=70&format=webp&w=384'
+    },
+    {
+        id:3,
+        title:'Recommended Product 3',
+        rating:3,
+        description:'This is a description for Recommended Product 3',
+        size:'S',
+        color:'Green',
+        price:'25.00',
+        image:'https://printo-s3.dietpixels.net/site/20231117_175412539277_599ebc_Round-neck.jpg?quality=70&format=webp&w=384'
+    },
+    {
+        id:4,
+        title:'Recommended Product 4',
+        rating:2,
+        description:'This is a description for Recommended Product 4',
+        size:'XL',
+        color:'Black',
+        price:'30.00',
+        image:'https://printo-s3.dietpixels.net/site/20231117_175412539277_599ebc_Round-neck.jpg?quality=70&format=webp&w=384'
+    },
+    {
+        id:5,
+        title:'Recommended Product 5',
+        rating:1,
+        description:'This is a description for Recommended Product 5',
+        size:'M',
+        color:'White',
+        price:'35.00',
+        image:'https://printo-s3.dietpixels.net/site/20231117_175412539277_599ebc_Round-neck.jpg?quality=70&format=webp&w=384'
+    }
+]
+
+export const recentlViewedProducts = [
+    {
+        id:1,
+        title:'Recent Product 1',
+        rating:5,
+        description:'This is a description for Recent Product 1',
+        size:'M',
+        color:'Red',
+        price:'15.00',
+        image:'https://printo-s3.dietpixels.net/site/20231117_175412539277_599ebc_Round-neck.jpg?quality=70&format=webp&w=384'
+    },
+    {
+        id:2,
+        title:'Recent Product 2',
+        rating:4,
+        description:'This is a description for Recent Product 2',
+        size:'L',
+        color:'Blue',
+        price:'20.00',
+        image:'https://printo-s3.dietpixels.net/site/20231117_175412539277_599ebc_Round-neck.jpg?quality=70&format=webp&w=384'
+    },
+    {
+        id:3,
+        title:'Recent Product 3',
+        rating:3,
+        description:'This is a description for Recent Product 3',
+        size:'S',
+        color:'Green',
+        price:'25.00',
+        image:'https://printo-s3.dietpixels.net/site/20231117_175412539277_599ebc_Round-neck.jpg?quality=70&format=webp&w=384'
+    },
+    {
+        id:4,
+        title:'Recent Product 4',
+        rating:2,
+        description:'This is a description for Recent Product 4',
+        size:'XL',
+        color:'Black',
+        price:'30.00',
+        image:'https://printo-s3.dietpixels.net/site/20231117_175412539277_599ebc_Round-neck.jpg?quality=70&format=webp&w=384'
+    },
+    {
+        id:5,
+        title:'Recent Product 5',
+        rating:1,
+        description:'This is a description for Recent Product 5',
+        size:'M',
+        color:'White',
+        price:'35.00',
+        image:'https://printo-s3.dietpixels.net/site/20231117_175412539277_599ebc_Round-neck.jpg?quality=70&format=webp&w=384'
+    }
+]

@@ -8,6 +8,7 @@ import Footer from './components/myui/Footer'
 import Shop from './pages/Shop'
 import TshirtDetail from './pages/TshirtDetail'
 import Cart from './pages/Cart'
+import DesignTshirt from './pages/DesignTshirt'
 
 const App = () => {
   return (
@@ -19,8 +20,9 @@ const App = () => {
           <Route path='/login' element={<Login />} />
           <Route path='/shop' element={<Shop />} />
           {/* <Route path=':tshirt-id' element={<TshirtDetail />} /> */}
-          <Route path='cart' element={<Cart />} />
-          <Route path='/shop/:tshirt-id' element={<TshirtDetail />} />
+          <Route path='/cart' element={<Cart />} />
+          <Route path='/shop/:id' element={<TshirtDetail />} />
+          <Route path='/design-your-tshirt' element={<DesignTshirt />} />
           <Route path='*' element={<ErrorPage />} />
         </Routes>
         <Footer />

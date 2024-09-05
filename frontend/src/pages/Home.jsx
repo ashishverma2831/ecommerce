@@ -18,6 +18,7 @@ import {
 } from "@/components/ui/accordion"
 import TshirtCard from '@/components/myui/TshirtCard'
 import ReviewCard from '@/components/myui/ReviewCard'
+import { Link } from 'react-router-dom'
 
 
 const Home = () => {
@@ -33,7 +34,7 @@ const Home = () => {
           <div className='max-w-screen-xl mx-auto flex flex-col justify-center items-center'>
             <h1 className='text-color_2 font-semibold text-4xl text-center capitalize'>Make your own customized t-shirts</h1>
             <p className='text-color_2 text-center'> Make your own brands, your own style customizable t-shirts in few minutes and deliver it anywhere worldwide that makes a lasting impression.</p>
-            <Button className='bg-color_1 w-fit hover:bg-color_2 mt-6 text-background_1 p-2 rounded-md'>Customize Now</Button>
+            <Link to={'/design-your-tshirt'}><Button className='bg-color_1 w-fit hover:bg-color_2 mt-6 text-background_1 p-2 rounded-md'>Customize Now</Button></Link>
           </div>
 
           <div className='max-w-screen-xl mx-auto'>
@@ -66,7 +67,6 @@ const Home = () => {
                   </div>
                 </div>
               </div>
-
             )
           }
 
@@ -153,7 +153,8 @@ const Home = () => {
                     })
                   }
                 </ul>
-                <Button className='bg-color_1 w-fit hover:bg-color_2 text-background_1 p-2 rounded-md'>Customize Now</Button>
+            <Link to={'/design-your-tshirt'}><Button className='bg-color_1 w-fit hover:bg-color_2 mt-6 text-background_1 p-2 rounded-md'>Customize Now</Button></Link>
+                {/* <Button className='bg-color_1 w-fit hover:bg-color_2 text-background_1 p-2 rounded-md'>Customize Now</Button> */}
               </div>
             </div>
           </div>
