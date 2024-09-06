@@ -1,6 +1,7 @@
 const User = require('../models/userModel');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const { get } = require('mongoose');
 
 const userController = {
     register: async (req, res) => {
@@ -49,7 +50,69 @@ const userController = {
         } catch (error) {
             return res.status(500).json({msg: error.message});
         }
-    }
+    },
+    login: async(req, res) => {
+        try {
+            const {email, password} = req.body;
+            const user = await User.findOne({email});
+            if(!user) return res.status(400).json({msg: "User does not exist."});
+
+            const isMatch = await bcrypt.compare(password, user.password);
+            if(!isMatch) return res.status(400).json({msg: "Incorrect password."});
+
+            // If login success, create access token and refresh token
+            const accesstoken = createAccessToken({id: user._id});
+            const refreshToken = createRefreshToken({id: user._id});
+
+            res.cookie('refreshtoken', refreshToken, {
+                httpOnly: true,
+                path: '/api/users/refresh_token',
+            });
+
+            res.json({accesstoken});
+
+        } catch (error) {
+            return res.status(500).json({msg: error.message});  
+        }
+    },
+    logout: async(req, res) => {
+        try {
+            res.clearCookie('refreshtoken', {path: '/api/users/refresh_token'});
+            return res.json({msg: "Logged out"});
+        } catch (error) {
+            return res.status(500).json({msg: error.message});
+        }
+    },
+    getUser: async(req, res) => {
+        try {
+            const user = await User.findById(req.user.id).select('-password');
+            if(!user) return res.status(400).json({msg: "User does not exist."});
+            res.json(user);
+        } catch (error) {
+            return res.status(500).json({msg: error.message});
+        }
+    },
+    // updateUser: async(req, res) => {
+    //     try {
+    //         const {name, avatar} = req.body;
+    //         await User.findByIdAndUpdate({_id: req.user.id}, {
+    //             name, avatar
+    //         });
+
+    //         res.json({msg: "Update Success!"});
+    //     } catch (error) {
+    //         return res.status(500).json({msg: error.message});
+    //     }
+    // },
+    // deleteUser: async(req, res) => {
+    //     try {
+    //         await User.findByIdAndDelete(req.user.id);
+    //         res.json({msg: "Delete Success!"});
+    //     } catch (error) {
+    //         return res.status(500).json({msg: error.message});
+    //     }
+    // }
+
 }
 
 const createAccessToken = (payload) => {
