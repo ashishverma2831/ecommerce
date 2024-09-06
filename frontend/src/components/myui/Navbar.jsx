@@ -22,13 +22,14 @@ import './Navbar.css'
 import { Button } from '../ui/button'
 import { Input } from '../ui/input'
 
-const Navbar = () => {
+const Navbar = ({typeTshirt,setTypeTshirt}) => {
 
     const [searchInput, setsearchInput] = useState(false);
     const searchRef = useRef(null);
     const handleSearch = () => {
         setsearchInput(!searchInput);
         console.log(searchRef.current.value);
+        setTypeTshirt(searchRef.current.value.toLowerCase());
     }
 
     return (
@@ -40,6 +41,7 @@ const Navbar = () => {
                         <NavLink to={'/'} >Home</NavLink>
                         <NavLink to={'/login'} >Login</NavLink>
                         <NavLink to={'/shop'} >Shop</NavLink>
+                        <NavLink to={'/design-your-tshirt'} >Design </NavLink>
                     </ul>
                 </div>
                 <div className='hidden md:block text-color_2'>
@@ -90,6 +92,7 @@ const Navbar = () => {
                                             <NavLink to={'/'} >Home</NavLink>
                                             <NavLink to={'/login'} >Login</NavLink>
                                             <NavLink to={'/shop'} >Shop</NavLink>
+                                            <NavLink to={'/design-your-tshirt'} >Design </NavLink>
                                         </ul>
                                     </div>
                                     <div className=''>

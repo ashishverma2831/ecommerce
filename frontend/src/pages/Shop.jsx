@@ -68,7 +68,7 @@ const Shop = () => {
                 <div className='bg-background_1 text-color_2 max-w-screen-xl mx-auto p-4'>
                     <h1 className='text-4xl text-center my-6 font-semibold'>Shop Tshirts now</h1>
                     <div className='py-4 flex flex-col md:flex-row gap-8'>
-                        <div className='bg-background_2 h-fit z-30 md:sticky top-[100px] shadow-xl p-2'>
+                        <div className='bg-background_2 h-fit z-30 md:sticky top-[100px] shadow-lg hover:shadow-2xl p-2'>
                             <h3 className='text-2xl p-2'>Filters</h3>
                             <form onSubmit={filterForm.handleSubmit} className='p-2 md:w-[240px] flex flex-col gap-4 justify-center'>
                                 {/* <select className='p-2 rounded-md border-none outline-none bg-background_1' id='size' onChange={filterForm.handleChange} value={filterForm.values.size}>

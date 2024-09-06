@@ -415,6 +415,8 @@ export const typeOfTshirtCollection = {
         }
     ]
 }
+// console.log(Object.keys(typeOfTshirtCollection));
+
 
 export const tshirtFilters = {
     size:['S','M','L','XL'],

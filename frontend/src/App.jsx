@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Home from './pages/Home'
 import ErrorPage from './pages/ErrorPage'
@@ -11,12 +11,15 @@ import Cart from './pages/Cart'
 import DesignTshirt from './pages/DesignTshirt'
 
 const App = () => {
+
+  const [typeTshirt, setTypeTshirt] = useState('');
+
   return (
     <>
       <BrowserRouter>
-        <Navbar />
+        <Navbar typeTshirt={typeTshirt} setTypeTshirt={setTypeTshirt} />
         <Routes>
-          <Route path='/' element={<Home />} />
+          <Route path='/' element={<Home typeTshirt={typeTshirt} setTypeTshirt={setTypeTshirt} />} />
           <Route path='/login' element={<Login />} />
           <Route path='/shop' element={<Shop />} />
           <Route path='/cart' element={<Cart />} />

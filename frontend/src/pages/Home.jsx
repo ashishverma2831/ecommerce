@@ -21,9 +21,10 @@ import ReviewCard from '@/components/myui/ReviewCard'
 import { Link } from 'react-router-dom'
 
 
-const Home = () => {
+const Home = ({typeTshirt,setTypeTshirt}) => {
 
-  const [typeTshirt, setTypeTshirt] = useState('');
+  // const [typeTshirt, setTypeTshirt] = useState('');
+  // console.log(Object.keys(typeOfTshirtCollection))
 
   return (
     <>
@@ -52,11 +53,11 @@ const Home = () => {
 
 
           {
-            typeTshirt && (
+            Object.keys(typeOfTshirtCollection).includes(typeTshirt) ? (
               <div className='max-w-screen-xl mx-auto'>
                 <div className='flex flex-col gap-8 p-4'>
                   <h1 className='text-color_2 font-semibold text-4xl text-center'>Choose your <span className='uppercase'> '{typeTshirt}'</span></h1>
-                  <div className='flex flex-wrap p-4 justify-center items-center gap-8'>
+                  <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 place-items-center  gap-4'>
                     {
                       typeOfTshirtCollection[typeTshirt].map((tshirt, index) => {
                         return (
@@ -66,6 +67,10 @@ const Home = () => {
                     }
                   </div>
                 </div>
+              </div>
+            ): typeTshirt && (
+              <div className='max-w-screen-xl mx-auto'>
+                <h1 className='text-color_2 font-semibold text-4xl text-center'>No data Found</h1>
               </div>
             )
           }
