@@ -98,7 +98,6 @@ const userController = {
     //         await User.findByIdAndUpdate({_id: req.user.id}, {
     //             name, avatar
     //         });
-
     //         res.json({msg: "Update Success!"});
     //     } catch (error) {
     //         return res.status(500).json({msg: error.message});
