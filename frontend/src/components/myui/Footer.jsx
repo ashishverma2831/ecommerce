@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom'
 
 const Footer = () => {
   return (
-    <footer className='bg-background_1'>
-      <div className='max-w-screen-lg mx-auto bg-background_1 text-color_2'>
+    <footer className='bg-background_2 pt-8 text-color_2'>
+      <div className='max-w-screen-lg mx-auto bg-background_2'>
         <div className='p-4 grid grid-cols-2 md:grid-cols-4 gap-4'>
           <div>
             <div className='w-fit'>
@@ -25,7 +25,7 @@ const Footer = () => {
             <ul className='flex flex-col gap-2 mt-4'>
               <li className='hover:underline hover:translate-x-1 duration-500 w-fit'><Link>Home</Link></li>
               <li className='hover:underline hover:translate-x-1 duration-500 w-fit'><Link>About</Link></li>
-              <li className='hover:underline hover:translate-x-1 duration-500 w-fit'><Link>Contact</Link></li>
+              <li className='hover:underline hover:translate-x-1 duration-500 w-fit'><Link to={'/contact-us'}>Contact Us</Link></li>
               <li className='hover:underline hover:translate-x-1 duration-500 w-fit'><Link>FAQ</Link></li>
             </ul>
           </div>
@@ -42,7 +42,7 @@ const Footer = () => {
             <h3 className='text-xl font-semibold'>About Us</h3>
             <ul className='flex flex-col gap-2 mt-4'>
               <li className='hover:underline hover:translate-x-1 duration-500 w-fit'><Link>Values</Link></li>
-              <li className='hover:underline hover:translate-x-1 duration-500 w-fit'><Link>Contact Us</Link></li>
+              <li className='hover:underline hover:translate-x-1 duration-500 w-fit'><Link to={'/contact-us'}>Contact Us</Link></li>
             </ul>
           </div>
         </div>

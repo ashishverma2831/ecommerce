@@ -10,6 +10,7 @@ import TshirtDetail from './pages/TshirtDetail'
 import Cart from './pages/Cart'
 import DesignTshirt from './pages/DesignTshirt'
 import { AppProvider } from './AppContext'
+import ContactUs from './pages/ContactUs'
 
 const App = () => {
 
@@ -27,6 +28,7 @@ const App = () => {
             <Route path='/cart' element={<Cart />} />
             <Route path='/shop/:id' element={<TshirtDetail />} />
             <Route path='/design-your-tshirt' element={<DesignTshirt />} />
+            <Route path='/contact-us' element={<ContactUs />} />
             <Route path='*' element={<ErrorPage />} />
           </Routes>
           <Footer />
