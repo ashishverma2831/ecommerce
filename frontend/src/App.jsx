@@ -11,6 +11,7 @@ import Cart from './pages/Cart'
 import DesignTshirt from './pages/DesignTshirt'
 import { AppProvider } from './AppContext'
 import ContactUs from './pages/ContactUs'
+import { SnackbarProvider } from 'notistack'
 
 const App = () => {
 
@@ -18,22 +19,24 @@ const App = () => {
 
   return (
     <>
-      <BrowserRouter>
-        <AppProvider>
-          <Navbar typeTshirt={typeTshirt} setTypeTshirt={setTypeTshirt} />
-          <Routes>
-            <Route path='/' element={<Home typeTshirt={typeTshirt} setTypeTshirt={setTypeTshirt} />} />
-            <Route path='/login' element={<Login />} />
-            <Route path='/shop' element={<Shop />} />
-            <Route path='/cart' element={<Cart />} />
-            <Route path='/shop/:id' element={<TshirtDetail />} />
-            <Route path='/design-your-tshirt' element={<DesignTshirt />} />
-            <Route path='/contact-us' element={<ContactUs />} />
-            <Route path='*' element={<ErrorPage />} />
-          </Routes>
-          <Footer />
-        </AppProvider>
-      </BrowserRouter>
+      <SnackbarProvider maxSnack={3} anchorOrigin={{vertical:'bottom',horizontal:'right'}}>
+        <BrowserRouter>
+          <AppProvider>
+            <Navbar typeTshirt={typeTshirt} setTypeTshirt={setTypeTshirt} />
+            <Routes>
+              <Route path='/' element={<Home typeTshirt={typeTshirt} setTypeTshirt={setTypeTshirt} />} />
+              <Route path='/login' element={<Login />} />
+              <Route path='/shop' element={<Shop />} />
+              <Route path='/cart' element={<Cart />} />
+              <Route path='/shop/:id' element={<TshirtDetail />} />
+              <Route path='/design-your-tshirt' element={<DesignTshirt />} />
+              <Route path='/contact-us' element={<ContactUs />} />
+              <Route path='*' element={<ErrorPage />} />
+            </Routes>
+            <Footer />
+          </AppProvider>
+        </BrowserRouter>
+      </SnackbarProvider>
     </>
   )
 }

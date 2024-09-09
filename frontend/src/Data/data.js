@@ -22,7 +22,7 @@ for (let i = 1; i <= 100; i++) {
     tShirts.push(tShirt);
 }
 
-console.log(tShirts);
+// console.log(tShirts);
 
 export const typeOfTshirts = [
     {

@@ -12,7 +12,6 @@ const DesignTshirt = () => {
             <div className='bg-blue-400 flex justify-center items-center'>
               {/* <div></div> */}
               <div>
-                
               </div>
               <div></div>
             </div>

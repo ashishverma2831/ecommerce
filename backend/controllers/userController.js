@@ -58,7 +58,7 @@ const userController = {
             if(!user) return res.status(400).json({msg: "User does not exist."});
 
             const isMatch = await bcrypt.compare(password, user.password);
-            if(!isMatch) return res.status(400).json({msg: "Incorrect password."});
+            if(!isMatch) return res.status(401).json({msg: "Incorrect password."});
 
             // If login success, create access token and refresh token
             const accesstoken = createAccessToken({id: user._id});
@@ -92,6 +92,15 @@ const userController = {
             return res.status(500).json({msg: error.message});
         }
     },
+    // getAllUsers: async(req, res) => {
+    //     try {
+    //         const users = await User.find().select('-password');
+    //         if(!users) return res.status(400).json({msg: "User does not exist."});
+    //         res.json(users);
+    //     } catch (error) {
+    //         return res.status(500).json({msg: error.message});
+    //     }
+    // },
     // updateUser: async(req, res) => {
     //     try {
     //         const {name, avatar} = req.body;
