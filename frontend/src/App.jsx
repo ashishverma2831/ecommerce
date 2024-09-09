@@ -12,6 +12,7 @@ import DesignTshirt from './pages/DesignTshirt'
 import { AppProvider } from './AppContext'
 import ContactUs from './pages/ContactUs'
 import { SnackbarProvider } from 'notistack'
+import Profile from './pages/Profile'
 
 const App = () => {
 
@@ -31,6 +32,7 @@ const App = () => {
               <Route path='/shop/:id' element={<TshirtDetail />} />
               <Route path='/design-your-tshirt' element={<DesignTshirt />} />
               <Route path='/contact-us' element={<ContactUs />} />
+              <Route path='/user-profile' element={<Profile />} />
               <Route path='*' element={<ErrorPage />} />
             </Routes>
             <Footer />

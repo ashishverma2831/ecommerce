@@ -21,9 +21,14 @@ import { Link, NavLink } from 'react-router-dom'
 import './Navbar.css'
 import { Button } from '../ui/button'
 import { Input } from '../ui/input'
+import useAppContext from '@/AppContext'
+import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from '../ui/dropdown-menu'
 
-const Navbar = ({typeTshirt,setTypeTshirt}) => {
 
+const Navbar = ({ typeTshirt, setTypeTshirt }) => {
+
+    const { currentUser, setCurrentUser, isLoggedIn, setIsLoggedIn, isAdmin, setIsAdmin, logout } = useAppContext();
     const [searchInput, setsearchInput] = useState(false);
     const searchRef = useRef(null);
     const handleSearch = () => {
@@ -39,7 +44,6 @@ const Navbar = ({typeTshirt,setTypeTshirt}) => {
                 <div className='hidden md:block text-color_2'>
                     <ul className='flex gap-8 items-center'>
                         <NavLink to={'/'} >Home</NavLink>
-                        <NavLink to={'/login'} >Login</NavLink>
                         <NavLink to={'/shop'} >Shop</NavLink>
                         <NavLink to={'/design-your-tshirt'} >Design </NavLink>
                     </ul>
@@ -68,12 +72,28 @@ const Navbar = ({typeTshirt,setTypeTshirt}) => {
                                 ><i className="fa-solid fa-magnifying-glass"></i> </button>
                             )
                         }
-                        {/* <button
-                            onClick={() => {setsearchInput(!searchInput)
-                            }}
-                        ><i className="fa-solid fa-magnifying-glass"></i> </button> */}
                         <Link to={'cart'}><i className="fa-solid fa-cart-shopping"></i></Link>
-                        <Link to={'/login'}><i className="fa-solid fa-user"></i></Link>
+                        {
+                            currentUser !== null && isLoggedIn ? (
+                                    <DropdownMenu>
+                                        <DropdownMenuTrigger>
+                                            <Avatar >
+                                                <AvatarImage className='outline-none' src="https://github.com/shadcn.png" alt="@shadcn" />
+                                                <AvatarFallback>CN</AvatarFallback>
+                                            </Avatar>
+                                        </DropdownMenuTrigger>
+                                        <DropdownMenuContent className='bg-background_1'>
+                                            <DropdownMenuItem>Welcome! {currentUser.name}</DropdownMenuItem>
+                                            <DropdownMenuItem>{currentUser.email}</DropdownMenuItem>
+                                            <DropdownMenuItem><Link to={'/user-profile'} >Profile</Link></DropdownMenuItem>
+                                            <DropdownMenuSeparator />
+                                            <DropdownMenuItem>
+                                                <button onClick={logout}>Logout</button>
+                                            </DropdownMenuItem>
+                                        </DropdownMenuContent>
+                                    </DropdownMenu>
+                            ) : <Link to={'/login'}><i className="fa-solid fa-user"></i></Link>
+                        }
                     </ul>
                 </div>
                 <div className='block md:hidden'>
@@ -90,7 +110,7 @@ const Navbar = ({typeTshirt,setTypeTshirt}) => {
                                     <div className=''>
                                         <ul className='flex flex-col items-start gap-4'>
                                             <NavLink to={'/'} >Home</NavLink>
-                                            <NavLink to={'/login'} >Login</NavLink>
+                                            {/* <NavLink to={'/login'} >Login</NavLink> */}
                                             <NavLink to={'/shop'} >Shop</NavLink>
                                             <NavLink to={'/design-your-tshirt'} >Design </NavLink>
                                         </ul>
