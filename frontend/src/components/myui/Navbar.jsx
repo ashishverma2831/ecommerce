@@ -28,7 +28,7 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSepara
 
 const Navbar = ({ typeTshirt, setTypeTshirt }) => {
 
-    const { currentUser, setCurrentUser, isLoggedIn, setIsLoggedIn, isAdmin, setIsAdmin, logout } = useAppContext();
+    const {userCart, token, currentUser, setCurrentUser, isLoggedIn, setIsLoggedIn, isAdmin, setIsAdmin, logout } = useAppContext();
     const [searchInput, setsearchInput] = useState(false);
     const searchRef = useRef(null);
     const handleSearch = () => {
@@ -72,7 +72,7 @@ const Navbar = ({ typeTshirt, setTypeTshirt }) => {
                                 ><i className="fa-solid fa-magnifying-glass"></i> </button>
                             )
                         }
-                        <Link to={'cart'}><i className="fa-solid fa-cart-shopping"></i></Link>
+                        <Link to={'cart'}><i className="fa-solid fa-cart-shopping"><sup className='bg-background_1 p-1 rounded-full'>{ currentUser !==null && isLoggedIn? userCart.length:null}</sup></i></Link>
                         {
                             currentUser !== null && isLoggedIn ? (
                                     <DropdownMenu>
@@ -82,7 +82,7 @@ const Navbar = ({ typeTshirt, setTypeTshirt }) => {
                                                 <AvatarFallback>CN</AvatarFallback>
                                             </Avatar>
                                         </DropdownMenuTrigger>
-                                        <DropdownMenuContent className='bg-background_1'>
+                                        <DropdownMenuContent className='bg-white text-color_2'>
                                             <DropdownMenuItem>Welcome! {currentUser.name}</DropdownMenuItem>
                                             <DropdownMenuItem>{currentUser.email}</DropdownMenuItem>
                                             <DropdownMenuItem><Link to={'/user-profile'} >Profile</Link></DropdownMenuItem>

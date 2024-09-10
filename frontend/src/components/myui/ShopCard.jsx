@@ -2,7 +2,11 @@ import React from 'react'
 import { Button } from '../ui/button'
 import { Link } from 'react-router-dom'
 
-const ShopCard = ({ tshirt, id }) => {
+const ShopCard = ({cart,setCart, tshirt, id }) => {
+
+    // const handleCart = () => {
+        
+    // }
 
     return (
         <>
@@ -19,9 +23,9 @@ const ShopCard = ({ tshirt, id }) => {
                         <p className='text-sm'>Color: {tshirt.color}</p>
                         <p className='font-bold mt-2'>₹{Math.round(tshirt.price * 80)}</p>
                     </div>
-                    <div className='flex justify-end mt-2'>
-                        <Button className='bg-color_1 hover:bg-color_2 text-background_1 p-2 rounded-md'>Add to cart</Button>
-                    </div>
+                    {/* <div className='flex justify-end mt-2'>
+                        <Button onClick={handleCart} className='bg-color_1 hover:bg-color_2 text-background_1 p-2 rounded-md'>Add to cart</Button>
+                    </div> */}
                 </div>
             </Link>
         </>

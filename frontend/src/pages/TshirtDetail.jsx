@@ -1,17 +1,34 @@
 import React, { useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { tShirts } from '@/Data/data';
 import { Button } from '@/components/ui/button';
 import TshirtCard from '@/components/myui/TshirtCard';
 import { recommendedProducts, recentlViewedProducts, similarProducts } from '@/Data/data';
+import useAppContext from '@/AppContext';
+import { enqueueSnackbar } from 'notistack'
+
 
 const TshirtDetail = () => {
 
+  const {userCart,setUserCart, currentUser, setCurrentUser, isLoggedIn, setIsLoggedIn, isAdmin, setIsAdmin, logout } = useAppContext();
   const { id } = useParams();
   // console.log('id:', id);
-
+  const navigate = useNavigate();
   const [product, setProduct] = useState(tShirts[id-1]);
 
+  const handleCart = () => {
+    if(currentUser!==null && isLoggedIn){
+      const check = userCart.every(item => item.id !== product.id);
+      if(check){
+        setUserCart([...userCart, {...product, quantity: 1}]);
+        setCurrentUser({...currentUser, cart: [...userCart, {...product, quantity: 1}]});
+        enqueueSnackbar('Product added to cart.', { variant: 'success',action: <Button onClick={()=>navigate('/cart')} className='bg-green-400/50 hover:bg-green-700 text-background_1 p-2 rounded-md'>Checkout now</Button> });
+      }
+      else {
+        enqueueSnackbar('This product is already in the cart.', { variant: 'error',action: <Button onClick={()=>navigate('/cart')} className='bg-red-400/50 hover:bg-red-700 text-background_1 p-2 rounded-md'>View Cart</Button> });
+      };
+    }
+  }
 
   return (
     <>
@@ -42,7 +59,11 @@ const TshirtDetail = () => {
             <p className='text-lg'>Ideal for corporate events, team outings, or everyday wear, these polos combine comfort and style, effortlessly boosting your brand.</p>
             <p className='font-semibold'> <span className='font-normal line-through'>₹1000</span> <span className='text-3xl mx-1'>₹{Math.round(product.price*80)}</span> <span className='text-green-600 font-medium'>10% Off</span> </p>
             <div className='flex justify-end'>
-              <Button className='bg-color_1 hover:bg-color_2 text-background_1 p-2 rounded-md'>Add to cart</Button>
+              <Button
+              onClick={()=>{
+                handleCart();
+              }} 
+              disabled={currentUser===null || !isLoggedIn} className='bg-color_1 hover:bg-color_2 text-background_1 p-2 rounded-md'>Add to cart</Button>
             </div>
           </div>
         </div>

@@ -23,9 +23,11 @@ import {
     PopoverContent,
     PopoverTrigger,
 } from "@/components/ui/popover"
+import useAppContext from '@/AppContext';
 
 const Shop = () => {
 
+    const {token, cart, setCart, currentUser, setCurrentUser, isLoggedIn, setIsLoggedIn, isAdmin, setIsAdmin, logout } = useAppContext();
     const [tshirtList, setTshirtList] = useState(tShirts);
 
     const [openColor, setOpenColor] = useState(false);
@@ -230,7 +232,7 @@ const Shop = () => {
                             {
                                 tshirtList.map((tshirt) => {
                                     return (
-                                        <ShopCard tshirt={tshirt} key={tshirt.id} id={tshirt.id} />
+                                        <ShopCard cart={cart} setCart={setCart} tshirt={tshirt} key={tshirt.id} id={tshirt.id} />
                                     )
                                 })
                             }

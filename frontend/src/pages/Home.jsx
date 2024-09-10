@@ -32,9 +32,9 @@ const Home = ({typeTshirt,setTypeTshirt}) => {
         <div className='flex flex-col gap-16 '>
           <img className='h-[200px] sm:h-full' src='https://printo-s3.dietpixels.net/site/Web%20banner/Apparel%20CP%20Banner%20Desktop_1717070343.png?quality=70&format=webp&w=1920' alt='hero' />
 
-          <div className='max-w-screen-xl mx-auto flex flex-col justify-center items-center'>
+          <div className='max-w-screen-xl px-2 mx-auto flex flex-col justify-center items-center'>
             <h1 className='text-color_2 font-semibold text-4xl text-center capitalize'>Make your own customized t-shirts</h1>
-            <p className='text-color_2 text-center'> Make your own brands, your own style customizable t-shirts in few minutes and deliver it anywhere worldwide that makes a lasting impression.</p>
+            <p className='text-color_2 text-center text-lg mt-2'> Make your own brands, your own style customizable t-shirts in few minutes and deliver it anywhere worldwide that makes a lasting impression.</p>
             <Link to={'/design-your-tshirt'}><Button className='bg-color_1 w-fit hover:bg-color_2 mt-6 text-background_1 p-2 rounded-md'>Customize Now</Button></Link>
           </div>
 

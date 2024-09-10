@@ -1,6 +1,16 @@
 import React from 'react'
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
+import useAppContext from '@/AppContext';
 
 const DesignTshirt = () => {
+  const {cart,setCart, currentUser, setCurrentUser, isLoggedIn, setIsLoggedIn, isAdmin, setIsAdmin, logout } = useAppContext();
 
   return (
     <>
@@ -18,6 +28,7 @@ const DesignTshirt = () => {
           </div>
         </div>
       </section>
+
     </>
   )
 }

@@ -1,70 +1,100 @@
 import { enqueueSnackbar } from 'notistack';
-import { createContext, useContext, useEffect, useLayoutEffect, useState } from 'react'; 
+import { createContext, useContext, useEffect, useLayoutEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const AppContext = createContext();
 
-export const AppProvider = ({children}) => {
+export const AppProvider = ({ children }) => {
 
     const navigate = useNavigate();
     const [token, setToken] = useState(
         localStorage.getItem('token') || null
     );
-    console.log('token:'+token);
-    
+
     const [currentUser, setCurrentUser] = useState(null);
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    // const [isLoggedIn, setIsLoggedIn] = useState(currentUser!==null);
+    const [isLoggedIn, setIsLoggedIn] = useState(token !== null);
     const [isAdmin, setIsAdmin] = useState(false);
-    // let token = null;
-    // useLayoutEffect(() => {
-    //     token = localStorage.getItem('token');
-    // }, []);
+    const [userCart, setUserCart] = useState(currentUser !== null ? currentUser.cart : []);
+
     useEffect(() => {
-        getUser();
+        getUserByToken();
     }, [token]);
 
-    
-    
-    const getUser = async () => {
-        const res = await fetch('http://localhost:3000/api/users/user-info', {
-            method: 'GET',
-            headers: {
-                'Authorization': token,
-            },
-        });
-        const data = await res.json();
-        if(data) {
+    const getUserByToken = async () => {
+        try {
+            const response = await fetch('http://localhost:3000/api/users/user-info', {
+                method: 'GET',
+                headers: {
+                    'Authorization': token
+                }
+            });
+            const data = await response.json();
+            console.log(data);
+            if (data.msg) {
+                setIsLoggedIn(false);
+                setIsAdmin(false);
+                setCurrentUser(null);
+                return;
+            }
             setCurrentUser(data);
             setIsLoggedIn(true);
-            if(data.role === 1) {
+            if (data.role === 1) {
                 setIsAdmin(true);
             }
-        }
-    }        
-    console.log('currentUser:'+currentUser);
-    console.log('isLoggedIn:'+isLoggedIn);
-    console.log('isAdmin:'+isAdmin);
-    
-
-    const logout = async() => {
-        const res = await fetch('http://localhost:3000/api/users/logout', {
-            method: 'GET',
-            headers: {
-                'Authorization': token
-            },
-        });
-        const data = await res.json();
-        if(data) {
-            localStorage.removeItem('token');
-            setCurrentUser(null);
-            setIsLoggedIn(false);
-            setIsAdmin(false);
-            enqueueSnackbar('Logged out Successfully', {variant: 'success'});
-            navigate('/');
+        } catch (error) {
+            console.log(error);
         }
     }
+    
+    const updateUserData = async () => {
+        try {
+            const response = await fetch('http://localhost:3000/api/users/user-info', {
+                method: 'GET',
+                headers: {
+                    'Authorization': token
+                }
+            });
+            const data = await response.json();
+            console.log(data);
+            if (data.msg) {
+                setIsLoggedIn(false);
+                setIsAdmin(false);
+                setCurrentUser(null);
+                return;
+            }
+            setCurrentUser(data);
+            setIsLoggedIn(true);
+            if (data.role === 1) {
+                setIsAdmin(true);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    // console.log('token:' + token);
+    // console.log('currentUser:' + currentUser);
+    // console.log('isLoggedIn:' + isLoggedIn);
+    // console.log('isAdmin:' + isAdmin);
+    // // console.log('cart:' + currentUser.name);
+    
+    // console.log('cart:' + userCart.length);
+    // console.log('cart:' + userCart);
 
-    return <AppContext.Provider value={{currentUser,setCurrentUser,isLoggedIn,setIsLoggedIn,isAdmin,setIsAdmin,logout}}>
+    const logout = async () => {
+        await fetch('http://localhost:3000/api/users/logout', {
+            method: 'GET'
+        });
+        localStorage.clear();
+        setIsAdmin(false);
+        setIsLoggedIn(false);
+        setCurrentUser(null);
+        setToken(null);
+        enqueueSnackbar('Logged out', { variant: 'success' });
+        navigate('/');
+    }
+
+    return <AppContext.Provider value={{token, userCart, setUserCart, currentUser, setCurrentUser, isLoggedIn, setIsLoggedIn, isAdmin, setIsAdmin, logout }}>
         {children}
     </AppContext.Provider>
 }

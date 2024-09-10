@@ -50,10 +50,6 @@ const Login = () => {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    // 'Accept': 'application/json',
-                    // 'Access-Control-Allow-Origin': '*',
-                    // 'Authorization': 'Bearer ' + localStorage.getItem('token'),
-                    // 'Access-Control-Allow-Credentials': true
                 },
                 body: JSON.stringify(values)
             });
@@ -65,7 +61,6 @@ const Login = () => {
                 localStorage.setItem('token',data.accesstoken);
                 // console.log(data);
                 // sessionStorage.setItem('user',JSON.stringify(data));
-
                 enqueueSnackbar('User Logged In Successfully!',{variant:'success'})
                 navigate('/');
             }
