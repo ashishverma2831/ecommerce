@@ -45,10 +45,10 @@ const Cart = () => {
                             <p className='text-md'>{product.quantity}</p>
                           </td>
                           <td>
-                            <p className='text-md'>₹{Math.round(product.price * 80)}</p>
+                            <p className='text-md'>₹{Math.round(product.price)}</p>
                           </td>
                           <td>
-                            <p className='text-md'>₹{Math.round(product.price * 80 * product.quantity)}</p>
+                            <p className='text-md'>₹{Math.round(product.price * product.quantity)}</p>
                           </td>
                         </tr>
                       ))
@@ -57,7 +57,7 @@ const Cart = () => {
                 </table>
               </div>
               <div className='flex flex-col text-color_2 gap-4'>
-                <h1 className='text-3xl font-bold'>Total: ₹{userCart.reduce((acc, item) => acc + item.price * 80 * item.quantity, 0)}</h1>
+                <h1 className='text-3xl font-bold'>Total: ₹{userCart.reduce((acc, item) => acc + item.price * item.quantity, 0)}</h1>
                 <div className='flex justify-end'>
                   <Button className='bg-color_1 hover:bg-color_2 text-background_1 p-2 rounded-md'>Proceed to checkout</Button>
                 </div>

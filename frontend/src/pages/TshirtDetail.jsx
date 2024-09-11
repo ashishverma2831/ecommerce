@@ -57,7 +57,7 @@ const TshirtDetail = () => {
               <li>Rating: {product.rating}</li>
             </ul>
             <p className='text-lg'>Ideal for corporate events, team outings, or everyday wear, these polos combine comfort and style, effortlessly boosting your brand.</p>
-            <p className='font-semibold'> <span className='font-normal line-through'>₹1000</span> <span className='text-3xl mx-1'>₹{Math.round(product.price*80)}</span> <span className='text-green-600 font-medium'>10% Off</span> </p>
+            <p className='font-semibold'> <span className='font-normal line-through'>₹1000</span> <span className='text-3xl mx-1'>₹{product.price}</span> <span className='text-green-600 font-medium'>10% Off</span> </p>
             <div className='flex justify-end'>
               <Button
               onClick={()=>{

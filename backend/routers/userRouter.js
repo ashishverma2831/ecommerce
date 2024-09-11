@@ -12,7 +12,7 @@ router.get('/user-info',auth, userController.getUser);
 // router.get('/all', userController.getAllUsers);
 router.put('/update',auth, userController.updateUser);
 // router.delete('/delete',auth, userController.deleteUser);
-router.get('/user-info/:id', userController.getUserById);
+// router.get('/user-info/:id', userController.getUserById);
 
 
 module.exports = router;

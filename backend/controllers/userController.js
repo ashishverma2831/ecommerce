@@ -1,8 +1,8 @@
 const User = require('../models/userModel');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const { get } = require('mongoose');
-const { merge } = require('../routers/userRouter');
+// const { get } = require('mongoose');
+// const { merge } = require('../routers/userRouter');
 
 const userController = {
     register: async (req, res) => {
@@ -110,15 +110,16 @@ const userController = {
         }
     },
     updateUser: async(req, res) => {
-        try {
-            const {name, avatar} = req.body;
-            await User.findByIdAndUpdate({_id: req.user.id}, {
-                name, avatar
-            });
-            res.json({msg: "Update Success!"});
-        } catch (error) {
-            return res.status(500).json({msg: error.message});
-        }
+        // try {
+        //     // const {name, avatar} = req.body;
+        //     await User.findByIdAndUpdate({_id: req.user._id}, {
+        //         ...req.body
+        //     });
+        //     res.json({msg: "Update Success!"});
+        // } catch (error) {
+        //     return res.status(500).json({msg: error.message});
+        // }
+        console.log('req.body:', req.body);
     },
     deleteUser: async(req, res) => {
         try {

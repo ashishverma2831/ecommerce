@@ -16,7 +16,7 @@ for (let i = 1; i <= 100; i++) {
         description: `This is a description for T-Shirt ${i}`,
         size: sizes[Math.floor(Math.random() * sizes.length)],
         color: colors[Math.floor(Math.random() * colors.length)],
-        price: (Math.random() * 20 + 10).toFixed(2), // Random price between 10 and 30
+        price: 400, // Random price between 10 and 30
         image: 'https://image.spreadshirtmedia.com/image-server/v1/products/T210A2PA4301PT17X108Y77D10373966W13622H13622/views/1,width=550,height=550,appearanceId=2,backgroundColor=F2F2F2,modelId=6287,crop=list/preloader-mens-t-shirt.jpg',
     };
     tShirts.push(tShirt);

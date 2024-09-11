@@ -21,7 +21,7 @@ const ShopCard = ({cart,setCart, tshirt, id }) => {
                         <p className='text-sm '>{tshirt.description}</p>
                         <p className='text-sm'>Size: {tshirt.size}</p>
                         <p className='text-sm'>Color: {tshirt.color}</p>
-                        <p className='font-bold mt-2'>₹{Math.round(tshirt.price * 80)}</p>
+                        <p className='font-bold mt-2'>₹{tshirt.price }</p>
                     </div>
                     {/* <div className='flex justify-end mt-2'>
                         <Button onClick={handleCart} className='bg-color_1 hover:bg-color_2 text-background_1 p-2 rounded-md'>Add to cart</Button>

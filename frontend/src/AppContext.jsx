@@ -23,30 +23,30 @@ export const AppProvider = ({ children }) => {
 
     const getUserByToken = async () => {
         try {
-            const response = await fetch('http://localhost:3000/api/users/user-info', {
+            const response = await fetch('http://localhost:3000/api/users/update', {
                 method: 'GET',
                 headers: {
                     'Authorization': token
                 }
             });
             const data = await response.json();
-            console.log(data);
-            if (data.msg) {
-                setIsLoggedIn(false);
-                setIsAdmin(false);
-                setCurrentUser(null);
-                return;
-            }
-            setCurrentUser(data);
-            setIsLoggedIn(true);
-            if (data.role === 1) {
-                setIsAdmin(true);
-            }
+            // console.log(data);
+            // if (data.msg) {
+            //     setIsLoggedIn(false);
+            //     setIsAdmin(false);
+            //     setCurrentUser(null);
+            //     return;
+            // }
+            // setCurrentUser(data);
+            // setIsLoggedIn(true);
+            // if (data.role === 1) {
+            //     setIsAdmin(true);
+            // }
         } catch (error) {
-            console.log(error);
+            console.log(error)
         }
     }
-    
+
     const updateUserData = async () => {
         try {
             const response = await fetch('http://localhost:3000/api/users/user-info', {
