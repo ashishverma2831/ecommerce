@@ -72,7 +72,7 @@ const Navbar = ({ typeTshirt, setTypeTshirt }) => {
                                 ><i className="fa-solid fa-magnifying-glass"></i> </button>
                             )
                         }
-                        <Link to={'cart'}><i className="fa-solid fa-cart-shopping"><sup className='bg-background_1 p-1 rounded-full'>{ currentUser !==null && isLoggedIn? userCart.length:null}</sup></i></Link>
+                        <Link to={'cart'}><i className="fa-solid fa-cart-shopping"><sup className='bg-background_1 p-1 rounded-full'>{ currentUser !==null && isLoggedIn? currentUser.cart.length:null}</sup></i></Link>
                         {
                             currentUser !== null && isLoggedIn ? (
                                     <DropdownMenu>

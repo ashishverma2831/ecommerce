@@ -1,16 +1,20 @@
 import useAppContext from '@/AppContext';
 import { Button } from '@/components/ui/button'
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 const Cart = () => {
-  const { userCart, setUserCart, currentUser, setCurrentUser, isLoggedIn, setIsLoggedIn, isAdmin, setIsAdmin, logout } = useAppContext();
+  const { userCart, setUserCart,updateUserData, currentUser, setCurrentUser, isLoggedIn, setIsLoggedIn, isAdmin, setIsAdmin, logout } = useAppContext();
+
+  const [cartItem, setCartItem] = useState(currentUser?currentUser.cart:[]);
+  console.log('cartItem:', cartItem);
+  
 
   return (
     <>
       <section className='bg-background_1 py-8'>
         {
-          userCart.length === 0 ? (
+          cartItem.length === 0 ? (
             <div className='max-w-screen-md flex py-4 text-color_2 flex-col gap-2 justify-center items-center mx-auto'>
               <img className='w-[400px] mix-blend-multiply' src='https://media.istockphoto.com/id/861576608/vector/empty-shopping-bag-icon-online-business-vector-icon-template.jpg?s=612x612&w=0&k=20&c=I7MbHHcjhRH4Dy0NVpf4ZN4gn8FVDnwn99YdRW2x5k0=' alt='cart' />
               <h1 className='text-3xl text-center'>Your cart is empty</h1>
@@ -32,7 +36,7 @@ const Cart = () => {
                   </thead>
                   <tbody>
                     {
-                      userCart.map((product, index) => (
+                      cartItem.map((product, index) => (
                         <tr key={index}>
                           <td>
                             <img className='w-16 h-16' src={product.image} alt={product.title} />

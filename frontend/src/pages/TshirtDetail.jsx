@@ -10,7 +10,7 @@ import { enqueueSnackbar } from 'notistack'
 
 const TshirtDetail = () => {
 
-  const {userCart,setUserCart, currentUser, setCurrentUser, isLoggedIn, setIsLoggedIn, isAdmin, setIsAdmin, logout } = useAppContext();
+  const {userCart, setUserCart, updateUserData, currentUser, setCurrentUser, isLoggedIn, setIsLoggedIn, isAdmin, setIsAdmin, logout } = useAppContext();
   const { id } = useParams();
   // console.log('id:', id);
   const navigate = useNavigate();
@@ -22,6 +22,7 @@ const TshirtDetail = () => {
       if(check){
         setUserCart([...userCart, {...product, quantity: 1}]);
         setCurrentUser({...currentUser, cart: [...userCart, {...product, quantity: 1}]});
+        updateUserData();
         enqueueSnackbar('Product added to cart.', { variant: 'success',action: <Button onClick={()=>navigate('/cart')} className='bg-green-400/50 hover:bg-green-700 text-background_1 p-2 rounded-md'>Checkout now</Button> });
       }
       else {

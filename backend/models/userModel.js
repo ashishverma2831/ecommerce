@@ -21,6 +21,14 @@ const userSchema = new Schema({
     cart: {
         type: Array,
         default: []
+    },
+    address: {
+        type: String,
+        default: ''
+    },
+    phone: {
+        type: Number,
+        default: 9999999999
     }
 }, {
     timestamps: true

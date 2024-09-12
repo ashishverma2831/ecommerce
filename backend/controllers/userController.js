@@ -17,7 +17,7 @@ const userController = {
             // const newUser = new User({
             //     name, email, password: passwordHash
             // });
-            const newUser = new User({...req.body, password: passwordHash},{merge: true});
+            const newUser = new User({...req.body, password: passwordHash});
             // save to mongodb
             await newUser.save();
 
@@ -110,15 +110,12 @@ const userController = {
         }
     },
     updateUser: async(req, res) => {
-        // try {
-        //     // const {name, avatar} = req.body;
-        //     await User.findByIdAndUpdate({_id: req.user._id}, {
-        //         ...req.body
-        //     });
-        //     res.json({msg: "Update Success!"});
-        // } catch (error) {
-        //     return res.status(500).json({msg: error.message});
-        // }
+        try {
+            const user = await User.findByIdAndUpdate(req.user.id, req.body, {new: true, merge: {address: req.body.address,phone: req.body.phone}});
+            res.json(user);
+        } catch (error) {
+            return res.status(500).json({msg: error.message});
+        }
         console.log('req.body:', req.body);
     },
     deleteUser: async(req, res) => {

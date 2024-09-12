@@ -10,7 +10,7 @@ export const AppProvider = ({ children }) => {
     const [token, setToken] = useState(
         localStorage.getItem('token') || null
     );
-
+    
     const [currentUser, setCurrentUser] = useState(null);
     // const [isLoggedIn, setIsLoggedIn] = useState(currentUser!==null);
     const [isLoggedIn, setIsLoggedIn] = useState(token !== null);
@@ -18,37 +18,12 @@ export const AppProvider = ({ children }) => {
     const [userCart, setUserCart] = useState(currentUser !== null ? currentUser.cart : []);
 
     useEffect(() => {
-        getUserByToken();
-    }, [token]);
+        getUserByToken();        
+    }, []);
 
     const getUserByToken = async () => {
         try {
-            const response = await fetch('http://localhost:3000/api/users/update', {
-                method: 'GET',
-                headers: {
-                    'Authorization': token
-                }
-            });
-            const data = await response.json();
-            // console.log(data);
-            // if (data.msg) {
-            //     setIsLoggedIn(false);
-            //     setIsAdmin(false);
-            //     setCurrentUser(null);
-            //     return;
-            // }
-            // setCurrentUser(data);
-            // setIsLoggedIn(true);
-            // if (data.role === 1) {
-            //     setIsAdmin(true);
-            // }
-        } catch (error) {
-            console.log(error)
-        }
-    }
-
-    const updateUserData = async () => {
-        try {
+            const token = localStorage.getItem('token');
             const response = await fetch('http://localhost:3000/api/users/user-info', {
                 method: 'GET',
                 headers: {
@@ -68,6 +43,23 @@ export const AppProvider = ({ children }) => {
             if (data.role === 1) {
                 setIsAdmin(true);
             }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    const updateUserData = async () => {
+        try {
+            const res = await fetch('http://localhost:3000/api/users/update-user',{
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': token,
+                    'mode': 'no-cors'
+                },
+                body: JSON.stringify(currentUser)
+            });
+            const data = await res.json();
+            console.log(data);
         } catch (error) {
             console.log(error);
         }
@@ -94,7 +86,7 @@ export const AppProvider = ({ children }) => {
         navigate('/');
     }
 
-    return <AppContext.Provider value={{token, userCart, setUserCart, currentUser, setCurrentUser, isLoggedIn, setIsLoggedIn, isAdmin, setIsAdmin, logout }}>
+    return <AppContext.Provider value={{token, updateUserData, userCart, setUserCart, currentUser, setCurrentUser, isLoggedIn, setIsLoggedIn, isAdmin, setIsAdmin, logout }}>
         {children}
     </AppContext.Provider>
 }
