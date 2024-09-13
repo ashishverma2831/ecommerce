@@ -12,7 +12,7 @@ import { useFormik } from 'formik';
 const TshirtDetail = () => {
 
   const { getUserByToken, currentUser, setCurrentUser, isLoggedIn, setIsLoggedIn, isAdmin, setIsAdmin, logout } = useAppContext();
-  const { id } = useParams();
+  const { id,userId } = useParams();
   const navigate = useNavigate();
   const [product, setProduct] = useState(tShirts[id - 1]);
   console.log('product:', product);
@@ -41,9 +41,11 @@ const TshirtDetail = () => {
       quantity: 1,
       price: product.price,
       color: product.color,
+      image: product.image,
+      description: product.description,
       size: 'M',
-      id: product._id,
-      userId: currentUserId
+      productId: product._id,
+      userId: userId
     },
     onSubmit: async (values) => {
       console.log('values:', values);
@@ -61,7 +63,7 @@ const TshirtDetail = () => {
         enqueueSnackbar(data.msg, { variant: 'error' });
       }
       else {
-        enqueueSnackbar('Product added to cart.', { variant: 'success', action: <Button onClick={() => navigate('/cart')} className='bg-green-400/50 hover:bg-green-700 text-background_1 p-2 rounded-md'>Checkout now</Button> });
+        enqueueSnackbar('Product added to cart.', { variant: 'success', action: <Button onClick={() => navigate(`/user/${currentUserId}/cart`)} className='bg-green-400/50 hover:bg-green-700 text-background_1 p-2 rounded-md'>Checkout now</Button> });
       }
     }
   })

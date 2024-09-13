@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 const Cart = () => {
-  const { getUserByToken,updateUserData, currentUser, setCurrentUser, isLoggedIn, setIsLoggedIn, isAdmin, setIsAdmin, logout } = useAppContext();
+  const { getUserByToken, currentUser, setCurrentUser, isLoggedIn, setIsLoggedIn, isAdmin, setIsAdmin, logout } = useAppContext();
 
   useEffect(() => {
     getUserByToken();
@@ -12,9 +12,7 @@ const Cart = () => {
 
   
   const [cartItem, setCartItem] = useState([]);
-  // setCartItem(currentUser?currentUser.cart:[]);
-  // console.log('cartItem:', cartItem);
-  // console.log('currentUser:', currentUser);
+  // setCurrentUser(currentUser.cart = cartItem);
 
   const getUserCartItems = async () => {
     const res = await fetch('http://localhost:3000/api/users/get-user-cart', {
@@ -23,8 +21,13 @@ const Cart = () => {
         'Authorization': localStorage.getItem('token')
       }
     });
-    const data = await res.json();
-    setCartItem(data);
+    const data = await res.json()
+    .then((result) => {
+      console.log(result);
+      setCartItem(result);
+    }).catch((err) => {
+      console.log(err);
+    });
   }
   useEffect(() => {
     getUserCartItems();

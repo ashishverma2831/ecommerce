@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import {
     NavigationMenu,
     NavigationMenuContent,
@@ -37,6 +37,46 @@ const Navbar = ({ typeTshirt, setTypeTshirt }) => {
         setTypeTshirt(searchRef.current.value.toLowerCase());
     }
 
+    const getUser = async () => {
+        const response = await fetch('http://localhost:3000/api/users/user-info', {
+            method: 'GET',
+            headers: {
+                'Authorization': token
+            }
+        });
+        const data = await response.json()
+        .then((result) => {
+            console.log(result);
+        }).catch((err) => {
+            console.log(err);
+        });
+    }
+    useEffect(() => {
+        getUser();
+    }, [])
+
+    const [cartItem, setCartItem] = useState([]);
+    // setCurrentUser(currentUser.cart = cartItem);
+  
+    const getUserCartItems = async () => {
+      const res = await fetch('http://localhost:3000/api/users/get-user-cart', {
+        method: 'GET',
+        headers: {
+          'Authorization': localStorage.getItem('token')
+        }
+      });
+      const data = await res.json()
+      .then((result) => {
+        console.log(result);
+        setCartItem(result);
+      }).catch((err) => {
+        console.log(err);
+      });
+    }
+    useEffect(() => {
+      getUserCartItems();
+    }, [currentUser])
+
     return (
         <section className='bg-background_1 z-20 sticky top-0 shadow-lg'>
             <nav className='bg-background_1 max-w-screen-2xl mx-auto text-lg flex justify-between p-4 gap-12 items-center'>
@@ -44,7 +84,7 @@ const Navbar = ({ typeTshirt, setTypeTshirt }) => {
                 <div className='hidden md:block text-color_2'>
                     <ul className='flex gap-8 items-center'>
                         <NavLink to={'/'} >Home</NavLink>
-                        <NavLink to={'/shop'} >Shop</NavLink>
+                        <NavLink to={`/shop/${currentUser!==null?currentUser._id:null}`} >Shop</NavLink>
                         <NavLink to={'/design-your-tshirt'} >Design </NavLink>
                     </ul>
                 </div>
@@ -72,7 +112,7 @@ const Navbar = ({ typeTshirt, setTypeTshirt }) => {
                                 ><i className="fa-solid fa-magnifying-glass"></i> </button>
                             )
                         }
-                        <Link to={'cart'}><i className="fa-solid fa-cart-shopping"><sup className='bg-background_1 p-1 rounded-full'>{ currentUser !==null && isLoggedIn? currentUser.cart.length:null}</sup></i></Link>
+                        <Link to={`/user/${currentUser!==null?currentUser._id:null}/cart`}><i className="fa-solid fa-cart-shopping"><sup className='bg-background_1 p-1 rounded-full'>{ currentUser !==null && isLoggedIn? cartItem.length:null}</sup></i></Link>
                         {
                             currentUser !== null && isLoggedIn ? (
                                     <DropdownMenu>

@@ -128,14 +128,14 @@ const userController = {
         }
     },
     addToCart: async (req, res) => {
-        const { productId, quantity, price,size, color } = req.body;
+        const { productId, quantity, price,size, color,image,description } = req.body;
         const id = req.user._id;
+        console.log('req.body:', req.body);
         try {
             let newCart = await new Cart({
-                userId: id, productId, quantity, price,size, color
+                userId: id, productId, quantity, price,size, color,image,description 
             }).save();
             res.json(newCart);
-
         } catch (error) {
             return res.status(500).json({ msg: error.message });
         }
@@ -146,6 +146,35 @@ const userController = {
             const cart = await Cart.find({ userId: id });
             if (!cart) return res.status(400).json({ msg: "User does not exist." });
             res.json(cart);
+        } catch (error) {
+            return res.status(500).json({ msg: error.message });
+        }
+    },
+    updateUserCart: async (req, res) => {
+        const { productId, quantity, price,size, color,image,description } = req.body;
+        const id = req.user._id;
+        try {
+            const cart = await Cart.findOneAndUpdate({ userId: id, productId }, { quantity, price,size, color,image,description });
+            res.json(cart);
+        } catch (error) {
+            return res.status(500).json({ msg: error.message });
+        }
+    },
+    deleteUserCartItem: async (req, res) => {
+        const id = req.user._id;
+        const productId = req.params.id;
+        try {
+            await Cart.findOneAndDelete({ userId: id, productId });
+            res.json({ msg: "Delete Success!" });
+        } catch (error) {
+            return res.status(500).json({ msg: error.message });
+        }
+    },
+    deleteUserCart: async (req, res) => {
+        const id = req.user._id;
+        try {
+            await Cart.findOneAndDelete({ userId: id });
+            res.json({ msg: "Delete Success!" });
         } catch (error) {
             return res.status(500).json({ msg: error.message });
         }

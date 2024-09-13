@@ -27,9 +27,9 @@ const App = () => {
             <Routes>
               <Route path='/' element={<Home typeTshirt={typeTshirt} setTypeTshirt={setTypeTshirt} />} />
               <Route path='/login' element={<Login />} />
-              <Route path='/shop' element={<Shop />} />
-              <Route path='/cart' element={<Cart />} />
-              <Route path='/shop/:id' element={<TshirtDetail />} />
+              <Route path='/shop/:userId' element={<Shop />} />
+              <Route path='/user/:userId/cart' element={<Cart />} />
+              <Route path='/shop/:userId/:id' element={<TshirtDetail />} />
               <Route path='/design-your-tshirt' element={<DesignTshirt />} />
               <Route path='/contact-us' element={<ContactUs />} />
               <Route path='/user-profile' element={<Profile />} />

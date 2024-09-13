@@ -46,23 +46,6 @@ export const AppProvider = ({ children }) => {
             console.log(error);
         }
     }
-    // const updateUserData = async () => {
-    //     try {
-    //         const res = await fetch('http://localhost:3000/api/users/update-user',{
-    //             method: 'PUT',
-    //             headers: {
-    //                 'Content-Type': 'application/json',
-    //                 'Authorization': token,
-    //                 'mode': 'no-cors'
-    //             },
-    //             body: JSON.stringify(currentUser)
-    //         });
-    //         const data = await res.json();
-    //         console.log(data);
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // };
 
     const logout = async () => {
         await fetch('http://localhost:3000/api/users/logout', {

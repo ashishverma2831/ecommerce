@@ -27,10 +27,10 @@ import useAppContext from '@/AppContext';
 
 const Shop = () => {
 
-    const {token, currentUser, setCurrentUser, isLoggedIn, setIsLoggedIn, isAdmin, setIsAdmin, logout } = useAppContext();
+    const { token, currentUser, setCurrentUser, isLoggedIn, setIsLoggedIn, isAdmin, setIsAdmin, logout } = useAppContext();
     const [tshirtList, setTshirtList] = useState(tShirts);
-    console.log('tshirtList:', tshirtList);
-    
+    // console.log('tshirtList:', tshirtList);
+
     const [openColor, setOpenColor] = useState(false);
     const [openSize, setOpenSize] = useState(false);
     const [openPrice, setOpenPrice] = useState(false);
@@ -44,10 +44,10 @@ const Shop = () => {
         color: colorValue,
         price: priceValue
     }
- 
+
     const filterForm = useFormik({
         initialValues: filterObject,
-        onSubmit: (values,{resetForm}) => {
+        onSubmit: (values, { resetForm }) => {
             values.size = sizeValue;
             values.color = colorValue;
             values.price = priceValue;
@@ -65,6 +65,27 @@ const Shop = () => {
         }
     })
 
+    // const [currentUserId, setCurrentUserId] = useState(null);
+    // console.log('currentUserId:', currentUserId);
+
+    // const getUser = async () => {
+    //     const token = localStorage.getItem('token');
+    //     const response = await fetch('http://localhost:3000/api/users/user-info', {
+    //         method: 'GET',
+    //         headers: {
+    //             'Authorization': token
+    //         }
+    //     });
+    //     const data = await response.json();
+    //     console.log(data);
+    //     setCurrentUserId(data._id);
+    // }
+
+    // useEffect(() => {
+    //     getUser();
+    // }, [])
+
+
     return (
         <>
             <section className='bg-background_1'>
@@ -74,29 +95,6 @@ const Shop = () => {
                         <div className='bg-background_2 h-fit z-30 md:sticky top-[100px] shadow-lg hover:shadow-2xl p-2'>
                             <h3 className='text-2xl p-2'>Filters</h3>
                             <form onSubmit={filterForm.handleSubmit} className='p-2 md:w-[240px] flex flex-col gap-4 justify-center'>
-                                {/* <select className='p-2 rounded-md border-none outline-none bg-background_1' id='size' onChange={filterForm.handleChange} value={filterForm.values.size}>
-                                    <option value=''>Select Size</option>
-                                    <option value='S'>Small</option>
-                                    <option value='M'>Medium</option>
-                                    <option value='L'>Large</option>
-                                    <option value='XL'>X-Large</option>
-                                </select>
-                                <select className='p-2 rounded-md border-none outline-none bg-background_1' id='color' onChange={filterForm.handleChange} value={filterForm.values.color}>
-                                    <option value=''>Select Color</option>
-                                    <option value='black'>Black</option>
-                                    <option value='white'>White</option>
-                                    <option value='red'>Red</option>
-                                    <option value='blue'>Blue</option>
-                                    <option value='green'>Green</option>
-                                </select>
-                                <select className='p-2 rounded-md border-none outline-none bg-background_1' id='price' onChange={filterForm.handleChange} value={filterForm.values.price}>
-                                    <option value=''>Select Price</option>
-                                    <option value='500'>0-500</option>
-                                    <option value='1000'>500-1000</option>
-                                    <option value='1500'>1000-1500</option>
-                                    <option value='2000'>1500-2000</option>
-                                    <option value='2000'>2000 above</option>
-                                </select> */}
                                 <Popover open={openSize} onOpenChange={setOpenSize}>
                                     <PopoverTrigger asChild>
                                         <Button
@@ -233,7 +231,7 @@ const Shop = () => {
                             {
                                 tshirtList.map((tshirt) => {
                                     return (
-                                        <ShopCard tshirt={tshirt} key={tshirt._id} />
+                                        <ShopCard currentUser={currentUser} tshirt={tshirt} key={tshirt._id} />
                                     )
                                 })
                             }
