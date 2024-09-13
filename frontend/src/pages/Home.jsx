@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { typeOfTshirts, newTshirts, services, howToDesign, bulkOrders, topReviews, typeOfTshirtCollection } from '@/Data/data'
 import {
   Carousel,
@@ -19,12 +19,18 @@ import {
 import TshirtCard from '@/components/myui/TshirtCard'
 import ReviewCard from '@/components/myui/ReviewCard'
 import { Link } from 'react-router-dom'
+import useAppContext from '@/AppContext'
 
 
 const Home = ({typeTshirt,setTypeTshirt}) => {
 
+  const { currentUser,getUserByToken } = useAppContext();
   // const [typeTshirt, setTypeTshirt] = useState('');
   // console.log(Object.keys(typeOfTshirtCollection))
+
+  useEffect(() => {
+    getUserByToken();
+  }, [])
 
   return (
     <>

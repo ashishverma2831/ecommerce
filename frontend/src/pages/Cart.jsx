@@ -1,12 +1,34 @@
 import useAppContext from '@/AppContext';
 import { Button } from '@/components/ui/button'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 const Cart = () => {
-  const { userCart, setUserCart,updateUserData, currentUser, setCurrentUser, isLoggedIn, setIsLoggedIn, isAdmin, setIsAdmin, logout } = useAppContext();
+  const { getUserByToken,updateUserData, currentUser, setCurrentUser, isLoggedIn, setIsLoggedIn, isAdmin, setIsAdmin, logout } = useAppContext();
 
-  const [cartItem, setCartItem] = useState(currentUser?currentUser.cart:[]);
+  useEffect(() => {
+    getUserByToken();
+  }, [])
+
+  
+  const [cartItem, setCartItem] = useState([]);
+  // setCartItem(currentUser?currentUser.cart:[]);
+  // console.log('cartItem:', cartItem);
+  // console.log('currentUser:', currentUser);
+
+  const getUserCartItems = async () => {
+    const res = await fetch('http://localhost:3000/api/users/get-user-cart', {
+      method: 'GET',
+      headers: {
+        'Authorization': localStorage.getItem('token')
+      }
+    });
+    const data = await res.json();
+    setCartItem(data);
+  }
+  useEffect(() => {
+    getUserCartItems();
+  }, [currentUser])
   console.log('cartItem:', cartItem);
   
 
@@ -14,7 +36,7 @@ const Cart = () => {
     <>
       <section className='bg-background_1 py-8'>
         {
-          cartItem.length === 0 ? (
+          currentUser !== null && cartItem.length === 0 ? (
             <div className='max-w-screen-md flex py-4 text-color_2 flex-col gap-2 justify-center items-center mx-auto'>
               <img className='w-[400px] mix-blend-multiply' src='https://media.istockphoto.com/id/861576608/vector/empty-shopping-bag-icon-online-business-vector-icon-template.jpg?s=612x612&w=0&k=20&c=I7MbHHcjhRH4Dy0NVpf4ZN4gn8FVDnwn99YdRW2x5k0=' alt='cart' />
               <h1 className='text-3xl text-center'>Your cart is empty</h1>
@@ -61,7 +83,7 @@ const Cart = () => {
                 </table>
               </div>
               <div className='flex flex-col text-color_2 gap-4'>
-                <h1 className='text-3xl font-bold'>Total: ₹{userCart.reduce((acc, item) => acc + item.price * item.quantity, 0)}</h1>
+                <h1 className='text-3xl font-bold'>Total: ₹{cartItem.reduce((acc, item) => acc + item.price * item.quantity, 0)}</h1>
                 <div className='flex justify-end'>
                   <Button className='bg-color_1 hover:bg-color_2 text-background_1 p-2 rounded-md'>Proceed to checkout</Button>
                 </div>

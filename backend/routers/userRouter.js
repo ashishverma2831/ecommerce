@@ -12,7 +12,9 @@ router.get('/user-info',auth, userController.getUser);
 // router.get('/all', userController.getAllUsers);
 router.put('/update-user',auth, userController.updateUser);
 // router.delete('/delete',auth, userController.deleteUser);
-// router.get('/user-info/:id', userController.getUserById);
+router.get('/user-info/:id', userController.getUserById);
+router.get('/get-user-cart',auth, userController.getUserCart);
+router.post('/add-to-cart',auth, userController.addToCart);
 
 
 module.exports = router;

@@ -10,12 +10,13 @@ const colors = ['Red', 'Blue', 'Green', 'Black', 'White'];
 // ];
 for (let i = 1; i <= 100; i++) {
     const tShirt = {
-        id: i,
+        _id: i,
         title: `T-Shirt ${i}`,
         rating: Math.floor(Math.random() * 5) + 1,
         description: `This is a description for T-Shirt ${i}`,
         size: sizes[Math.floor(Math.random() * sizes.length)],
         color: colors[Math.floor(Math.random() * colors.length)],
+        // quantity: 1,
         price: 400, // Random price between 10 and 30
         image: 'https://image.spreadshirtmedia.com/image-server/v1/products/T210A2PA4301PT17X108Y77D10373966W13622H13622/views/1,width=550,height=550,appearanceId=2,backgroundColor=F2F2F2,modelId=6287,crop=list/preloader-mens-t-shirt.jpg',
     };

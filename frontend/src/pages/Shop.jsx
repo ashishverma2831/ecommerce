@@ -27,9 +27,10 @@ import useAppContext from '@/AppContext';
 
 const Shop = () => {
 
-    const {token, cart, setCart, currentUser, setCurrentUser, isLoggedIn, setIsLoggedIn, isAdmin, setIsAdmin, logout } = useAppContext();
+    const {token, currentUser, setCurrentUser, isLoggedIn, setIsLoggedIn, isAdmin, setIsAdmin, logout } = useAppContext();
     const [tshirtList, setTshirtList] = useState(tShirts);
-
+    console.log('tshirtList:', tshirtList);
+    
     const [openColor, setOpenColor] = useState(false);
     const [openSize, setOpenSize] = useState(false);
     const [openPrice, setOpenPrice] = useState(false);
@@ -232,7 +233,7 @@ const Shop = () => {
                             {
                                 tshirtList.map((tshirt) => {
                                     return (
-                                        <ShopCard cart={cart} setCart={setCart} tshirt={tshirt} key={tshirt.id} id={tshirt.id} />
+                                        <ShopCard tshirt={tshirt} key={tshirt._id} />
                                     )
                                 })
                             }

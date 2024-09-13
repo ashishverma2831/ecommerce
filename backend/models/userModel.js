@@ -28,7 +28,8 @@ const userSchema = new Schema({
     },
     phone: {
         type: Number,
-        default: 9999999999
+        default: 9999999999,
+        unique: true
     }
 }, {
     timestamps: true
