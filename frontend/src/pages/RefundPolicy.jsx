@@ -34,18 +34,18 @@ const RefundPolicy = () => {
         <>
             <section className='bg-background_1 py-6'>
                 <div className='max-w-screen-lg mx-auto text-center text-color_2 p-6'>
-                    <h1 className='text-4xl capitalize'>Refund Policy</h1>
+                    <h1 className='text-4xl capitalize underline'>Refund Policy</h1>
                     <div className='text-lg flex flex-col gap-6 text-left my-6'>
-                        <p>At Thub, we are committed to ensuring that you are completely satisfied with your purchase. If for any reason you're not happy with your order, we offer a hassle-free refund process, subject to the following conditions:</p>
-                        <ol className='list-number'>
+                        <p className='text-2xl mt-4'>At Thub, we are committed to ensuring that you are completely satisfied with your purchase. If for any reason you're not happy with your order, we offer a hassle-free refund process, subject to the following conditions:</p>
+                        <ol className='list-number flex-col flex gap-4 p-4'>
                             {
                                 Object.keys(refundPolicy).map((refundTitle)=>{
-                                    return <li>
+                                    return <li className='text-xl text-color_2' key={refundTitle}>
                                         {refundTitle}
                                         <ul>
                                             {
                                                 refundPolicy[refundTitle].map((refund) => {
-                                                    return <li key={refund}><span>- </span>{refund}</li>
+                                                    return <li className='text-lg text-color_1' key={refund}><span>- </span>{refund}</li>
                                                 })
                                             }
                                         </ul>

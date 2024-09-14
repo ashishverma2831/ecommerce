@@ -15,6 +15,11 @@ import { SnackbarProvider } from 'notistack'
 import Profile from './pages/Profile'
 import About from './pages/About'
 import RefundPolicy from './pages/RefundPolicy'
+import TermsAndCondition from './pages/TermsAndCondition'
+import PrivacyPolicy from './pages/PrivacyPolicy'
+import ShippingPolicy from './pages/ShippingPolicy'
+import Faq from './pages/Faq'
+import SizeGuide from './pages/SizeGuide'
 
 const App = () => {
 
@@ -33,10 +38,18 @@ const App = () => {
               <Route path='/cart' element={<Cart />} />
               <Route path='/shop' element={<TshirtDetail />} />
               <Route path='/design-your-tshirt' element={<DesignTshirt />} />
-              <Route path='/contact-us' element={<ContactUs />} />
               <Route path='/user-profile' element={<Profile />} />
+
+
+              {/* footer routes */}
+              <Route path='/contact-us' element={<ContactUs />} />
               <Route path='/about-us' element={<About />} />
               <Route path='/refund-policy' element={<RefundPolicy />} />
+              <Route path='/term-and-conditions' element={<TermsAndCondition />} />
+              <Route path='/privacy-policy' element={<PrivacyPolicy />} />
+              <Route path='/shipping-policy' element={<ShippingPolicy />} />
+              <Route path='/faq' element={<Faq />} />
+              <Route path='/size-guide' element={<SizeGuide />} />
               <Route path='*' element={<ErrorPage />} />
             </Routes>
             <Footer />
