@@ -9,6 +9,9 @@ module.exports = {
   ],
   prefix: "",
   theme: {
+    listStyleType:{
+      number:'listStyleType',
+    },
     container: {
       center: true,
       padding: "2rem",

@@ -27,7 +27,7 @@ import useAppContext from '@/AppContext';
 
 const Shop = () => {
 
-    const { token, currentUser, setCurrentUser, isLoggedIn, setIsLoggedIn, isAdmin, setIsAdmin, logout } = useAppContext();
+    // const { token, currentUser, setCurrentUser, isLoggedIn, setIsLoggedIn, isAdmin, setIsAdmin, logout } = useAppContext();
     const [tshirtList, setTshirtList] = useState(tShirts);
     // console.log('tshirtList:', tshirtList);
 
@@ -231,7 +231,7 @@ const Shop = () => {
                             {
                                 tshirtList.map((tshirt) => {
                                     return (
-                                        <ShopCard currentUser={currentUser} tshirt={tshirt} key={tshirt._id} />
+                                        <ShopCard tshirt={tshirt} key={tshirt._id} />
                                     )
                                 })
                             }

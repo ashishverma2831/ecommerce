@@ -6,61 +6,61 @@ const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
 
-    const navigate = useNavigate();
-    const [token, setToken] = useState(
-        localStorage.getItem('token') || null
-    );
+    // const navigate = useNavigate();
+    // const [token, setToken] = useState(
+    //     localStorage.getItem('token') || null
+    // );
     
-    const [currentUser, setCurrentUser] = useState(null);
-    const [isLoggedIn, setIsLoggedIn] = useState(token !== null);
-    const [isAdmin, setIsAdmin] = useState(false);
+    // const [currentUser, setCurrentUser] = useState(null);
+    // const [isLoggedIn, setIsLoggedIn] = useState(token !== null);
+    // const [isAdmin, setIsAdmin] = useState(false);
     
 
-    useEffect(() => {
-        getUserByToken();        
-    }, []);
+    // useEffect(() => {
+    //     getUserByToken();        
+    // }, []);
 
-    const getUserByToken = async () => {
-        try {
-            const token = localStorage.getItem('token');
-            const response = await fetch('http://localhost:3000/api/users/user-info', {
-                method: 'GET',
-                headers: {
-                    'Authorization': token
-                }
-            });
-            const data = await response.json();
-            // console.log(data);
-            if (data.msg) {
-                setIsLoggedIn(false);
-                setIsAdmin(false);
-                setCurrentUser(null);
-                return;
-            }
-            setCurrentUser(data);
-            setIsLoggedIn(true);
-            if (data.role === 1) {
-                setIsAdmin(true);
-            }
-        } catch (error) {
-            console.log(error);
-        }
-    }
+    // const getUserByToken = async () => {
+    //     try {
+    //         const token = localStorage.getItem('token');
+    //         const response = await fetch('http://localhost:3000/api/users/user-info', {
+    //             method: 'GET',
+    //             headers: {
+    //                 'Authorization': token
+    //             }
+    //         });
+    //         const data = await response.json();
+    //         // console.log(data);
+    //         if (data.msg) {
+    //             setIsLoggedIn(false);
+    //             setIsAdmin(false);
+    //             setCurrentUser(null);
+    //             return;
+    //         }
+    //         setCurrentUser(data);
+    //         setIsLoggedIn(true);
+    //         if (data.role === 1) {
+    //             setIsAdmin(true);
+    //         }
+    //     } catch (error) {
+    //         console.log(error);
+    //     }
+    // }
 
-    const logout = async () => {
-        await fetch('http://localhost:3000/api/users/logout', {
-            method: 'GET'
-        });
-        localStorage.clear();
-        setIsAdmin(false);
-        setIsLoggedIn(false);
-        setCurrentUser(null);
-        setToken(null);
-        enqueueSnackbar('Logged out', { variant: 'success' });
-        navigate('/');
-    }
-
-    return <AppContext.Provider value={{token,getUserByToken, currentUser, setCurrentUser, isLoggedIn, setIsLoggedIn, isAdmin, setIsAdmin, logout }}>
+    // const logout = async () => {
+    //     await fetch('http://localhost:3000/api/users/logout', {
+    //         method: 'GET'
+    //     });
+    //     localStorage.clear();
+    //     setIsAdmin(false);
+    //     setIsLoggedIn(false);
+    //     setCurrentUser(null);
+    //     setToken(null);
+    //     enqueueSnackbar('Logged out', { variant: 'success' });
+    //     navigate('/');
+    // }
+    // value={{token,getUserByToken, currentUser, setCurrentUser, isLoggedIn, setIsLoggedIn, isAdmin, setIsAdmin, logout }}
+    return <AppContext.Provider value={'sd'}>
         {children}
     </AppContext.Provider>
 }

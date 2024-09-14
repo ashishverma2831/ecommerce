@@ -28,7 +28,7 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSepara
 
 const Navbar = ({ typeTshirt, setTypeTshirt }) => {
 
-    const {userCart, token, currentUser, setCurrentUser, isLoggedIn, setIsLoggedIn, isAdmin, setIsAdmin, logout } = useAppContext();
+    // const {userCart, token, currentUser, setCurrentUser, isLoggedIn, setIsLoggedIn, isAdmin, setIsAdmin, logout } = useAppContext();
     const [searchInput, setsearchInput] = useState(false);
     const searchRef = useRef(null);
     const handleSearch = () => {
@@ -37,45 +37,45 @@ const Navbar = ({ typeTshirt, setTypeTshirt }) => {
         setTypeTshirt(searchRef.current.value.toLowerCase());
     }
 
-    const getUser = async () => {
-        const response = await fetch('http://localhost:3000/api/users/user-info', {
-            method: 'GET',
-            headers: {
-                'Authorization': token
-            }
-        });
-        const data = await response.json()
-        .then((result) => {
-            console.log(result);
-        }).catch((err) => {
-            console.log(err);
-        });
-    }
-    useEffect(() => {
-        getUser();
-    }, [])
+    // const getUser = async () => {
+    //     const response = await fetch('http://localhost:3000/api/users/user-info', {
+    //         method: 'GET',
+    //         headers: {
+    //             'Authorization': token
+    //         }
+    //     });
+    //     const data = await response.json()
+    //     .then((result) => {
+    //         console.log(result);
+    //     }).catch((err) => {
+    //         console.log(err);
+    //     });
+    // }
+    // useEffect(() => {
+    //     getUser();
+    // }, [])
 
-    const [cartItem, setCartItem] = useState([]);
+    // const [cartItem, setCartItem] = useState([]);
     // setCurrentUser(currentUser.cart = cartItem);
   
-    const getUserCartItems = async () => {
-      const res = await fetch('http://localhost:3000/api/users/get-user-cart', {
-        method: 'GET',
-        headers: {
-          'Authorization': localStorage.getItem('token')
-        }
-      });
-      const data = await res.json()
-      .then((result) => {
-        console.log(result);
-        setCartItem(result);
-      }).catch((err) => {
-        console.log(err);
-      });
-    }
-    useEffect(() => {
-      getUserCartItems();
-    }, [currentUser])
+    // const getUserCartItems = async () => {
+    //   const res = await fetch('http://localhost:3000/api/users/get-user-cart', {
+    //     method: 'GET',
+    //     headers: {
+    //       'Authorization': localStorage.getItem('token')
+    //     }
+    //   });
+    //   const data = await res.json()
+    //   .then((result) => {
+    //     console.log(result);
+    //     setCartItem(result);
+    //   }).catch((err) => {
+    //     console.log(err);
+    //   });
+    // }
+    // useEffect(() => {
+    //   getUserCartItems();
+    // }, [currentUser])
 
     return (
         <section className='bg-background_1 z-20 sticky top-0 shadow-lg'>
@@ -84,7 +84,8 @@ const Navbar = ({ typeTshirt, setTypeTshirt }) => {
                 <div className='hidden md:block text-color_2'>
                     <ul className='flex gap-8 items-center'>
                         <NavLink to={'/'} >Home</NavLink>
-                        <NavLink to={`/shop/${currentUser!==null?currentUser._id:null}`} >Shop</NavLink>
+                        {/* <NavLink to={`/shop/${currentUser!==null?currentUser._id:null}`} >Shop</NavLink> */}
+                        <NavLink to={`/shop`} >Shop</NavLink>
                         <NavLink to={'/design-your-tshirt'} >Design </NavLink>
                     </ul>
                 </div>
@@ -94,7 +95,7 @@ const Navbar = ({ typeTshirt, setTypeTshirt }) => {
                             searchInput ? (
                                 <span className='flex relative items-center'>
                                     <Input
-                                        ref={searchRef}
+                                        // ref={searchRef}
                                         type='text'
                                         placeholder='Search'
                                         className='bg-background_1 border-b-2 border-color_2 text-color_2'
@@ -112,8 +113,9 @@ const Navbar = ({ typeTshirt, setTypeTshirt }) => {
                                 ><i className="fa-solid fa-magnifying-glass"></i> </button>
                             )
                         }
-                        <Link to={`/user/${currentUser!==null?currentUser._id:null}/cart`}><i className="fa-solid fa-cart-shopping"><sup className='bg-background_1 p-1 rounded-full'>{ currentUser !==null && isLoggedIn? cartItem.length:null}</sup></i></Link>
-                        {
+                        {/* <Link to={`/user/${currentUser!==null?currentUser._id:null}/cart`}><i className="fa-solid fa-cart-shopping"><sup className='bg-background_1 p-1 rounded-full'>{ currentUser !==null && isLoggedIn? cartItem.length:null}</sup></i></Link> */}
+                        <Link to={`/cart`}><i className="fa-solid fa-cart-shopping"><sup className='bg-background_1 p-1 rounded-full'>0</sup></i></Link>
+                        {/* {
                             currentUser !== null && isLoggedIn ? (
                                     <DropdownMenu>
                                         <DropdownMenuTrigger>
@@ -133,7 +135,8 @@ const Navbar = ({ typeTshirt, setTypeTshirt }) => {
                                         </DropdownMenuContent>
                                     </DropdownMenu>
                             ) : <Link to={'/login'}><i className="fa-solid fa-user"></i></Link>
-                        }
+                        } */}
+                        <Link to={'/login'}><i className="fa-solid fa-user"></i></Link>
                     </ul>
                 </div>
                 <div className='block md:hidden'>
@@ -157,7 +160,6 @@ const Navbar = ({ typeTshirt, setTypeTshirt }) => {
                                     </div>
                                     <div className=''>
                                         <ul className='flex items-center gap-8'>
-                                            {/* <li> <i className="fa-solid fa-magnifying-glass"></i> </li> */}
                                             {
                                                 searchInput ? (
                                                     <span className='flex relative items-center'>
@@ -180,7 +182,7 @@ const Navbar = ({ typeTshirt, setTypeTshirt }) => {
                                                     ><i className="fa-solid fa-magnifying-glass"></i> </button>
                                                 )
                                             }
-                                            <Link to={'cart'}><i className="fa-solid fa-cart-shopping"></i></Link>
+                                            <Link to={'/cart'}><i className="fa-solid fa-cart-shopping"></i></Link>
                                             <Link to={'/login'}><i className="fa-solid fa-user"></i></Link>
                                         </ul>
                                     </div>

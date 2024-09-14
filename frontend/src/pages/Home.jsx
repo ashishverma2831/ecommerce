@@ -24,13 +24,13 @@ import useAppContext from '@/AppContext'
 
 const Home = ({typeTshirt,setTypeTshirt}) => {
 
-  const { currentUser,getUserByToken } = useAppContext();
+  // const { currentUser,getUserByToken } = useAppContext();
   // const [typeTshirt, setTypeTshirt] = useState('');
   // console.log(Object.keys(typeOfTshirtCollection))
 
-  useEffect(() => {
-    getUserByToken();
-  }, [])
+  // useEffect(() => {
+  //   getUserByToken();
+  // }, [])
 
   return (
     <>

@@ -26,9 +26,9 @@ const ContactUs = () => {
                     <form className='w-[400px]' onSubmit={contactForm.handleSubmit}>
                         <Card className='text-color_2'>
                             <CardHeader className='text-center'>
-                                <CardTitle className='text-color_2'>Contact Us</CardTitle>
+                                <CardTitle className='text-color_2 text-xl'>Contact Us</CardTitle>
                                 <CardDescription>
-                                    <p className='text-sm'>Please fill the form below to contact us</p>
+                                    <p className='text-md text-color_1'>Please fill the form below to contact us to resolve any problems you are facing. We are on it 24*7 for our customers</p>
                                 </CardDescription>
                             </CardHeader>
                             <CardContent className="space-y-2">
