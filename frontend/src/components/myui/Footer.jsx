@@ -11,7 +11,7 @@ const Footer = () => {
               <Link to={'/'} ><img src='/logo.png' className='w-[88px] mix-blend-multiply' alt='logo' /></Link>
             </div>
             <div className='flex flex-col mt-4 gap-4'>
-              <p>Some text here fsflslkf lmfklwekln nwelkfnklwen newkfnklwen ewnfklnwekln wenfklwenfklew  klnewklnf  ewnfklewn neknween ewioweio oewinfne wenfemkj </p>
+              <p>Thub is your go-to destination for stylish and high-quality t-shirts that blend comfort with creativity. Whether you're looking for bold graphic designs or classic wardrobe staples, our diverse collection has something for everyone. </p>
               <div className='flex text-xl justify-start gap-4'>
                 <Link><i className="fa-brands fa-instagram"></i></Link>
                 <Link><i className="fa-brands fa-facebook"></i></Link>

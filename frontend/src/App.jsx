@@ -20,6 +20,9 @@ import PrivacyPolicy from './pages/PrivacyPolicy'
 import ShippingPolicy from './pages/ShippingPolicy'
 import Faq from './pages/Faq'
 import SizeGuide from './pages/SizeGuide'
+import Review from './pages/Review'
+import ForgetPassword from './pages/ForgetPassword'
+import ResetPassword from './pages/ResetPassword'
 
 const App = () => {
 
@@ -39,11 +42,14 @@ const App = () => {
               <Route path='/shop' element={<TshirtDetail />} />
               <Route path='/design-your-tshirt' element={<DesignTshirt />} />
               <Route path='/user-profile' element={<Profile />} />
+              <Route path='/forget-password' element={<ForgetPassword />} />
+              <Route path='/reset-password/:userId' element={<ResetPassword />} />
 
 
               {/* footer routes */}
               <Route path='/contact-us' element={<ContactUs />} />
               <Route path='/about-us' element={<About />} />
+              <Route path='/review' element={<Review />} />
               <Route path='/refund-policy' element={<RefundPolicy />} />
               <Route path='/term-and-conditions' element={<TermsAndCondition />} />
               <Route path='/privacy-policy' element={<PrivacyPolicy />} />

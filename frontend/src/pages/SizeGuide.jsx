@@ -47,11 +47,11 @@ const SizeGuide = () => {
                 <div className='max-w-screen-lg mx-auto text-center text-color_2 p-6'>
                     <h1 className='text-4xl capitalize underline'>Size Guide</h1>
                     <div className='text-lg flex flex-col gap-6 text-left my-6'>
-                        <div className='flex-col flex gap-8 p-4'>
+                        <div className='flex-col flex gap-8'>
                             <Table>
                                 <TableCaption className='text-xl'>A list of sizes</TableCaption>
                                 <TableHeader>
-                                    <TableRow>
+                                    <TableRow className='text-xl'>
                                         <TableHead>Size</TableHead>
                                         <TableHead>Chest</TableHead>
                                         <TableHead>Length</TableHead>
