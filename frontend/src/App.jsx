@@ -51,7 +51,7 @@ const App = () => {
               <Route path='/about-us' element={<About />} />
               <Route path='/review' element={<Review />} />
               <Route path='/refund-policy' element={<RefundPolicy />} />
-              <Route path='/term-and-conditions' element={<TermsAndCondition />} />
+              <Route path='/terms-and-conditions' element={<TermsAndCondition />} />
               <Route path='/privacy-policy' element={<PrivacyPolicy />} />
               <Route path='/shipping-policy' element={<ShippingPolicy />} />
               <Route path='/faq' element={<Faq />} />

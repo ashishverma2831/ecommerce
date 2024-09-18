@@ -3,20 +3,30 @@ const { Schema, model } = require("mongoose");
 const userSchema = new Schema({
     name: {
         type: String,
-        required: true
+        required: [true, 'Please enter your name'],
+        trim: true,
+        maxLength: [100, 'Your name cannot exceed 100 characters']
     },
     email: {
         type: String,
-        required: true,
-        unique: true
+        required: [true, 'Please enter your email'],
+        unique: true,
+        trim: true,
+        maxLength: [100, 'Your email cannot exceed 100 characters']
     },
     password: {
         type: String,
-        required: true
+        required: [true, 'Please enter your password'],
+        minLength: [6, 'Your password must be longer than 6 characters'],
+        select: false
+    },
+    avatar: {
+        public_id: String,
+        url:String
     },
     role: {
-        type: Number,
-        default: 0
+        type: String,
+        default: 'user'
     },
     cart: {
         type: Array,
@@ -27,9 +37,10 @@ const userSchema = new Schema({
         default: ''
     },
     phone: {
-        type: Number,
-        default: 9999999999,
-        unique: true
+        type: String,
+        default: '',
+        unique: true,
+        maxLength: [10, 'Your phone number cannot exceed 10 numbers']
     }
 }, {
     timestamps: true

@@ -23,25 +23,26 @@ const Footer = () => {
           <div className='flex flex-col ml-8'>
             <h3 className='text-xl font-semibold'>Our Shop</h3>
             <ul className='flex flex-col gap-2 mt-4'>
-              <li className='hover:underline hover:translate-x-1 duration-500 w-fit'><Link>Home</Link></li>
-              <li className='hover:underline hover:translate-x-1 duration-500 w-fit'><Link>About</Link></li>
+              <li className='hover:underline hover:translate-x-1 duration-500 w-fit'><Link to={'/'}>Home</Link></li>
+              <li className='hover:underline hover:translate-x-1 duration-500 w-fit'><Link to={'/about-us'}>About</Link></li>
               <li className='hover:underline hover:translate-x-1 duration-500 w-fit'><Link to={'/contact-us'}>Contact Us</Link></li>
-              <li className='hover:underline hover:translate-x-1 duration-500 w-fit'><Link>FAQ</Link></li>
+              <li className='hover:underline hover:translate-x-1 duration-500 w-fit'><Link to={'/faq'}>FAQ</Link></li>
             </ul>
           </div>
           <div className='flex flex-col'>
             <h3 className='text-xl font-semibold'>Help</h3>
             <ul className='flex flex-col gap-2 mt-4'>
-              <li className='hover:underline hover:translate-x-1 duration-500 w-fit'><Link>Size guide</Link></li>
-              <li className='hover:underline hover:translate-x-1 duration-500 w-fit'><Link>Shipping Policy</Link></li>
-              <li className='hover:underline hover:translate-x-1 duration-500 w-fit'><Link>Refund Policy</Link></li>
-              <li className='hover:underline hover:translate-x-1 duration-500 w-fit'><Link>Wear and Care FAQ</Link></li>
+              <li className='hover:underline hover:translate-x-1 duration-500 w-fit'><Link to={'/size-guide'}>Size guide</Link></li>
+              <li className='hover:underline hover:translate-x-1 duration-500 w-fit'><Link to={'/shipping-policy'}>Shipping Policy</Link></li>
+              <li className='hover:underline hover:translate-x-1 duration-500 w-fit'><Link to={'/refund-policy'}>Refund Policy</Link></li>
+              <li className='hover:underline hover:translate-x-1 duration-500 w-fit'><Link to={'/privacy-policy'}>Privacy Policy</Link></li>
             </ul>
           </div>
           <div className='flex flex-col'>
             <h3 className='text-xl font-semibold'>About Us</h3>
             <ul className='flex flex-col gap-2 mt-4'>
-              <li className='hover:underline hover:translate-x-1 duration-500 w-fit'><Link>Values</Link></li>
+              <li className='hover:underline hover:translate-x-1 duration-500 w-fit'><Link to={'/review'}>Review</Link></li>
+              <li className='hover:underline hover:translate-x-1 duration-500 w-fit'><Link to={'/terms-and-conditions'} >Terms and Conditions</Link></li>
               <li className='hover:underline hover:translate-x-1 duration-500 w-fit'><Link to={'/contact-us'}>Contact Us</Link></li>
             </ul>
           </div>
