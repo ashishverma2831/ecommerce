@@ -20,7 +20,7 @@ const productSchema = new Schema({
     },
     ratings: {
         type: Number,
-        default: 0
+        default: 0,
     },
     images: [
         {
@@ -78,7 +78,7 @@ const productSchema = new Schema({
                 type: String,
                 required: true
             }
-        }
+        },
     ],
     user: {
         type: Schema.Types.ObjectId,

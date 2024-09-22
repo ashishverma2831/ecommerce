@@ -9,6 +9,13 @@ const errorMiddleware = require('./middleware/error.js');
 const app = express();
 const port = process.env.PORT || 3000;
 
+// handle uncaught exceptions
+process.on('uncaughtException', err => {
+    console.log(`Error: ${err.message}`);
+    console.log('Shutting down the server due to uncaught exception');
+    process.exit(1);
+});
+
 
 // import routes
 const UserRouter = require('./routers/userRouter');
@@ -37,6 +44,15 @@ app.use('/api/products', ProductRouter);
 app.use(errorMiddleware);
 
 
-app.listen(port, () => {
+const server = app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
+});
+
+// Handle unhandled promise rejections
+process.on('unhandledRejection', err => {
+    console.log(`Error: ${err.message}`);
+    console.log('Shutting down the server due to unhandled promise rejection');
+    server.close(() => {
+        process.exit(1);
+    });
 });
