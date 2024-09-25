@@ -1,12 +1,23 @@
 const ErrorHandler = require('../utils/errorHandler');
 const catchAsyncErrors = require('../middleware/catchAsyncErrors');
 const Product = require('../models/productModel');
+const APIFilters = require('../utils/apiFilters');
 
 const productController = {
     getProducts: catchAsyncErrors(async (req, res) => {
         // res.send('getProducts');
-        const products = await Product.find({});
-        res.status(200).json({ products });
+        const resPerPage = 1;
+        const apiFilters = new APIFilters(Product,req.query).search().filters();
+        let products = await apiFilters.query;
+        let filteredProductsCount = products.length;
+        // const products = await Product.find({});
+        apiFilters.pagination(resPerPage);
+        products = await apiFilters.query.clone();
+
+        res.status(200).json({ 
+            filteredProductsCount,
+            products,
+        });
     }),
     createProduct: catchAsyncErrors(async (req, res) => {
         // res.send('createProduct');
