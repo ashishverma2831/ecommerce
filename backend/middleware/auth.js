@@ -1,18 +1,34 @@
-const jwt = require('jsonwebtoken');
+// const jwt = require('jsonwebtoken');
 
-const auth = (req, res, next) => {
-    try {
-        const token = req.header("Authorization");
-        if(!token) return res.status(400).json({msg: "Invalid Authentication"});
+// const auth = (req, res, next) => {
+//     try {
+//         const token = req.header("Authorization");
+//         if(!token) return res.status(400).json({msg: "Invalid Authentication"});
 
-        jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
-            if(err) return res.status(400).json({msg: "Invalid Authentication"});
-            req.user = user;
-            next();
-        });
-    } catch (error) {
-        return res.status(500).json({msg: error.message});
+//         jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
+//             if(err) return res.status(400).json({msg: "Invalid Authentication"});
+//             req.user = user;
+//             next();
+//         });
+//     } catch (error) {
+//         return res.status(500).json({msg: error.message});
+//     }
+// }
+
+// module.exports = auth;
+
+const catchAsyncErrors = require('./catchAsyncErrors');
+const ErrorHandler = require('../utils/errorHandler');
+
+const isAuthenticatedUser = catchAsyncErrors(async (req, res, next) => {
+    const { token } = req.cookies;
+
+    if (!token) {
+        return next(new ErrorHandler('Login first to access this resource.', 401));
     }
-}
 
-module.exports = auth;
+    req.user = user;
+    next();
+});
+
+// Handling user roles

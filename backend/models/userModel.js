@@ -1,4 +1,7 @@
 const { Schema, model } = require("mongoose");
+const jwt = require('jsonwebtoken');
+const dotenv = require('dotenv');
+dotenv.config();
 
 const userSchema = new Schema({
     name: {
@@ -41,9 +44,22 @@ const userSchema = new Schema({
         default: '',
         unique: true,
         maxLength: [10, 'Your phone number cannot exceed 10 numbers']
-    }
+    },
+    // wishlist: [{
+    //     type: Schema.Types.ObjectId,
+    //     ref: 'Product'
+    // }],
+    resetPasswordToken: String,
+    resetPasswordExpire: Date
 }, {
     timestamps: true
 })
+
+
+userSchema.methods.getJWTToken = function() {
+    return jwt.sign({ id: this._id }, process.env.JWT_SECRET, {
+        expiresIn: process.env.JWT_EXPIRATION
+    });
+}
 
 module.exports = model('user', userSchema);

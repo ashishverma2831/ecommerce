@@ -2,11 +2,12 @@ const User = require('../models/userModel');
 const Cart = require('../models/cartModel');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-// const { get } = require('mongoose');
-// const { merge } = require('../routers/userRouter');
+const catchAsyncErrors = require('../middleware/catchAsyncErrors');
+const ErrorHandler = require('../utils/errorHandler');
+const sendToken = require('../utils/sendToken');
 
 const userController = {
-    register: async (req, res) => {
+    register: catchAsyncErrors( async (req, res, next) => {
         try {
             const { name, email, password } = req.body;
             const user = await User.findOne({ email });
@@ -18,26 +19,30 @@ const userController = {
             // const newUser = new User({
             //     name, email, password: passwordHash
             // });
-            const newUser = new User({ ...req.body, password: passwordHash });
+            // const newUser = new User({ ...req.body, password: passwordHash });
             // save to mongodb
-            await newUser.save();
+            // await newUser.save();
+
+            const newUser = await User.create({ name, email, password: passwordHash });
 
             // create jsonwebtoken to authentication
-            const accesstoken = createAccessToken({ id: newUser._id });
-            const refreshToken = createRefreshToken({ id: newUser._id });
+            // const accesstoken = createAccessToken({ id: newUser._id });
+            // const refreshToken = createRefreshToken({ id: newUser._id });
+            // const token = newUser.getJWTToken();
 
-            res.cookie('refreshtoken', refreshToken, {
-                httpOnly: true,
-                path: '/api/users/refresh_token',
-                secure: true,
-            });
+            // res.cookie('refreshtoken', refreshToken, {
+            //     httpOnly: true,
+            //     path: '/api/users/refresh_token',
+            //     secure: true,
+            // });
+            // res.json({ msg: 'register success', token: token });
 
-            res.json({ msg: 'register success', accesstoken: accesstoken, refreshToken: refreshToken });
+            sendToken(newUser, 201, res);
 
         } catch (error) {
             return res.status(500).json({ msg: error.message });
         }
-    },
+    }),
     refreshToken: async (req, res) => {
         try {
             const rf_token = req.cookies.refreshtoken;
@@ -51,30 +56,36 @@ const userController = {
             return res.status(500).json({ msg: error.message });
         }
     },
-    login: async (req, res) => {
+    login: catchAsyncErrors(async (req, res,next) => {
         try {
             const { email, password } = req.body;
-            const user = await User.findOne({ email });
-            if (!user) return res.status(400).json({ msg: "User does not exist." });
+            if(!email || !password) return res.status(400).json({ msg: "Please enter all fields." });
+            
+            const user = await User.findOne({ email }).select('+password');
+            if (!user) return res.status(401).json({ msg: "User does not exist." });
+            // if (!user) return next(new ErrorHandler('Invalid Email or Password', 401));
 
             const isMatch = await bcrypt.compare(password, user.password);
-            if (!isMatch) return res.status(401).json({ msg: "Incorrect password." });
+            if (!isMatch) return res.status(401).json({ msg: "Incorrect Password." });
 
             // If login success, create access token and refresh token
-            const accesstoken = createAccessToken({ id: user._id });
-            const refreshToken = createRefreshToken({ id: user._id });
+            // const accesstoken = createAccessToken({ id: user._id });
+            // const refreshToken = createRefreshToken({ id: user._id });
 
-            res.cookie('refreshtoken', refreshToken, {
-                httpOnly: true,
-                path: '/api/users/refresh_token',
-            });
+            // res.cookie('refreshtoken', refreshToken, {
+            //     httpOnly: true,
+            //     path: '/api/users/refresh_token',
+            // });
 
-            res.json({ accesstoken });
+            // const token = user.getJWTToken();
+            // res.status(200).json({ msg: 'Login Success', token });
+
+            sendToken(user, 200, res);
 
         } catch (error) {
             return res.status(500).json({ msg: error.message });
         }
-    },
+    }),
     logout: async (req, res) => {
         try {
             await res.clearCookie('refreshtoken', { path: '/api/users/refresh_token' });
