@@ -6,6 +6,7 @@ const APIFilters = require('../utils/apiFilters');
 const productController = {
     getProducts: catchAsyncErrors(async (req, res) => {
         // res.send('getProducts');
+        
         const resPerPage = 1;
         const apiFilters = new APIFilters(Product,req.query).search().filters();
         let products = await apiFilters.query;
@@ -27,7 +28,7 @@ const productController = {
         // if (existingProduct) {
         //     return next(new ErrorHandler('Product already exists', 400));
         // }
-
+        req.body.user = req.user._id;
         const product = await Product.create(req.body);
         res.status(201).json({
             product
@@ -37,7 +38,8 @@ const productController = {
         // res.send('updateProduct');
         let product = await Product.findById(req?.params?.id);
         if (!product) {
-            return next(new ErrorHandler('Product not found', 404));
+            // return next(new ErrorHandler('Product not found', 404));
+            return res.status(404).json({ msg: "Product not found" });
         }
         product = await Product.findByIdAndUpdate(req?.params?.id, req.body, {
             new: true,
@@ -50,7 +52,8 @@ const productController = {
         // res.send('deleteProduct');
         const product = await Product.findById(req?.params?.id);
         if (!product) {
-            return next(new ErrorHandler('Product not found', 404));
+            // return next(new ErrorHandler('Product not found', 404));
+            return res.status(404).json({ msg: "Product not found" });
         }
         await product.deleteOne();
         res.status(200).json({
@@ -61,7 +64,8 @@ const productController = {
         // res.send('getProductDetails');
         const product = await Product.findById(req?.params?.id);
         if (!product) {
-            return next(new ErrorHandler('Product not found', 404));
+            // return next(new ErrorHandler('Product not found', 404));
+            return res.status(404).json({ msg: "Product not found" });
         }
         res.status(200).json({ product });
     }),

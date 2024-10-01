@@ -41,21 +41,25 @@ const userController = {
 
         } catch (error) {
             return res.status(500).json({ msg: error.message });
+            // return next(new ErrorHandler(error.message, 500));
         }
     }),
-    refreshToken: async (req, res) => {
-        try {
-            const rf_token = req.cookies.refreshtoken;
-            if (!rf_token) return res.status(400).json({ msg: "Please Login or Register!" });
-            jwt.verify(rf_token, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
-                if (err) return res.status(400).json({ msg: "Please Login or Register" });
-                const accesstoken = createAccessToken({ id: user.id });
-                res.json({ user, accesstoken });
-            });
-        } catch (error) {
-            return res.status(500).json({ msg: error.message });
-        }
-    },
+    // refreshToken: async (req, res) => {
+    //     try {
+    //         const rf_token = req.cookies.refreshtoken;
+    //         if (!rf_token) return res.status(400).json({ msg: "Please Login or Register!" });
+    //         jwt.verify(rf_token, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
+    //             if (err) return res.status(400).json({ msg: "Please Login or Register" });
+    //             const accesstoken = createAccessToken({ id: user.id });
+    //             res.json({ user, accesstoken });
+    //         });
+    //     } catch (error) {
+    //         return res.status(500).json({ msg: error.message });
+    //     }
+    // },
+    forgotPassword: catchAsyncErrors(async (req, res, next) => {
+        
+    }),
     login: catchAsyncErrors(async (req, res,next) => {
         try {
             const { email, password } = req.body;
@@ -86,14 +90,16 @@ const userController = {
             return res.status(500).json({ msg: error.message });
         }
     }),
-    logout: async (req, res) => {
-        try {
-            await res.clearCookie('refreshtoken', { path: '/api/users/refresh_token' });
-            return res.json({ msg: "Logged out" });
-        } catch (error) {
-            return res.status(500).json({ msg: error.message });
-        }
-    },
+    logout: catchAsyncErrors( async (req, res, next) => {
+        res.cookie('token',null,{
+            expires: new Date(Date.now()),
+            httpOnly: true
+        });
+
+        res.status(200).json({
+            message: 'Logged out'
+        });
+    }),
     getUser: async (req, res) => {
         try {
             const user = await User.findById(req.user.id).select('-password');
