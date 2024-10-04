@@ -26,7 +26,6 @@ const ProductRouter = require('./routers/productRouter');
 app.use(express.json());
 app.use(cors({
     origin: process.env.CLIENT_URL
-    
 }));
 app.use(cookieParser());
 

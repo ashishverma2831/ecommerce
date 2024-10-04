@@ -571,6 +571,7 @@ const getResetPasswordTemplate = (username, resetUrl) => {
     </table>
   </body>
 </html>
-
     `;
 }
+
+module.exports = getResetPasswordTemplate;

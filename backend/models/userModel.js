@@ -76,4 +76,4 @@ userSchema.methods.getResetPasswordToken = function() {
     return resetToken;
 }
 
-module.exports = model('user', userSchema);
+module.exports = model('User', userSchema);

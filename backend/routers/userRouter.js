@@ -7,6 +7,8 @@ router.route('/register').post(userController.register);
 // router.route('/refresh_token').post(userController.refreshToken);
 router.route('/login').post(userController.login);
 router.route('/logout').get(userController.logout);
+router.route('/password/forgot').post(userController.forgotPassword);
+// router.route('/password/reset/:token').post(userController.forgotPassword);
 // router.get('/user-info', userController.getUser);
 // router.get('/logout',auth, userController.logout);
 // router.get('/all', userController.getAllUsers);
