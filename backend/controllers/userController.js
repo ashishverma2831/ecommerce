@@ -3,9 +3,10 @@ const Cart = require('../models/cartModel');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const catchAsyncErrors = require('../middleware/catchAsyncErrors');
-const ErrorHandler = require('../utils/errorHandler.js');
+const ErrorHandler = require('../utils/errorHandler');
 const sendToken = require('../utils/sendToken');
 const sendEmail = require('../utils/sendEmail');
+const crypto = require('crypto');
 const getResetPasswordTemplate = require('../utils/emailTemplate')
 
 const userController = {
@@ -68,7 +69,8 @@ const userController = {
         await user.save();
 
         // Create reset password url
-        const resetUrl = `${process.env.CLIENT_URL}/api/users/password/reset/${resetToken}`;
+        // const resetUrl = `${process.env.CLIENT_URL}/api/users/password/reset/${resetToken}`;
+        const resetUrl = `http://localhost:3000/api/users/password/reset/${resetToken}`;
         const message = getResetPasswordTemplate(user?.name,resetUrl);
 
         try {
@@ -86,6 +88,34 @@ const userController = {
             // return next(new ErrorHandler(error.message, 500));
             return res.status(500).json({ msg: error.message });     
         }
+    }),
+    // resetPassword
+    resetPassword: catchAsyncErrors(async (req,res,next)=>{
+        const resetPasswordToken = crypto
+        .createHash('sha256')
+        .update(req.params.token)
+        .digest('hex');
+
+        const user = await User.findOne({
+            resetPasswordToken,
+            resetPasswordExpire: {$gt: Date.now()}
+        })
+
+        if(!user){
+            // return next(new ErrorHandler('Password reset token is invalid or has expired',400));
+            return res.status(400).json({ msg: "Password reset token is invalid or has expired." });
+        }
+        if(req.body.password !== req.body.confirmPassword){
+            // return next(new ErrorHandler('Password does not match',400));
+            return res.status(400).json({ msg: "Password does not match." });
+        }
+        // setup new password
+        const passwordHash = await bcrypt.hash(req.body.password,10);
+        user.password = passwordHash;
+        user.resetPasswordToken = undefined;
+        user.resetPasswordExpire = undefined;
+        await user.save();
+        sendToken(user,200,res);
     }),
     login: catchAsyncErrors(async (req, res,next) => {
         try {
@@ -127,25 +157,12 @@ const userController = {
             message: 'Logged out'
         });
     }),
-
-    // getUser: async (req, res) => {
-    //     try {
-    //         const user = await User.findById(req.user.id).select('-password');
-    //         if (!user) return res.status(400).json({ msg: "User does not exist." });
-    //         res.json(user);
-    //     } catch (error) {
-    //         return res.status(500).json({ msg: error.message });
-    //     }
-    // },
-    // getUserById: async (req, res) => {
-    //     try {
-    //         const user = await User.findById(req.params.id).select('-password');
-    //         if (!user) return res.status(400).json({ msg: "User does not exist." });
-    //         res.json(user);
-    //     } catch (error) {
-    //         return res.status(500).json({ msg: error.message });
-    //     }
-    // },
+    getUserProfile: catchAsyncErrors(async (req, res, next) => {
+        const user = await User.findById(req?.user?._id);
+        res.status(200).json({
+            user
+        });
+    }),
     // getAllUsers: async (req, res) => {
     //     try {
     //         const users = await User.find().select('-password');

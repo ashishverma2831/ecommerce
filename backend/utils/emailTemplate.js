@@ -505,7 +505,7 @@ const getResetPasswordTemplate = (username, resetUrl) => {
                                 <tr>
                                   <td align="center">
                                     <a
-                                      href="${resetUrl}"
+                                      href=${resetUrl}
                                       class="f-fallback button button--green"
                                       target="_blank"
                                       >Reset your password</a
@@ -533,7 +533,7 @@ const getResetPasswordTemplate = (username, resetUrl) => {
                                 browser.
                               </p>
                               <p class="f-fallback sub">
-                                <a href="${resetUrl}">{resetUrl}</a>
+                                <a href="${resetUrl}">${resetUrl}</a>
                               </p>
                             </td>
                           </tr>

@@ -43,7 +43,7 @@ const App = () => {
               <Route path='/design-your-tshirt' element={<DesignTshirt />} />
               <Route path='/user-profile' element={<Profile />} />
               <Route path='/forget-password' element={<ForgetPassword />} />
-              <Route path='/reset-password/:userId' element={<ResetPassword />} />
+              <Route path='/reset-password/:resetToken' element={<ResetPassword />} />
 
 
               {/* footer routes */}

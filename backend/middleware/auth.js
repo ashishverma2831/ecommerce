@@ -18,7 +18,7 @@
 // module.exports = auth;
 
 const catchAsyncErrors = require('./catchAsyncErrors');
-const ErrorHandler = require('../utils/errorHandler.js');
+const { ErrorHandler } = require('../utils/errorHandler');
 const jwt = require('jsonwebtoken');
 const User = require('../models/userModel');
 
