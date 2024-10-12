@@ -20,7 +20,7 @@ process.on('uncaughtException', err => {
 // import routes
 const UserRouter = require('./routers/userRouter');
 const ProductRouter = require('./routers/productRouter');
-
+const OrderRouter = require('./routers/orderRouter');  
 
 // middlewares
 app.use(express.json());
@@ -40,6 +40,7 @@ app.get('/', (req, res) => {
 // routes
 app.use('/api/users', UserRouter);
 app.use('/api/products', ProductRouter);
+app.use('/api/orders', OrderRouter);
 app.use(errorMiddleware);
 
 
