@@ -4,7 +4,7 @@ const Product = require("../models/productModel");
 
 const seedProducts = async () => {
   try {
-    await mongoose.connect('mongodb+srv://root:root@cluster0.ve2kz8r.mongodb.net/ecommerce?retryWrites=true&w=majority');
+    await mongoose.connect();
 
     await Product.deleteMany();
     console.log("Products are deleted");
