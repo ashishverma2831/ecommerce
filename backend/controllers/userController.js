@@ -7,7 +7,7 @@ const ErrorHandler = require('../utils/errorHandler');
 const sendToken = require('../utils/sendToken');
 const sendEmail = require('../utils/sendEmail');
 const crypto = require('crypto');
-const getResetPasswordTemplate = require('../utils/emailTemplate')
+const getResetPasswordTemplate = require('../utils/emailTemplate');
 
 const userController = {
     register: catchAsyncErrors( async (req, res, next) => {
@@ -161,6 +161,74 @@ const userController = {
         const user = await User.findById(req?.user?._id);
         res.status(200).json({
             user
+        });
+    }),
+    updatePassword: catchAsyncErrors(async (req, res, next) => {
+        const user = await User.findById(req?.user?._id).select('+password');
+
+        // Check previous user password
+        const isMatch = await bcrypt.compare(req.body.oldPassword, user.password);
+        if (!isMatch) return res.status(400).json({ msg: "Old password is incorrect." });
+
+        const passwordHash = await bcrypt.hash(req.body.password, 10);
+
+
+        user.password = passwordHash;
+        await user.save();
+
+        res.status(200).json({
+            message: 'Password updated successfully.'
+        });
+    }),
+    updateProfile: catchAsyncErrors(async (req, res, next) => {
+        const newUserData = {
+            name: req.body.name,
+            email: req.body.email
+        }
+        const user = await User.findByIdAndUpdate(req?.user?._id,newUserData,{
+            new: true,
+        });
+        res.status(200).json({
+            user
+        });
+    }),
+    // get all users
+    allUsers: catchAsyncErrors(async (req, res, next) => {
+        const users = await User.find();
+        res.status(200).json({
+            users
+        });
+    }),
+    getUserDetails: catchAsyncErrors(async (req, res, next) => {
+        const user = await User.findById(req.params.id);
+        // if (!user) return next(new ErrorHandler('User not found with this ID', 400));
+        // if (!user) return res.status(404).json({ msg: `User not found with this id: " + ${req.params.id}`});
+
+        if (!user) return res.status(404).json({ msg: 'User does not exist with this id.' });
+       
+        res.status(200).json({
+            user
+        });
+    }),
+    updateUser: catchAsyncErrors(async (req, res, next) => {
+        const newUserData = {
+            name: req.body.name,
+            email: req.body.email,
+            role: req.body.role
+        }
+        const user = await User.findByIdAndUpdate(req.params.id,newUserData,{
+            new: true,
+        });
+        res.status(200).json({
+            user
+        });
+    }),
+    deleteUser: catchAsyncErrors(async (req, res, next) => {
+        const user = await User.findById(req.params.id);
+        if (!user) return res.status(404).json({ msg: `User not found with this id: " + ${req.params.id}` });
+        await user.deleteOne();
+        res.status(200).json({
+            message: 'User deleted successfully.'
         });
     }),
     // getAllUsers: async (req, res) => {
