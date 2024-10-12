@@ -16,27 +16,99 @@ const orderController = {
             paymentInfo,
         } = req.body;
 
-        const order = await Order.create({
-            orderItems,
-            shippingInfo,
-            itemsPrice,
-            taxAmount,
-            shippingAmount,
-            totalAmount,
-            paymentMethod,
-            paymentInfo,
-            user: req.user._id,
+        try {
+            const order = await Order.create({
+                orderItems,
+                shippingInfo,
+                itemsPrice,
+                taxAmount,
+                shippingAmount,
+                totalAmount,
+                paymentMethod,
+                paymentInfo,
+                user: req.user._id,
+            });
+
+            res.status(200).json({
+                order,
+            });
+        } catch (error) {
+            // return next(new ErrorHandler(error.message, 500));
+            return res.status(500).json({
+                success: false,
+                message: error.message,
+            });
+        }
+    }),
+    myOrders: catchAsyncErrors(async (req, res, next) => {
+        const orders = await Order.find({ user: req.user._id });
+
+        res.status(200).json({
+            orders,
         });
+    }),
+    getOrderDetails: catchAsyncErrors(async (req, res, next) => {
+        const order = await Order.findById(req.params.id).populate("user", "name email");
+
+        if (!order) {
+            return next(new ErrorHandler("No Order found with this ID", 404));
+        }
 
         res.status(200).json({
             order,
         });
     }),
-    myOrders: catchAsyncErrors(async (req, res, next) => { }),
-    getOrderDetails: catchAsyncErrors(async (req, res, next) => { }),
-    allOrders: catchAsyncErrors(async (req, res, next) => { }),
-    updateOrder: catchAsyncErrors(async (req, res, next) => { }),
-    deleteOrder: catchAsyncErrors(async (req, res, next) => { }),
+    allOrders: catchAsyncErrors(async (req, res, next) => {
+        const orders = await Order.find();
+
+        res.status(200).json({
+            orders,
+        });
+    }),
+    updateOrder: catchAsyncErrors(async (req, res, next) => {
+        const order = await Order.findById(req.params.id);
+
+        if (!order) {
+            return next(new ErrorHandler("No Order found with this ID", 404));
+        }
+
+        if (order?.orderStatus === "Delivered") {
+            return next(new ErrorHandler("You have already delivered this order", 400));
+        }
+
+        // Update products stock
+        order?.orderItems?.forEach(async (item) => {
+            const product = await Product.findById(item?.product?.toString());
+            if (!product) {
+                return next(new ErrorHandler("No Product found with this ID", 404));
+            }
+            product.stock = product.stock - item.quantity;
+            await product.save({ validateBeforeSave: false });
+        });
+
+        order.orderStatus = req.body.status;
+        order.deliveredAt = Date.now();
+
+        await order.save();
+
+        res.status(200).json({
+            success: true,
+        });
+    }),
+    deleteOrder: catchAsyncErrors(async (req, res, next) => {
+        const order = await Order.findById(req.params.id);
+
+        if (!order) {
+            return next(new ErrorHandler("No Order found with this ID", 404));
+        }
+
+        await order.deleteOne();
+
+        res.status(200).json({
+            success: true,
+            message: "Order is Canceled",
+        });
+    }),
 }
 
 module.exports = orderController;
