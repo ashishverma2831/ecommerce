@@ -21,7 +21,7 @@ import { Link, NavLink } from 'react-router-dom'
 import './Navbar.css'
 import { Button } from '../ui/button'
 import { Input } from '../ui/input'
-import useAppContext from '@/AppContext'
+// import useAppContext from '@/AppContext'
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from '../ui/dropdown-menu'
 

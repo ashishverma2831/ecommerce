@@ -7,10 +7,10 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
-import useAppContext from '@/AppContext';
+// import useAppContext from '@/AppContext';
 
 const DesignTshirt = () => {
-  const {cart,setCart, currentUser, setCurrentUser, isLoggedIn, setIsLoggedIn, isAdmin, setIsAdmin, logout } = useAppContext();
+  // const {cart,setCart, currentUser, setCurrentUser, isLoggedIn, setIsLoggedIn, isAdmin, setIsAdmin, logout } = useAppContext();
 
   return (
     <>

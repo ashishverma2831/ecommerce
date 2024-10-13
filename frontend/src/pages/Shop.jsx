@@ -23,9 +23,13 @@ import {
     PopoverContent,
     PopoverTrigger,
 } from "@/components/ui/popover"
-import useAppContext from '@/AppContext';
+// import useAppContext from '@/AppContext';
+import { useGetProductsQuery } from '../redux/api/productsApi';
 
 const Shop = () => {
+
+    const { data = [] } = useGetProductsQuery();
+    console.log('data:', data);
 
     // const { token, currentUser, setCurrentUser, isLoggedIn, setIsLoggedIn, isAdmin, setIsAdmin, logout } = useAppContext();
     const [tshirtList, setTshirtList] = useState(tShirts);

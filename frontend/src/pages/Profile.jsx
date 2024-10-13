@@ -7,7 +7,7 @@ import { Textarea } from '@/components/ui/textarea'
 import React from 'react'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
-import useAppContext from '@/AppContext'
+// import useAppContext from '@/AppContext'
 import { enqueueSnackbar } from 'notistack'
 
 const profileSchema = Yup.object().shape({
@@ -20,7 +20,7 @@ const profileSchema = Yup.object().shape({
 
 const Profile = () => {
 
-    const {token, currentUser, setCurrentUser } = useAppContext();
+    // const {token, currentUser, setCurrentUser } = useAppContext();
     console.log('currentUser:', currentUser);
 
     const updateProfileForm = async (values) => {
