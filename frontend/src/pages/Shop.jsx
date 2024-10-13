@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { tShirts } from '@/Data/data'
+import React, { useEffect, useState } from 'react'
+// import { tShirts } from '@/Data/data'
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { Pagination, PaginationContent, PaginationItem, PaginationNext, PaginationPrevious } from '@/components/ui/pagination';
 import { Button } from '@/components/ui/button';
@@ -28,11 +28,25 @@ import { useGetProductsQuery } from '../redux/api/productsApi';
 
 const Shop = () => {
 
-    const { data = [] } = useGetProductsQuery();
+    const { data = [],endpointName,isLoading } = useGetProductsQuery();
     console.log('data:', data);
+    console.log('endpointName:', endpointName);
+    console.log('isLoading:', isLoading);
+
+    // const [tShirts, setTShirts] = useState();
+    // const getData = async () => {
+    //     const response = await fetch('http://localhost:3000/api/products');
+    //     const data = await response.json();
+    //     console.log(data);
+    //     setTShirts(data);
+    // }
+
+    // useEffect(() => {
+    //     getData();
+    // }, [])
 
     // const { token, currentUser, setCurrentUser, isLoggedIn, setIsLoggedIn, isAdmin, setIsAdmin, logout } = useAppContext();
-    const [tshirtList, setTshirtList] = useState(tShirts);
+    // const [tshirtList, setTshirtList] = useState(tShirts);
     // console.log('tshirtList:', tshirtList);
 
     const [openColor, setOpenColor] = useState(false);
@@ -232,13 +246,13 @@ const Shop = () => {
                             </form>
                         </div>
                         <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4'>
-                            {
+                            {/* {
                                 tshirtList.map((tshirt) => {
                                     return (
                                         <ShopCard tshirt={tshirt} key={tshirt._id} />
                                     )
                                 })
-                            }
+                            } */}
                         </div>
                     </div>
                 </div>
