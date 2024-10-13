@@ -20,6 +20,7 @@ import TshirtCard from '@/components/myui/TshirtCard'
 import ReviewCard from '@/components/myui/ReviewCard'
 import { Link } from 'react-router-dom'
 import useAppContext from '@/AppContext'
+import MetaData from './MetaData'
 
 
 const Home = ({typeTshirt,setTypeTshirt}) => {
@@ -34,6 +35,7 @@ const Home = ({typeTshirt,setTypeTshirt}) => {
 
   return (
     <>
+    <MetaData title='Shop Tshirts Now' />
       <section className='bg-background_1'>
         <div className='flex flex-col gap-16 '>
           <img className='h-[200px] sm:h-full' src='https://printo-s3.dietpixels.net/site/Web%20banner/Apparel%20CP%20Banner%20Desktop_1717070343.png?quality=70&format=webp&w=1920' alt='hero' />
