@@ -7,73 +7,30 @@ import { recommendedProducts, recentlViewedProducts, similarProducts } from '@/D
 // import useAppContext from '@/AppContext';
 import { enqueueSnackbar } from 'notistack'
 import { useFormik } from 'formik';
+import { useGetProductDetailsQuery } from '@/redux/api/productsApi';
 
 
 const TshirtDetail = () => {
 
-  // const { getUserByToken, currentUser, setCurrentUser, isLoggedIn, setIsLoggedIn, isAdmin, setIsAdmin, logout } = useAppContext();
-  // const { id,userId } = useParams();
-  // const navigate = useNavigate();
-  // const [product, setProduct] = useState(tShirts[id - 1]);
-  // console.log('product:', product);
-  // const [currentUserId, setCurrentUserId] = useState(null);
-  // console.log('currentUserId:', currentUserId);
+  const params = useParams();
+  const { data, isError, error, isLoading } = useGetProductDetailsQuery(params?.id);
 
-  // const getUser = async () => {
-  //   const token = localStorage.getItem('token');
-  //   const response = await fetch('http://localhost:3000/api/users/user-info', {
-  //     method: 'GET',
-  //     headers: {
-  //       'Authorization': token
-  //     }
-  //   });
-  //   const data = await response.json();
-  //   console.log(data);
-  //   setCurrentUserId(data._id);
-  // }
+  const product = data?.product;
 
   // useEffect(() => {
-  //   getUser();
-  // }, [])
-
-  // const cartForm = useFormik({
-  //   initialValues: {
-  //     quantity: 1,
-  //     price: product.price,
-  //     color: product.color,
-  //     image: product.image,
-  //     description: product.description,
-  //     size: 'M',
-  //     productId: product._id,
-  //     userId: userId
-  //   },
-  //   onSubmit: async (values) => {
-  //     console.log('values:', values);
-  //     const res = await fetch('http://localhost:3000/api/users/add-to-cart', {
-  //       method: 'POST',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //         'Authorization': localStorage.getItem('token')
-  //       },
-  //       body: JSON.stringify(values)
-  //     })
-  //     const data = await res.json();
-  //     console.log(data);
-  //     if (data.msg) {
-  //       enqueueSnackbar(data.msg, { variant: 'error' });
-  //     }
-  //     else {
-  //       enqueueSnackbar('Product added to cart.', { variant: 'success', action: <Button onClick={() => navigate(`/user/${currentUserId}/cart`)} className='bg-green-400/50 hover:bg-green-700 text-background_1 p-2 rounded-md'>Checkout now</Button> });
-  //     }
+  //   if (isError) {
+  //     enqueueSnackbar(error?.data?.message, { variant: 'error' })
   //   }
-  // })
+  // }, [isError])
+
+  if (isLoading) return <div>Loading...</div>
 
   return (
     <>
       <section className='bg-background_1 flex flex-col gap-16 pb-8'>
-        {/* <form onSubmit={cartForm.handleSubmit} className='max-w-screen-lg mx-auto py-8 justify-between items-start bg-background_1 p-4 flex flex-col md:flex-row gap-8'>
+        <form className='max-w-screen-lg mx-auto py-8 justify-between items-start bg-background_1 p-4 flex flex-col md:flex-row gap-8'>
           <div className='w-full '>
-            <img className='shadow-md' src={product.image} alt={product.title} />
+            <img className='shadow-md' src={product.images[0].url} alt={product.title} />
           </div>
           <div className='flex flex-col text-color_2 gap-4'>
             <h1 className='text-5xl font-bold'>{product.title}</h1>
@@ -97,11 +54,10 @@ const TshirtDetail = () => {
             <p className='text-lg'>Ideal for corporate events, team outings, or everyday wear, these polos combine comfort and style, effortlessly boosting your brand.</p>
             <p className='font-semibold'> <span className='font-normal line-through'>₹1000</span> <span className='text-3xl mx-1'>₹{product.price}</span> <span className='text-green-600 font-medium'>10% Off</span> </p>
             <div className='flex justify-end'>
-              <Button
-                type='submit' disabled={currentUser === null || !isLoggedIn} className='bg-color_1 hover:bg-color_2 text-background_1 p-2 rounded-md'>Add to cart</Button>
+              {/* <Button type='submit' disabled={currentUser === null || !isLoggedIn} className='bg-color_1 hover:bg-color_2 text-background_1 p-2 rounded-md'>Add to cart</Button> */}
             </div>
           </div>
-        </form> */}
+        </form>
 
         <div className='max-w-screen-xl my-8 mx-auto flex flex-col justify-center items-center'>
           <h1 className='text-color_2 font-semibold text-4xl text-center capitalize'>Make your own customized t-shirts</h1>
@@ -113,13 +69,13 @@ const TshirtDetail = () => {
           <div className='flex flex-col gap-8 '>
             <h1 className='text-color_2 font-semibold text-3xl'>Similar Products</h1>
             <div className='flex flex-wrap justify-center items-center gap-8'>
-              {
+              {/* {
                 similarProducts.map((tshirt, index) => {
                   return (
                     <TshirtCard product={product} setProduct={setProduct} key={index} tshirt={tshirt} />
                   )
                 })
-              }
+              } */}
             </div>
           </div>
         </div>
@@ -127,13 +83,13 @@ const TshirtDetail = () => {
           <div className='flex flex-col gap-8'>
             <h1 className='text-color_2 font-semibold text-3xl'>Recently Viewed Products</h1>
             <div className='flex flex-wrap justify-center items-center gap-8'>
-              {
+              {/* {
                 recentlViewedProducts.map((tshirt, index) => {
                   return (
                     <TshirtCard product={product} setProduct={setProduct} key={index} tshirt={tshirt} />
                   )
                 })
-              }
+              } */}
             </div>
           </div>
         </div>
@@ -141,13 +97,13 @@ const TshirtDetail = () => {
           <div className='flex flex-col gap-8'>
             <h1 className='text-color_2 font-semibold text-3xl'>Recommended Products</h1>
             <div className='flex flex-wrap justify-center items-center gap-8'>
-              {
+              {/* {
                 recommendedProducts.map((tshirt, index) => {
                   return (
                     <TshirtCard product={product} setProduct={setProduct} key={index} tshirt={tshirt} />
                   )
                 })
-              }
+              } */}
             </div>
           </div>
         </div>

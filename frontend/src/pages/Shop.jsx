@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-// import { tShirts } from '@/Data/data'
+import { tShirts } from '@/Data/data'
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { Pagination, PaginationContent, PaginationItem, PaginationNext, PaginationPrevious } from '@/components/ui/pagination';
 import { Button } from '@/components/ui/button';
@@ -25,29 +25,18 @@ import {
 } from "@/components/ui/popover"
 // import useAppContext from '@/AppContext';
 import { useGetProductsQuery } from '../redux/api/productsApi';
+import CustomPagination from '@/components/myui/CustomPagination';
+import { useSearchParams } from 'react-router-dom';
 
 const Shop = () => {
 
-    const { data = [],endpointName,isLoading } = useGetProductsQuery();
+    let [searchParams] = useSearchParams();
+    const page = Number(searchParams.get("page")) || 1;
+    const keyword = searchParams.get("keyword") || "";
+
+    const params = { page: page, keyword: keyword };
+    const { data, isLoading, isError, error } = useGetProductsQuery(params);
     console.log('data:', data);
-    console.log('endpointName:', endpointName);
-    console.log('isLoading:', isLoading);
-
-    // const [tShirts, setTShirts] = useState();
-    // const getData = async () => {
-    //     const response = await fetch('http://localhost:3000/api/products');
-    //     const data = await response.json();
-    //     console.log(data);
-    //     setTShirts(data);
-    // }
-
-    // useEffect(() => {
-    //     getData();
-    // }, [])
-
-    // const { token, currentUser, setCurrentUser, isLoggedIn, setIsLoggedIn, isAdmin, setIsAdmin, logout } = useAppContext();
-    // const [tshirtList, setTshirtList] = useState(tShirts);
-    // console.log('tshirtList:', tshirtList);
 
     const [openColor, setOpenColor] = useState(false);
     const [openSize, setOpenSize] = useState(false);
@@ -71,46 +60,26 @@ const Shop = () => {
             values.price = priceValue;
             console.log(values);
 
-            let filteredTshirts = tShirts.filter((tshirt) => {
-                let size = tshirt.size.toLowerCase() === values.size.toLowerCase() || values.size.toLowerCase() === '';
-                let color = tshirt.color.toLowerCase() === values.color.toLowerCase() || values.color.toLowerCase() === '';
+            let filteredTshirts = data?.products.filter((tshirt) => {
+                // let size = tshirt.size.toLowerCase() === values.size.toLowerCase() || values.size.toLowerCase() === '';
+                // let color = tshirt.color.toLowerCase() === values.color.toLowerCase() || values.color.toLowerCase() === '';
                 let price = tshirt.price <= values.price || values.price === '';
-                return size && color && price;
+                // return size && color && price;
+                return price;
             })
             console.log(filteredTshirts);
-            setTshirtList(filteredTshirts);
+            // setTshirtList(filteredTshirts);
             resetForm();
         }
     })
-
-    // const [currentUserId, setCurrentUserId] = useState(null);
-    // console.log('currentUserId:', currentUserId);
-
-    // const getUser = async () => {
-    //     const token = localStorage.getItem('token');
-    //     const response = await fetch('http://localhost:3000/api/users/user-info', {
-    //         method: 'GET',
-    //         headers: {
-    //             'Authorization': token
-    //         }
-    //     });
-    //     const data = await response.json();
-    //     console.log(data);
-    //     setCurrentUserId(data._id);
-    // }
-
-    // useEffect(() => {
-    //     getUser();
-    // }, [])
-
 
     return (
         <>
             <section className='bg-background_1'>
                 <div className='bg-background_1 text-color_2 max-w-screen-xl mx-auto p-4'>
                     <h1 className='text-4xl text-center my-6 font-semibold'>Shop Tshirts now</h1>
-                    <div className='py-4 flex flex-col md:flex-row gap-8'>
-                        <div className='bg-background_2 h-fit z-30 md:sticky top-[100px] shadow-lg hover:shadow-2xl p-2'>
+                    <div className='py-4 flex flex-col md:flex-row sticky top-40 gap-8'>
+                        <div className='bg-background_2 h-fit z-30 md:sticky shadow-lg hover:shadow-2xl p-2'>
                             <h3 className='text-2xl p-2'>Filters</h3>
                             <form onSubmit={filterForm.handleSubmit} className='p-2 md:w-[240px] flex flex-col gap-4 justify-center'>
                                 <Popover open={openSize} onOpenChange={setOpenSize}>
@@ -245,14 +214,23 @@ const Shop = () => {
                                 <Button type='submit' className='bg-color_1 hover:bg-color_2 text-background_1 p-2 rounded-md'>Filter</Button>
                             </form>
                         </div>
-                        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4'>
-                            {/* {
-                                tshirtList.map((tshirt) => {
-                                    return (
-                                        <ShopCard tshirt={tshirt} key={tshirt._id} />
-                                    )
-                                })
-                            } */}
+                        <div className='flex flex-col gap-6'>
+                            <h3 className='text-3xl font-normal mb-2'>
+                                {
+                                    keyword ? `${data?.products?.length} Search results for '${keyword}'` : `All Products`
+                                }
+                            </h3>
+                            <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4'>
+                                {
+                                    data?.products?.map((product) => {
+                                        return <ShopCard key={product._id} product={product} />
+                                    })
+                                }
+
+                            </div>
+                            <div className='justify-center flex'>
+                                <CustomPagination resPerPage={data?.resPerPage} filteredProductsCount={data?.filteredProductsCount} />
+                            </div>
                         </div>
                     </div>
                 </div>

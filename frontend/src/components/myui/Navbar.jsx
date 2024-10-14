@@ -24,6 +24,7 @@ import { Input } from '../ui/input'
 // import useAppContext from '@/AppContext'
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from '../ui/dropdown-menu'
+import Search from './Search'
 
 
 const Navbar = ({ typeTshirt, setTypeTshirt }) => {
@@ -93,18 +94,7 @@ const Navbar = ({ typeTshirt, setTypeTshirt }) => {
                     <ul className='flex gap-8 items-center'>
                         {
                             searchInput ? (
-                                <span className='flex relative items-center'>
-                                    <Input
-                                        // ref={searchRef}
-                                        type='text'
-                                        placeholder='Search'
-                                        className='bg-background_1 border-b-2 border-color_2 text-color_2'
-                                    />
-                                    <button
-                                        className='absolute right-2'
-                                        onClick={handleSearch}
-                                    ><i className="fa-solid fa-magnifying-glass"></i> </button>
-                                </span>
+                                <Search />
                             ) : (
                                 <button
                                     onClick={() => {

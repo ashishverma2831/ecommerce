@@ -37,7 +37,7 @@ const App = () => {
               <Route path='/login' element={<Login />} />
               <Route path='/shop' element={<Shop />} />
               <Route path='/cart' element={<Cart />} />
-              <Route path='/shop' element={<TshirtDetail />} />
+              <Route path='/shop/:id' element={<TshirtDetail />} />
               <Route path='/design-your-tshirt' element={<DesignTshirt />} />
               <Route path='/user-profile' element={<Profile />} />
               <Route path='/forget-password' element={<ForgetPassword />} />

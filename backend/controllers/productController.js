@@ -4,18 +4,20 @@ const Product = require('../models/productModel');
 const APIFilters = require('../utils/apiFilters');
 
 const productController = {
-    getProducts: catchAsyncErrors(async (req, res) => {
+    getProducts: catchAsyncErrors(async (req, res, next) => {
         // res.send('getProducts');
 
-        const resPerPage = 10;
+        const resPerPage = 4;
         const apiFilters = new APIFilters(Product, req.query).search().filters();
         let products = await apiFilters.query;
         let filteredProductsCount = products.length;
         // const products = await Product.find({});
+
         apiFilters.pagination(resPerPage);
         products = await apiFilters.query.clone();
 
         res.status(200).json({
+            resPerPage, 
             filteredProductsCount,
             products,
         });
@@ -60,9 +62,10 @@ const productController = {
             message: "Product Deleted",
         });
     }),
-    getProductDetails: catchAsyncErrors(async (req, res) => {
+    getProductDetails: catchAsyncErrors(async (req, res, next) => {
         // res.send('getProductDetails');
         const product = await Product.findById(req?.params?.id);
+
         if (!product) {
             // return next(new ErrorHandler('Product not found', 404));
             return res.status(404).json({ msg: "Product not found" });
