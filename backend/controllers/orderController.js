@@ -33,11 +33,7 @@ const orderController = {
                 order,
             });
         } catch (error) {
-            // return next(new ErrorHandler(error.message, 500));
-            return res.status(500).json({
-                success: false,
-                message: error.message,
-            });
+            return next(new ErrorHandler(error.message, 500));
         }
     }),
     myOrders: catchAsyncErrors(async (req, res, next) => {
@@ -88,9 +84,7 @@ const orderController = {
 
         order.orderStatus = req.body.status;
         order.deliveredAt = Date.now();
-
         await order.save();
-
         res.status(200).json({
             success: true,
         });
@@ -101,9 +95,7 @@ const orderController = {
         if (!order) {
             return next(new ErrorHandler("No Order found with this ID", 404));
         }
-
         await order.deleteOne();
-
         res.status(200).json({
             success: true,
             message: "Order is Canceled",

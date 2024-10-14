@@ -14,62 +14,23 @@ const userController = {
         try {
             const { name, email, password } = req.body;
             const user = await User.findOne({ email });
-            if (user) return res.status(400).json({ msg: "The email already exists." });
-            if (password.length < 6) return res.status(400).json({ msg: "Password is at least 6 characters long." });
+            if (user) return next(new ErrorHandler('User already exists', 400));
+            if (password.length < 6) return next(new ErrorHandler('Password must be at least 6 characters', 400));
 
-            // Password Encryption
             const passwordHash = await bcrypt.hash(password, 10);
-            // const newUser = new User({
-            //     name, email, password: passwordHash
-            // });
-            // const newUser = new User({ ...req.body, password: passwordHash });
-            // save to mongodb
-            // await newUser.save();
-
             const newUser = await User.create({ name, email, password: passwordHash });
-
-            // create jsonwebtoken to authentication
-            // const accesstoken = createAccessToken({ id: newUser._id });
-            // const refreshToken = createRefreshToken({ id: newUser._id });
-            // const token = newUser.getJWTToken();
-
-            // res.cookie('refreshtoken', refreshToken, {
-            //     httpOnly: true,
-            //     path: '/api/users/refresh_token',
-            //     secure: true,
-            // });
-            // res.json({ msg: 'register success', token: token });
-
             sendToken(newUser, 201, res);
-
         } catch (error) {
-            return res.status(500).json({ msg: error.message });
-            // return next(new ErrorHandler(error.message, 500));
+            return next(new ErrorHandler(error.message, 500));
         }
     }),
-    // refreshToken: async (req, res) => {
-    //     try {
-    //         const rf_token = req.cookies.refreshtoken;
-    //         if (!rf_token) return res.status(400).json({ msg: "Please Login or Register!" });
-    //         jwt.verify(rf_token, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
-    //             if (err) return res.status(400).json({ msg: "Please Login or Register" });
-    //             const accesstoken = createAccessToken({ id: user.id });
-    //             res.json({ user, accesstoken });
-    //         });
-    //     } catch (error) {
-    //         return res.status(500).json({ msg: error.message });
-    //     }
-    // },
     forgotPassword: catchAsyncErrors(async (req, res, next) => {
         const user = await User.findOne({ email: req.body.email });
-        if (!user) return res.status(404).json({ msg: "User does not exist with this email." });
+        if (!user) return next(new ErrorHandler('User not found with this email', 404));
 
-        // Get reset token
         const resetToken = user.getResetPasswordToken();
         await user.save();
 
-        // Create reset password url
-        // const resetUrl = `${process.env.CLIENT_URL}/api/users/password/reset/${resetToken}`;
         const resetUrl = `http://localhost:3000/api/users/password/reset/${resetToken}`;
         const message = getResetPasswordTemplate(user?.name,resetUrl);
 
@@ -85,11 +46,9 @@ const userController = {
             user.resetPasswordExpire = undefined;
 
             await user.save();
-            // return next(new ErrorHandler(error.message, 500));
-            return res.status(500).json({ msg: error.message });     
+            return next(new ErrorHandler(error.message, 500));
         }
     }),
-    // resetPassword
     resetPassword: catchAsyncErrors(async (req,res,next)=>{
         const resetPasswordToken = crypto
         .createHash('sha256')
@@ -100,16 +59,12 @@ const userController = {
             resetPasswordToken,
             resetPasswordExpire: {$gt: Date.now()}
         })
-
         if(!user){
-            // return next(new ErrorHandler('Password reset token is invalid or has expired',400));
-            return res.status(400).json({ msg: "Password reset token is invalid or has expired." });
+            return next(new ErrorHandler('Password reset token is invalid or has expired',400));
         }
         if(req.body.password !== req.body.confirmPassword){
-            // return next(new ErrorHandler('Password does not match',400));
-            return res.status(400).json({ msg: "Password does not match." });
+            return next(new ErrorHandler('Password does not match',400));
         }
-        // setup new password
         const passwordHash = await bcrypt.hash(req.body.password,10);
         user.password = passwordHash;
         user.resetPasswordToken = undefined;
@@ -120,29 +75,14 @@ const userController = {
     login: catchAsyncErrors(async (req, res,next) => {
         try {
             const { email, password } = req.body;
-            if(!email || !password) return res.status(400).json({ msg: "Please enter all fields." });
+            if(!email || !password) return next(new ErrorHandler('Please enter email & password', 400));
             
             const user = await User.findOne({ email }).select('+password');
-            if (!user) return res.status(401).json({ msg: "User does not exist." });
-            // if (!user) return next(new ErrorHandler('Invalid Email or Password', 401));
+            if (!user) return next(new ErrorHandler('Invalid Email or Password', 401));
 
             const isMatch = await bcrypt.compare(password, user.password);
-            if (!isMatch) return res.status(401).json({ msg: "Incorrect Password." });
-
-            // If login success, create access token and refresh token
-            // const accesstoken = createAccessToken({ id: user._id });
-            // const refreshToken = createRefreshToken({ id: user._id });
-
-            // res.cookie('refreshtoken', refreshToken, {
-            //     httpOnly: true,
-            //     path: '/api/users/refresh_token',
-            // });
-
-            // const token = user.getJWTToken();
-            // res.status(200).json({ msg: 'Login Success', token });
-
+            if (!isMatch) return next(new ErrorHandler('Incorrect Password', 401));
             sendToken(user, 200, res);
-
         } catch (error) {
             return res.status(500).json({ msg: error.message });
         }
@@ -165,14 +105,9 @@ const userController = {
     }),
     updatePassword: catchAsyncErrors(async (req, res, next) => {
         const user = await User.findById(req?.user?._id).select('+password');
-
-        // Check previous user password
         const isMatch = await bcrypt.compare(req.body.oldPassword, user.password);
-        if (!isMatch) return res.status(400).json({ msg: "Old password is incorrect." });
-
+        if (!isMatch) return next(new ErrorHandler('Old password is incorrect', 400));
         const passwordHash = await bcrypt.hash(req.body.password, 10);
-
-
         user.password = passwordHash;
         await user.save();
 
@@ -192,7 +127,6 @@ const userController = {
             user
         });
     }),
-    // get all users
     allUsers: catchAsyncErrors(async (req, res, next) => {
         const users = await User.find();
         res.status(200).json({
@@ -201,11 +135,7 @@ const userController = {
     }),
     getUserDetails: catchAsyncErrors(async (req, res, next) => {
         const user = await User.findById(req.params.id);
-        // if (!user) return next(new ErrorHandler('User not found with this ID', 400));
-        // if (!user) return res.status(404).json({ msg: `User not found with this id: " + ${req.params.id}`});
-
-        if (!user) return res.status(404).json({ msg: 'User does not exist with this id.' });
-       
+        if (!user) return next(new ErrorHandler(`User does not exist with id: ${req.params.id}`, 400));
         res.status(200).json({
             user
         });
@@ -225,97 +155,13 @@ const userController = {
     }),
     deleteUser: catchAsyncErrors(async (req, res, next) => {
         const user = await User.findById(req.params.id);
-        if (!user) return res.status(404).json({ msg: `User not found with this id: " + ${req.params.id}` });
+        if (!user) return next(new ErrorHandler(`User does not exist with id: ${req.params.id}`, 400));
         await user.deleteOne();
         res.status(200).json({
             message: 'User deleted successfully.'
         });
     }),
-    // getAllUsers: async (req, res) => {
-    //     try {
-    //         const users = await User.find().select('-password');
-    //         if (!users) return res.status(400).json({ msg: "User does not exist." });
-    //         res.json(users);
-    //     } catch (error) {
-    //         return res.status(500).json({ msg: error.message });
-    //     }
-    // },
-    // updateUser: async (req, res) => {
-    //     try {
-    //         const user = await User.findByIdAndUpdate(req.user.id, req.body, { new: true, merge: { address: req.body.address, phone: req.body.phone } });
-    //         res.json(user);
-    //     } catch (error) {
-    //         return res.status(500).json({ msg: error.message });
-    //     }
-    //     console.log('req.body:', req.body);
-    // },
-    // deleteUser: async (req, res) => {
-    //     try {
-    //         await User.findByIdAndDelete(req.user.id);
-    //         res.json({ msg: "Delete Success!" });
-    //     } catch (error) {
-    //         return res.status(500).json({ msg: error.message });
-    //     }
-    // },
-    // addToCart: async (req, res) => {
-    //     const { productId, quantity, price,size, color,image,description } = req.body;
-    //     const id = req.user._id;
-    //     console.log('req.body:', req.body);
-    //     try {
-    //         let newCart = await new Cart({
-    //             userId: id, productId, quantity, price,size, color,image,description 
-    //         }).save();
-    //         res.json(newCart);
-    //     } catch (error) {
-    //         return res.status(500).json({ msg: error.message });
-    //     }
-    // },
-    // getUserCart: async (req, res) => {
-    //     const id = req.user._id;
-    //     try {
-    //         const cart = await Cart.find({ userId: id });
-    //         if (!cart) return res.status(400).json({ msg: "User does not exist." });
-    //         res.json(cart);
-    //     } catch (error) {
-    //         return res.status(500).json({ msg: error.message });
-    //     }
-    // },
-    // updateUserCart: async (req, res) => {
-    //     const { productId, quantity, price,size, color,image,description } = req.body;
-    //     const id = req.user._id;
-    //     try {
-    //         const cart = await Cart.findOneAndUpdate({ userId: id, productId }, { quantity, price,size, color,image,description });
-    //         res.json(cart);
-    //     } catch (error) {
-    //         return res.status(500).json({ msg: error.message });
-    //     }
-    // },
-    // deleteUserCartItem: async (req, res) => {
-    //     const id = req.user._id;
-    //     const productId = req.params.id;
-    //     try {
-    //         await Cart.findOneAndDelete({ userId: id, productId });
-    //         res.json({ msg: "Delete Success!" });
-    //     } catch (error) {
-    //         return res.status(500).json({ msg: error.message });
-    //     }
-    // },
-    // deleteUserCart: async (req, res) => {
-    //     const id = req.user._id;
-    //     try {
-    //         await Cart.findOneAndDelete({ userId: id });
-    //         res.json({ msg: "Delete Success!" });
-    //     } catch (error) {
-    //         return res.status(500).json({ msg: error.message });
-    //     }
-    // }
+   
 }
-
-// const createAccessToken = (payload) => {
-//     return jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1d' });
-// }
-// const createRefreshToken = (payload) => {
-//     return jwt.sign(payload, process.env.REFRESH_TOKEN_SECRET, { expiresIn: '7d' });
-// }
 
 module.exports = userController;

@@ -20,6 +20,8 @@ import { useFormik } from 'formik'
 import * as yup from 'yup'
 import { enqueueSnackbar } from 'notistack'
 import { useNavigate } from 'react-router-dom'
+import { useLoginMutation } from '@/redux/api/authApi'
+import Register from './Signup'
 
 
 const loginSchema = yup.object().shape({
@@ -27,16 +29,19 @@ const loginSchema = yup.object().shape({
     password: yup.string().required('Password is required')
 })
 
-const registerSchema = yup.object().shape({
-    name: yup.string().required('Name is required').min(3,'Name must be at least 3 characters'),
-    email: yup.string().email().required('Email is required'),
-    password: yup.string().required('Password is required').min(8,'Password must be atleast 8 characters').matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/,'Password must contain at least one lowercase, one uppercase, one number and one special character').max(20,'Password must be atmost 20 characters')
-})
+// const registerSchema = yup.object().shape({
+//     name: yup.string().required('Name is required').min(3,'Name must be at least 3 characters'),
+//     email: yup.string().email().required('Email is required'),
+//     password: yup.string().required('Password is required').min(8,'Password must be atleast 8 characters').matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/,'Password must contain at least one lowercase, one uppercase, one number and one special character').max(20,'Password must be atmost 20 characters')
+// })
 
 const Login = () => {
 
+    const [ login, {isError, error, isLoading, data}] = useLoginMutation();
+    console.log('data:',data);
+
     const [loginPassword, setLoginPassword] = useState(true);
-    const [registerPassword, setRegisterPassword] = useState(true);
+    // const [registerPassword, setRegisterPassword] = useState(true);
     const navigate = useNavigate();
 
     const loginForm = useFormik({
@@ -46,6 +51,8 @@ const Login = () => {
         },
         onSubmit: async (values) => {
             console.log(values);
+            // login(values);
+            // const res = await login(values);
             const res = await fetch('http://localhost:3000/api/users/login',{
                 method: 'POST',
                 headers: {
@@ -57,10 +64,7 @@ const Login = () => {
 
             if(res.status === 200){
                 console.log('User Logged In Successfully!');
-                const data = await res.json();
-                localStorage.setItem('token',data.accesstoken);
-                // console.log(data);
-                // sessionStorage.setItem('user',JSON.stringify(data));
+                localStorage.setItem('token',data?.token);
                 enqueueSnackbar('User Logged In Successfully!',{variant:'success'})
                 navigate('/');
             }
@@ -77,38 +81,34 @@ const Login = () => {
         validationSchema: loginSchema
     })
 
-    const registerForm = useFormik({
-        initialValues: {
-            name: '',
-            email: '',
-            password: ''
-        },
-        onSubmit: async (values,{setSubmitting,resetForm}) => {
-            console.log(values);
-            const res = await fetch('http://localhost:3000/api/users/register',{
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    // 'Accept': 'application/json',
-                    // 'Access-Control-Allow-Origin': '*',
-                    // 'Authorization': 'Bearer ' + localStorage.getItem('token'),
-                    // 'Access-Control-Allow-Credentials': true
-                },
-                body: JSON.stringify(values)
-            })
-            console.log(res.status);
-            setSubmitting(false);
-            if(res.status === 200){
-                enqueueSnackbar('User Registered Successfully!',{variant:'success'})
-                resetForm();
-                navigate('/login');
-            }
-            else{
-                enqueueSnackbar('User Registration Failed!',{variant:'error'})
-            }
-        },
-        validationSchema: registerSchema
-    })
+    // const registerForm = useFormik({
+    //     initialValues: {
+    //         name: '',
+    //         email: '',
+    //         password: ''
+    //     },
+    //     onSubmit: async (values,{setSubmitting,resetForm}) => {
+    //         console.log(values);
+    //         const res = await fetch('http://localhost:3000/api/users/register',{
+    //             method: 'POST',
+    //             headers: {
+    //                 'Content-Type': 'application/json',
+    //             },
+    //             body: JSON.stringify(values)
+    //         })
+    //         console.log(res.status);
+    //         setSubmitting(false);
+    //         if(res.status === 200){
+    //             enqueueSnackbar('User Registered Successfully!',{variant:'success'})
+    //             resetForm();
+    //             navigate('/login');
+    //         }
+    //         else{
+    //             enqueueSnackbar('User Registration Failed!',{variant:'error'})
+    //         }
+    //     },
+    //     validationSchema: registerSchema
+    // })
 
     return (
         <>
@@ -143,13 +143,13 @@ const Login = () => {
                                     </div>
                                 </CardContent>
                                 <CardFooter>
-                                    <Button className='bg-color_1 rounded-sm hover:bg-color_2 text-background_1' type='submit'>Login</Button>
+                                    <Button className='bg-color_1 rounded-sm hover:bg-color_2 text-background_1' type='submit' disabled={isLoading} >{isLoading?'Authenticating...':'Login'}</Button>
                                 </CardFooter>
                             </Card>
                         </form>
                     </TabsContent>
                     <TabsContent value="register">
-                        <form onSubmit={registerForm.handleSubmit}>
+                        {/* <form onSubmit={registerForm.handleSubmit}>
                             <Card className='text-color_2'>
                                 <CardHeader className='text-center'>
                                     <CardTitle className='text-color_2'>Register here</CardTitle>
@@ -181,7 +181,8 @@ const Login = () => {
                                     <Button className='bg-color_1 rounded-sm hover:bg-color_2 text-background_1' type='submit'>Register</Button>
                                 </CardFooter>
                             </Card>
-                        </form>
+                        </form> */}
+                        <Register />
                     </TabsContent>
                 </Tabs>
             </section>
