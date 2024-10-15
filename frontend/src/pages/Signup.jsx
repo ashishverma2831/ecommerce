@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button } from "@/components/ui/button"
 import {
     Card,
@@ -31,9 +31,19 @@ const registerSchema = yup.object().shape({
 
 const Signup = () => {
 
-    const [register, {isError,isLoading,data,error}] = useRegisterMutation();
+    const [register, {isLoading,data,error}] = useRegisterMutation();
     const [registerPassword, setRegisterPassword] = useState(true);
     const navigate = useNavigate();
+
+    useEffect(() => {
+        if(data){
+            enqueueSnackbar('User Registered Successfully!',{variant:'success'})
+            navigate('/');
+        }
+        if(error){
+            enqueueSnackbar(`${error?.data?.message}`,{variant:'error'})
+        }
+    }, [error,data])
 
     const registerForm = useFormik({
         initialValues: {

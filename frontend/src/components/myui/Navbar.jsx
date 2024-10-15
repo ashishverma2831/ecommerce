@@ -25,18 +25,26 @@ import { Input } from '../ui/input'
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from '../ui/dropdown-menu'
 import Search from './Search'
+import { useGetMeQuery } from '@/redux/api/userApi'
+import { useSelector } from 'react-redux'
 
 
 const Navbar = ({ typeTshirt, setTypeTshirt }) => {
 
+    const {data} = useGetMeQuery();
+    console.log('data:',data);
+    // const { user } = useSelector((state) => state.auth);
+    // console.log('user:',user);
+    
+
     // const {userCart, token, currentUser, setCurrentUser, isLoggedIn, setIsLoggedIn, isAdmin, setIsAdmin, logout } = useAppContext();
     const [searchInput, setsearchInput] = useState(false);
-    const searchRef = useRef(null);
-    const handleSearch = () => {
-        setsearchInput(!searchInput);
-        console.log(searchRef.current.value);
-        setTypeTshirt(searchRef.current.value.toLowerCase());
-    }
+    // const searchRef = useRef(null);
+    // const handleSearch = () => {
+    //     setsearchInput(!searchInput);
+    //     console.log(searchRef.current.value);
+    //     setTypeTshirt(searchRef.current.value.toLowerCase());
+    // }
 
     // const getUser = async () => {
     //     const response = await fetch('http://localhost:3000/api/users/user-info', {
@@ -152,18 +160,7 @@ const Navbar = ({ typeTshirt, setTypeTshirt }) => {
                                         <ul className='flex items-center gap-8'>
                                             {
                                                 searchInput ? (
-                                                    <span className='flex relative items-center'>
-                                                        <Input
-                                                            ref={searchRef}
-                                                            type='text'
-                                                            placeholder='Search'
-                                                            className='bg-background_1 border-b-2 border-color_2 text-color_2'
-                                                        />
-                                                        <button
-                                                            className='absolute right-2'
-                                                            onClick={handleSearch}
-                                                        ><i className="fa-solid fa-magnifying-glass"></i> </button>
-                                                    </span>
+                                                    <Search />
                                                 ) : (
                                                     <button
                                                         onClick={() => {
