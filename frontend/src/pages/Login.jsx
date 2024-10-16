@@ -24,7 +24,6 @@ import { useLoginMutation } from '@/redux/api/authApi'
 import Register from './Signup'
 import { useSelector } from 'react-redux'
 
-
 const loginSchema = yup.object().shape({
     email: yup.string().email().required('Email is required'),
     password: yup.string().required('Password is required')
@@ -36,6 +35,7 @@ const Login = () => {
     // const { isAuthenticated } = useSelector((state) => state.auth);
     console.log('data:',data);
 
+
     const [loginPassword, setLoginPassword] = useState(true);
     const navigate = useNavigate();
 
@@ -43,7 +43,7 @@ const Login = () => {
         if(data){
             localStorage.setItem('token',data?.token);
             sessionStorage.setItem('token',data?.token);
-            
+
             enqueueSnackbar('User Logged In Successfully!',{variant:'success'})
             navigate('/');
         }

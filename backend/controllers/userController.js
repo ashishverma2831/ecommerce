@@ -1,5 +1,5 @@
 const User = require('../models/userModel');
-const Cart = require('../models/cartModel');
+// const Cart = require('../models/cartModel');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const catchAsyncErrors = require('../middleware/catchAsyncErrors');
