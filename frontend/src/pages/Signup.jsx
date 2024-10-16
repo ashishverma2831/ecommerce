@@ -21,6 +21,7 @@ import * as yup from 'yup'
 import { enqueueSnackbar } from 'notistack'
 import { useNavigate } from 'react-router-dom'
 import { useRegisterMutation } from '@/redux/api/authApi'
+import { useSelector } from 'react-redux'
 
 const registerSchema = yup.object().shape({
     name: yup.string().required('Name is required').min(3,'Name must be at least 3 characters'),
@@ -34,16 +35,20 @@ const Signup = () => {
     const [register, {isLoading,data,error}] = useRegisterMutation();
     const [registerPassword, setRegisterPassword] = useState(true);
     const navigate = useNavigate();
+    const { isAuthenticated } = useSelector((state) => state.auth);
 
     useEffect(() => {
-        if(data){
-            enqueueSnackbar('User Registered Successfully!',{variant:'success'})
-            navigate('/');
+        // if(data){
+        //     enqueueSnackbar('User Registered Successfully!',{variant:'success'})
+        //     navigate('/');
+        // }
+        if (isAuthenticated) {
+            navigate("/");
         }
         if(error){
             enqueueSnackbar(`${error?.data?.message}`,{variant:'error'})
         }
-    }, [error,data])
+    }, [error,isAuthenticated])
 
     const registerForm = useFormik({
         initialValues: {
@@ -54,23 +59,6 @@ const Signup = () => {
         onSubmit: async (values,{setSubmitting,resetForm}) => {
             console.log(values);
             register(values);
-            // const res = await fetch('http://localhost:3000/api/users/register',{
-            //     method: 'POST',
-            //     headers: {
-            //         'Content-Type': 'application/json',
-            //     },
-            //     body: JSON.stringify(values)
-            // })
-            // console.log(res.status);
-            // setSubmitting(false);
-            // if(res.status === 200){
-            //     enqueueSnackbar('User Registered Successfully!',{variant:'success'})
-            //     resetForm();
-            //     navigate('/login');
-            // }
-            // else{
-            //     enqueueSnackbar('User Registration Failed!',{variant:'error'})
-            // }
         },
         validationSchema: registerSchema
     })

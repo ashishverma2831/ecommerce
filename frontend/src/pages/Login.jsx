@@ -22,6 +22,7 @@ import { enqueueSnackbar } from 'notistack'
 import { useNavigate } from 'react-router-dom'
 import { useLoginMutation } from '@/redux/api/authApi'
 import Register from './Signup'
+import { useSelector } from 'react-redux'
 
 
 const loginSchema = yup.object().shape({
@@ -32,21 +33,25 @@ const loginSchema = yup.object().shape({
 const Login = () => {
 
     const [ login, { error, isLoading, data}] = useLoginMutation();
+    // const { isAuthenticated } = useSelector((state) => state.auth);
     console.log('data:',data);
 
     const [loginPassword, setLoginPassword] = useState(true);
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
     useEffect(() => {
-        if(data){
-            localStorage.setItem('token',data?.token);
-            enqueueSnackbar('User Logged In Successfully!',{variant:'success'})
-            navigate('/');
-        }
+        // if(data){
+        //     localStorage.setItem('token',data?.token);
+        //     enqueueSnackbar('User Logged In Successfully!',{variant:'success'})
+        //     navigate('/');
+        // }
+        // if(isAuthenticated){
+        //     navigate('/');
+        // }
         if(error){
             enqueueSnackbar(`${error?.data?.message}`,{variant:'error'})
         }
-    }, [error,data])
+    }, [error])
 
     const loginForm = useFormik({
         initialValues: {

@@ -79,7 +79,7 @@ const productSchema = new Schema({
     user: {
         type: Schema.Types.ObjectId,
         ref: 'User',
-        required: false
+        required: true
     }
 },{timestamps: true});
 

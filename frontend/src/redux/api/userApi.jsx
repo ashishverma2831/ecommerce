@@ -7,16 +7,16 @@ export const userApi = createApi({
   endpoints: (builder) => ({
     getMe: builder.query({
       query: () => `/me`,
-      transformResponse: (result) => result.user,
-      async onQueryStarted(args, { dispatch, queryFulfilled }) {
-        try {
-          const { data } = await queryFulfilled;
-          dispatch(setUser(data));
-          dispatch(setIsAuthenticated(true));
-        } catch (error) {
-          console.log(error);
-        }
-      },
+      // transformResponse: (result) => result.user,
+      // async onQueryStarted(args, { dispatch, queryFulfilled }) {
+      //   try {
+      //     const { data } = await queryFulfilled;
+      //     dispatch(setUser(data));
+      //     dispatch(setIsAuthenticated(true));
+      //   } catch (error) {
+      //     console.log(error);
+      //   }
+      // },
     }),
   }),
 });

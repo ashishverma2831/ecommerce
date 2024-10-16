@@ -17,74 +17,33 @@ import {
     SheetTitle,
     SheetTrigger,
 } from "@/components/ui/sheet"
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
 import './Navbar.css'
 import { Button } from '../ui/button'
 import { Input } from '../ui/input'
-// import useAppContext from '@/AppContext'
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from '../ui/dropdown-menu'
 import Search from './Search'
 import { useGetMeQuery } from '@/redux/api/userApi'
 import { useSelector } from 'react-redux'
+import { useLazyLogoutQuery } from '@/redux/api/authApi'
 
 
 const Navbar = ({ typeTshirt, setTypeTshirt }) => {
 
-    const {data} = useGetMeQuery();
-    console.log('data:',data);
-    // const { user } = useSelector((state) => state.auth);
-    // console.log('user:',user);
+    // const navigate = useNavigate();
+    // const { isLoading} = useGetMeQuery();
+    // console.log('isLoading:',isLoading);
     
+    const [logout, {data}] = useLazyLogoutQuery();
+    // const { user } = useSelector((state) => state.auth);
 
-    // const {userCart, token, currentUser, setCurrentUser, isLoggedIn, setIsLoggedIn, isAdmin, setIsAdmin, logout } = useAppContext();
+    const logoutHandler = async () => {
+        await logout();
+        navigate(0);
+    };
+
     const [searchInput, setsearchInput] = useState(false);
-    // const searchRef = useRef(null);
-    // const handleSearch = () => {
-    //     setsearchInput(!searchInput);
-    //     console.log(searchRef.current.value);
-    //     setTypeTshirt(searchRef.current.value.toLowerCase());
-    // }
-
-    // const getUser = async () => {
-    //     const response = await fetch('http://localhost:3000/api/users/user-info', {
-    //         method: 'GET',
-    //         headers: {
-    //             'Authorization': token
-    //         }
-    //     });
-    //     const data = await response.json()
-    //     .then((result) => {
-    //         console.log(result);
-    //     }).catch((err) => {
-    //         console.log(err);
-    //     });
-    // }
-    // useEffect(() => {
-    //     getUser();
-    // }, [])
-
-    // const [cartItem, setCartItem] = useState([]);
-    // setCurrentUser(currentUser.cart = cartItem);
-  
-    // const getUserCartItems = async () => {
-    //   const res = await fetch('http://localhost:3000/api/users/get-user-cart', {
-    //     method: 'GET',
-    //     headers: {
-    //       'Authorization': localStorage.getItem('token')
-    //     }
-    //   });
-    //   const data = await res.json()
-    //   .then((result) => {
-    //     console.log(result);
-    //     setCartItem(result);
-    //   }).catch((err) => {
-    //     console.log(err);
-    //   });
-    // }
-    // useEffect(() => {
-    //   getUserCartItems();
-    // }, [currentUser])
 
     return (
         <section className='bg-background_1 z-20 sticky top-0 shadow-lg'>
@@ -93,8 +52,8 @@ const Navbar = ({ typeTshirt, setTypeTshirt }) => {
                 <div className='hidden md:block text-color_2'>
                     <ul className='flex gap-8 items-center'>
                         <NavLink to={'/'} >Home</NavLink>
-                        {/* <NavLink to={`/shop/${currentUser!==null?currentUser._id:null}`} >Shop</NavLink> */}
                         <NavLink to={`/shop`} >Shop</NavLink>
+                        {/* <NavLink>{user?'User':'No user'}</NavLink> */}
                         <NavLink to={'/design-your-tshirt'} >Design </NavLink>
                     </ul>
                 </div>
@@ -135,6 +94,7 @@ const Navbar = ({ typeTshirt, setTypeTshirt }) => {
                             ) : <Link to={'/login'}><i className="fa-solid fa-user"></i></Link>
                         } */}
                         <Link to={'/login'}><i className="fa-solid fa-user"></i></Link>
+                        {/* <Link to={'/'} onClick={logoutHandler} >Logout</Link> */}
                     </ul>
                 </div>
                 <div className='block md:hidden'>

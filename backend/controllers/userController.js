@@ -84,7 +84,7 @@ const userController = {
             if (!isMatch) return next(new ErrorHandler('Incorrect Password', 401));
             sendToken(user, 200, res);
         } catch (error) {
-            return res.status(500).json({ msg: error.message });
+            return next(new ErrorHandler(error.message, 500));
         }
     }),
     logout: catchAsyncErrors( async (req, res, next) => {
