@@ -37,21 +37,23 @@ const Login = () => {
     console.log('data:',data);
 
     const [loginPassword, setLoginPassword] = useState(true);
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
 
     useEffect(() => {
-        // if(data){
-        //     localStorage.setItem('token',data?.token);
-        //     enqueueSnackbar('User Logged In Successfully!',{variant:'success'})
-        //     navigate('/');
-        // }
+        if(data){
+            localStorage.setItem('token',data?.token);
+            sessionStorage.setItem('token',data?.token);
+            
+            enqueueSnackbar('User Logged In Successfully!',{variant:'success'})
+            navigate('/');
+        }
         // if(isAuthenticated){
         //     navigate('/');
         // }
         if(error){
             enqueueSnackbar(`${error?.data?.message}`,{variant:'error'})
         }
-    }, [error])
+    }, [error,data])
 
     const loginForm = useFormik({
         initialValues: {

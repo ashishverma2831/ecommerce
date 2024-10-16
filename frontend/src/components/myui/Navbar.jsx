@@ -32,10 +32,11 @@ import { useLazyLogoutQuery } from '@/redux/api/authApi'
 const Navbar = ({ typeTshirt, setTypeTshirt }) => {
 
     // const navigate = useNavigate();
-    // const { isLoading} = useGetMeQuery();
+    // const { isLoading,data} = useGetMeQuery();
     // console.log('isLoading:',isLoading);
+    // console.log('data:',data);
     
-    const [logout, {data}] = useLazyLogoutQuery();
+    // const [logout, {data}] = useLazyLogoutQuery();
     // const { user } = useSelector((state) => state.auth);
 
     const logoutHandler = async () => {
