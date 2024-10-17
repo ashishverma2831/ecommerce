@@ -31,17 +31,16 @@ import { useLazyLogoutQuery } from '@/redux/api/authApi'
 
 const Navbar = ({ typeTshirt, setTypeTshirt }) => {
 
-    // const navigate = useNavigate();
-    // const { isLoading,data} = useGetMeQuery();
-    // console.log('isLoading:',isLoading);
-    // console.log('data:',data);
+    const navigate = useNavigate();
+    const { isLoading } = useGetMeQuery();
+    console.log('isLoading:',isLoading);
     
-    // const [logout, {data}] = useLazyLogoutQuery();
-    // const { user } = useSelector((state) => state.auth);
+    const [logout] = useLazyLogoutQuery();
+    const { user } = useSelector((state) => state.auth);
 
     const logoutHandler = async () => {
         await logout();
-        // navigate(0);
+        navigate(0);
     };
 
     const [searchInput, setsearchInput] = useState(false);
@@ -54,7 +53,7 @@ const Navbar = ({ typeTshirt, setTypeTshirt }) => {
                     <ul className='flex gap-8 items-center'>
                         <NavLink to={'/'} >Home</NavLink>
                         <NavLink to={`/shop`} >Shop</NavLink>
-                        {/* <NavLink>{user?'User':'No user'}</NavLink> */}
+                        <NavLink>{user?'User':'No User'}</NavLink>
                         <NavLink to={'/design-your-tshirt'} >Design </NavLink>
                     </ul>
                 </div>
@@ -95,7 +94,7 @@ const Navbar = ({ typeTshirt, setTypeTshirt }) => {
                             ) : <Link to={'/login'}><i className="fa-solid fa-user"></i></Link>
                         } */}
                         <Link to={'/login'}><i className="fa-solid fa-user"></i></Link>
-                        {/* <Link to={'/'} onClick={logoutHandler} >Logout</Link> */}
+                        <Link to={'/'} onClick={logoutHandler} >Logout</Link>
                     </ul>
                 </div>
                 <div className='block md:hidden'>
