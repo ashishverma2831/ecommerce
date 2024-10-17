@@ -8,6 +8,7 @@ const errorMiddleware = require('./middleware/error');
 
 const app = express();
 const port = process.env.PORT || 3000;
+// app.set('trust proxy', 1);
 
 // handle uncaught exceptions
 process.on('uncaughtException', err => {
@@ -20,7 +21,6 @@ process.on('uncaughtException', err => {
 app.use(express.json());
 app.use(cors({
     origin: process.env.CLIENT_URL,
-    credentials: true
 }));
 app.use(cookieParser());
 

@@ -3,7 +3,9 @@ import { userApi } from "./userApi";
 
 export const authApi = createApi({
   reducerPath: "authApi",
-  baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:3000/api/users' }),
+  baseQuery: fetchBaseQuery({
+    baseUrl: 'http://localhost:3000/api/users',
+  }),
   endpoints: (builder) => ({
     register: builder.mutation({
       query(body) {
@@ -22,14 +24,14 @@ export const authApi = createApi({
       //   }
       // },
     }),
-    login: builder.mutation({
-      query(body) {
-        return {
-          url: "/login",
-          method: "POST",
-          body,
-        };
-      },
+    // login: builder.mutation({
+    //   query(body) {
+    //     return {
+    //       url: "/login",
+    //       method: "POST",
+    //       body,
+    //     };
+    //   },
       // async onQueryStarted(args, { dispatch, queryFulfilled }) {
       //   try {
       //     await queryFulfilled;
@@ -38,7 +40,7 @@ export const authApi = createApi({
       //     console.log(error);
       //   }
       // },
-    }),
+    // }),
     logout: builder.query({
       query: () => "/logout",
     }),

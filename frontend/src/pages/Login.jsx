@@ -23,6 +23,7 @@ import { useNavigate } from 'react-router-dom'
 import { useLoginMutation } from '@/redux/api/authApi'
 import Register from './Signup'
 import { useSelector } from 'react-redux'
+import { Cookies, useCookies } from 'react-cookie'
 
 const loginSchema = yup.object().shape({
     email: yup.string().email().required('Email is required'),
@@ -31,29 +32,39 @@ const loginSchema = yup.object().shape({
 
 const Login = () => {
 
-    const [ login, { error, isLoading, data}] = useLoginMutation();
+    // const [ login, { error, isLoading, data}] = useLoginMutation();
     // const { isAuthenticated } = useSelector((state) => state.auth);
-    console.log('data:',data);
+    // console.log('data:',data);
+    // console.log(data?.token);
+    
 
+    const [cookies,setCookie] = useCookies(['token']);
+    console.log('cookies:',cookies);
+    
 
     const [loginPassword, setLoginPassword] = useState(true);
     const navigate = useNavigate();
 
-    useEffect(() => {
-        if(data){
-            localStorage.setItem('token',data?.token);
-            sessionStorage.setItem('token',data?.token);
-
-            enqueueSnackbar('User Logged In Successfully!',{variant:'success'})
-            navigate('/');
-        }
-        // if(isAuthenticated){
-        //     navigate('/');
-        // }
-        if(error){
-            enqueueSnackbar(`${error?.data?.message}`,{variant:'error'})
-        }
-    }, [error,data])
+    // useEffect(() => {
+    //     if(data){
+    //         // localStorage.setItem('token',data?.token);
+    //         // sessionStorage.setItem('token',data?.token);
+    //         // setCookie('token',data?.token,{
+    //         //     httpOnly: true,
+    //         //     expires: new Date(
+    //         //         Date.now() + 7 * 24 * 60 * 60 * 1000
+    //         //     )
+    //         // });
+    //         enqueueSnackbar('User Logged In Successfully!',{variant:'success'})
+    //         navigate('/');
+    //     }
+    //     // if(isAuthenticated){
+    //     //     navigate('/');
+    //     // }
+    //     if(error){
+    //         enqueueSnackbar(`${error?.data?.message}`,{variant:'error'})
+    //     }
+    // }, [error])
 
     const loginForm = useFormik({
         initialValues: {
@@ -61,32 +72,32 @@ const Login = () => {
             password: ''
         },
         onSubmit: async (values) => {
+            // await login(values);
             console.log(values);
-            await login(values);
-            // const res = await fetch('http://localhost:3000/api/users/login',{
-            //     method: 'POST',
-            //     headers: {
-            //         'Content-Type': 'application/json',
-            //     },
-            //     body: JSON.stringify(values)
-            // });
-            // console.log(res.status);
 
-            // if(res.status === 200){
-            //     console.log('User Logged In Successfully!');
-            //     localStorage.setItem('token',data?.token);
-            //     enqueueSnackbar('User Logged In Successfully!',{variant:'success'})
-            //     navigate('/');
-            // }
-            // else if(res.status === 400){
-            //     enqueueSnackbar('User does not exist!',{variant:'error'})
-            // }
-            // else if(res.status === 401){
-            //     enqueueSnackbar('Incorrect Password!',{variant:'error'})
-            // }
-            // else{
-            //     enqueueSnackbar('User Login Failed!',{variant:'error'})
-            // }
+            const res = await fetch('http://localhost:3000/api/users/login',{
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Credentials': 'include'
+                },
+                body: JSON.stringify(values)
+            })
+            const data = await res.json();
+            console.log('data:',data);
+            if(data.success){
+                setCookie('token',data.token,{
+                    httpOnly: true,
+                    expires: new Date(
+                        Date.now() + 7 * 24 * 60 * 60 * 1000
+                    )
+                });
+                enqueueSnackbar('User Logged In Successfully!',{variant:'success'})
+                navigate('/');
+            }
+            if(data.error){
+                enqueueSnackbar(`${data?.message}`,{variant:'error'})
+            }
         },
         validationSchema: loginSchema
     })
@@ -124,7 +135,8 @@ const Login = () => {
                                     </div>
                                 </CardContent>
                                 <CardFooter>
-                                    <Button className='bg-color_1 rounded-sm hover:bg-color_2 text-background_1' type='submit' disabled={isLoading} >{isLoading?'Authenticating...':'Login'}</Button>
+                                    {/* <Button className='bg-color_1 rounded-sm hover:bg-color_2 text-background_1' type='submit' disabled={isLoading} >{isLoading?'Authenticating...':'Login'}</Button> */}
+                                    <Button className='bg-color_1 rounded-sm hover:bg-color_2 text-background_1' type='submit'>Login</Button>
                                 </CardFooter>
                             </Card>
                         </form>
