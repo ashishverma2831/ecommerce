@@ -8,6 +8,8 @@ const sendToken = (user, statusCode, res) => {
             Date.now() + process.env.COOKIE_EXPIRATION * 24 * 60 * 60 * 1000
         ),
         httpOnly: true,
+        secure: process.env.NODE_ENV === 'PRODUCTION',
+        sameSite: 'Strict'
     };
     res.status(statusCode).cookie('token', token, options).json({
         success: true,

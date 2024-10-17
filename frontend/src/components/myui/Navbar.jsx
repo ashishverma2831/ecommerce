@@ -41,7 +41,7 @@ const Navbar = ({ typeTshirt, setTypeTshirt }) => {
 
     const logoutHandler = async () => {
         await logout();
-        navigate(0);
+        // navigate(0);
     };
 
     const [searchInput, setsearchInput] = useState(false);

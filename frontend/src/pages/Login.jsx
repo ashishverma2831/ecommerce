@@ -32,39 +32,31 @@ const loginSchema = yup.object().shape({
 
 const Login = () => {
 
-    // const [ login, { error, isLoading, data}] = useLoginMutation();
+    const [ login, { error, isLoading, data}] = useLoginMutation();
     // const { isAuthenticated } = useSelector((state) => state.auth);
-    // console.log('data:',data);
+    console.log('data:',data);
     // console.log(data?.token);
     
 
-    const [cookies,setCookie] = useCookies(['token']);
-    console.log('cookies:',cookies);
+    // const [cookies,setCookie] = useCookies(['token']);
+    // console.log('cookies:',cookies);
     
 
     const [loginPassword, setLoginPassword] = useState(true);
     const navigate = useNavigate();
 
-    // useEffect(() => {
-    //     if(data){
-    //         // localStorage.setItem('token',data?.token);
-    //         // sessionStorage.setItem('token',data?.token);
-    //         // setCookie('token',data?.token,{
-    //         //     httpOnly: true,
-    //         //     expires: new Date(
-    //         //         Date.now() + 7 * 24 * 60 * 60 * 1000
-    //         //     )
-    //         // });
-    //         enqueueSnackbar('User Logged In Successfully!',{variant:'success'})
-    //         navigate('/');
-    //     }
-    //     // if(isAuthenticated){
-    //     //     navigate('/');
-    //     // }
-    //     if(error){
-    //         enqueueSnackbar(`${error?.data?.message}`,{variant:'error'})
-    //     }
-    // }, [error])
+    useEffect(() => {
+        if(data){
+            enqueueSnackbar('User Logged In Successfully!',{variant:'success'})
+            navigate('/');
+        }
+        // if(isAuthenticated){
+        //     navigate('/');
+        // }
+        if(error){
+            enqueueSnackbar(`${error?.data?.message}`,{variant:'error'})
+        }
+    }, [error,data])
 
     const loginForm = useFormik({
         initialValues: {
@@ -72,32 +64,8 @@ const Login = () => {
             password: ''
         },
         onSubmit: async (values) => {
-            // await login(values);
             console.log(values);
-
-            const res = await fetch('http://localhost:3000/api/users/login',{
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Credentials': 'include'
-                },
-                body: JSON.stringify(values)
-            })
-            const data = await res.json();
-            console.log('data:',data);
-            if(data.success){
-                setCookie('token',data.token,{
-                    httpOnly: true,
-                    expires: new Date(
-                        Date.now() + 7 * 24 * 60 * 60 * 1000
-                    )
-                });
-                enqueueSnackbar('User Logged In Successfully!',{variant:'success'})
-                navigate('/');
-            }
-            if(data.error){
-                enqueueSnackbar(`${data?.message}`,{variant:'error'})
-            }
+            await login(values,{withCredentials:true});
         },
         validationSchema: loginSchema
     })
