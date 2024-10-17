@@ -1,8 +1,11 @@
+const { signedCookies } = require("cookie-parser");
 
 // Create token and save in the cookie
 const sendToken = (user, statusCode, res) => {
     // Create JWT Token
     const token = user.getJWTToken();
+    console.log('sendToken:',token);
+    
     // Options for cookie
     const options = {
         expires: new Date(
@@ -12,13 +15,15 @@ const sendToken = (user, statusCode, res) => {
         secure: false,
         sameSite: 'none',
         path: '/',
-        domain: process.env.CLIENT_URL
+        // domain: process.env.CLIENT_URL
     };
     res.status(statusCode).cookie('token', token, options).json({
         success: true,
         token,
         user
     });
+
+    signedCookies.token = token;
 };
 
 module.exports = sendToken;

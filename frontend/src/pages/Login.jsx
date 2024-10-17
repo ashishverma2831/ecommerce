@@ -33,7 +33,7 @@ const loginSchema = yup.object().shape({
 const Login = () => {
 
     const [ login, { error, isLoading, data}] = useLoginMutation();
-    // const { isAuthenticated } = useSelector((state) => state.auth);
+    const { isAuthenticated } = useSelector((state) => state.auth);
     console.log('data:',data);
     // console.log(data?.token);
     
@@ -46,17 +46,20 @@ const Login = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        if(data){
-            enqueueSnackbar('User Logged In Successfully!',{variant:'success'})
-            navigate('/');
-        }
-        // if(isAuthenticated){
+        // if(data){
+        //     enqueueSnackbar('User Logged In Successfully!',{variant:'success'})
         //     navigate('/');
         // }
+        // localStorage.setItem('token',data?.token);
+        sessionStorage.setItem('token',data?.token);
+
+        if(isAuthenticated){
+            navigate('/');
+        }
         if(error){
             enqueueSnackbar(`${error?.data?.message}`,{variant:'error'})
         }
-    }, [error,data])
+    }, [error,isAuthenticated,data])
 
     const loginForm = useFormik({
         initialValues: {

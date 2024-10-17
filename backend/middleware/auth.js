@@ -4,8 +4,9 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/userModel');
 
 const isAuthenticatedUser = catchAsyncErrors(async (req, res, next) => {
-    const { token } = req.cookies;
-    console.log(token);
+    const token  = req.cookies.token;
+    // const token = sessionStorage.getItem('token'); 
+    console.log("adsas "+token);
     
     if (!token) {
         return next(new ErrorHandler('Login first to access this resource.', 401));
@@ -14,6 +15,7 @@ const isAuthenticatedUser = catchAsyncErrors(async (req, res, next) => {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     // console.log(decoded);
     req.user = await User.findById(decoded.id);
+    console.log(req.user);
     
     // req.user = user;
     next();

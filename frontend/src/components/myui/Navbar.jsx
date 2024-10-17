@@ -27,21 +27,28 @@ import Search from './Search'
 import { useGetMeQuery } from '@/redux/api/userApi'
 import { useSelector } from 'react-redux'
 import { useLazyLogoutQuery } from '@/redux/api/authApi'
+import { enqueueSnackbar } from 'notistack'
 
 
 const Navbar = ({ typeTshirt, setTypeTshirt }) => {
 
     const navigate = useNavigate();
-    const { isLoading } = useGetMeQuery();
-    console.log('isLoading:',isLoading);
+    const { isLoading, error } = useGetMeQuery();
+    // console.log('isLoading:',isLoading);
     
     const [logout] = useLazyLogoutQuery();
     const { user } = useSelector((state) => state.auth);
 
-    const logoutHandler = async () => {
-        await logout();
+    const logoutHandler = () => {
+        logout();
         navigate(0);
     };
+
+    useEffect(() => {
+        if(error){
+            enqueueSnackbar(`${error?.data?.message}`,{variant:'error'})
+        }
+    }, [error])
 
     const [searchInput, setsearchInput] = useState(false);
 
