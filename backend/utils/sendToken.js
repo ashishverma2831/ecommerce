@@ -23,7 +23,7 @@ const sendToken = (user, statusCode, res) => {
         user
     });
 
-    signedCookies.token = token;
+    // signedCookies.token = token;
 };
 
 module.exports = sendToken;

@@ -50,8 +50,8 @@ const Login = () => {
         //     enqueueSnackbar('User Logged In Successfully!',{variant:'success'})
         //     navigate('/');
         // }
-        // localStorage.setItem('token',data?.token);
-        sessionStorage.setItem('token',data?.token);
+        localStorage.setItem('token',data?.token);
+        // sessionStorage.setItem('token',data?.token);
 
         if(isAuthenticated){
             navigate('/');
@@ -68,7 +68,12 @@ const Login = () => {
         },
         onSubmit: async (values) => {
             console.log(values);
-            await login(values,{withCredentials:true});
+            await login(values,{
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`
+                }
+            });
         },
         validationSchema: loginSchema
     })

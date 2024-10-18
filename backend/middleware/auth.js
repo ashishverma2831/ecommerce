@@ -5,7 +5,6 @@ const User = require('../models/userModel');
 
 const isAuthenticatedUser = catchAsyncErrors(async (req, res, next) => {
     const token  = req.cookies.token;
-    // const token = sessionStorage.getItem('token'); 
     console.log("adsas "+token);
     
     if (!token) {
