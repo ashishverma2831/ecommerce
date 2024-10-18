@@ -24,31 +24,31 @@ import { Input } from '../ui/input'
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from '../ui/dropdown-menu'
 import Search from './Search'
-import { useGetMeQuery } from '@/redux/api/userApi'
-import { useSelector } from 'react-redux'
-import { useLazyLogoutQuery } from '@/redux/api/authApi'
+// import { useGetMeQuery } from '@/redux/api/userApi'
+// import { useSelector } from 'react-redux'
+// import { useLazyLogoutQuery } from '@/redux/api/authApi'
 import { enqueueSnackbar } from 'notistack'
 
 
 const Navbar = ({ typeTshirt, setTypeTshirt }) => {
 
-    const navigate = useNavigate();
-    const { isLoading, error } = useGetMeQuery();
-    // console.log('isLoading:',isLoading);
+    // const navigate = useNavigate();
+    // const { isLoading, error } = useGetMeQuery();
+    // // console.log('isLoading:',isLoading);
     
-    const [logout] = useLazyLogoutQuery();
-    const { user } = useSelector((state) => state.auth);
+    // const [logout] = useLazyLogoutQuery();
+    // const { user } = useSelector((state) => state.auth);
 
-    const logoutHandler = () => {
-        logout();
-        navigate(0);
-    };
+    // const logoutHandler = () => {
+    //     logout();
+    //     navigate(0);
+    // };
 
-    useEffect(() => {
-        if(error){
-            enqueueSnackbar(`${error?.data?.message}`,{variant:'error'})
-        }
-    }, [error])
+    // useEffect(() => {
+    //     if(error){
+    //         enqueueSnackbar(`${error?.data?.message}`,{variant:'error'})
+    //     }
+    // }, [error])
 
     const [searchInput, setsearchInput] = useState(false);
 
@@ -60,7 +60,7 @@ const Navbar = ({ typeTshirt, setTypeTshirt }) => {
                     <ul className='flex gap-8 items-center'>
                         <NavLink to={'/'} >Home</NavLink>
                         <NavLink to={`/shop`} >Shop</NavLink>
-                        <NavLink>{user?'User':'No User'}</NavLink>
+                        {/* <NavLink>{user?'User':'No User'}</NavLink> */}
                         <NavLink to={'/design-your-tshirt'} >Design </NavLink>
                     </ul>
                 </div>
@@ -101,7 +101,7 @@ const Navbar = ({ typeTshirt, setTypeTshirt }) => {
                             ) : <Link to={'/login'}><i className="fa-solid fa-user"></i></Link>
                         } */}
                         <Link to={'/login'}><i className="fa-solid fa-user"></i></Link>
-                        <Link to={'/'} onClick={logoutHandler} >Logout</Link>
+                        {/* <Link to={'/'} onClick={logoutHandler} >Logout</Link> */}
                     </ul>
                 </div>
                 <div className='block md:hidden'>

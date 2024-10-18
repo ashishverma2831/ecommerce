@@ -20,7 +20,7 @@ import { useFormik } from 'formik'
 import * as yup from 'yup'
 import { enqueueSnackbar } from 'notistack'
 import { useNavigate } from 'react-router-dom'
-import { useLoginMutation } from '@/redux/api/authApi'
+// import { useLoginMutation } from '@/redux/api/authApi'
 import Register from './Signup'
 import { useSelector } from 'react-redux'
 import { Cookies, useCookies } from 'react-cookie'
@@ -32,34 +32,24 @@ const loginSchema = yup.object().shape({
 
 const Login = () => {
 
-    const [ login, { error, isLoading, data}] = useLoginMutation();
-    const { isAuthenticated } = useSelector((state) => state.auth);
-    console.log('data:',data);
-    // console.log(data?.token);
-    
-
-    // const [cookies,setCookie] = useCookies(['token']);
-    // console.log('cookies:',cookies);
-    
-
     const [loginPassword, setLoginPassword] = useState(true);
     const navigate = useNavigate();
 
-    useEffect(() => {
-        // if(data){
-        //     enqueueSnackbar('User Logged In Successfully!',{variant:'success'})
-        //     navigate('/');
-        // }
-        localStorage.setItem('token',data?.token);
-        // sessionStorage.setItem('token',data?.token);
+    // useEffect(() => {
+    //     // if(data){
+    //     //     enqueueSnackbar('User Logged In Successfully!',{variant:'success'})
+    //     //     navigate('/');
+    //     // }
+    //     // localStorage.setItem('token',data?.token);
+    //     // sessionStorage.setItem('token',data?.token);
 
-        if(isAuthenticated){
-            navigate('/');
-        }
-        if(error){
-            enqueueSnackbar(`${error?.data?.message}`,{variant:'error'})
-        }
-    }, [error,isAuthenticated,data])
+    //     if(isAuthenticated){
+    //         navigate('/');
+    //     }
+    //     if(error){
+    //         enqueueSnackbar(`${error?.data?.message}`,{variant:'error'})
+    //     }
+    // }, [error,isAuthenticated,data])
 
     const loginForm = useFormik({
         initialValues: {
@@ -68,12 +58,12 @@ const Login = () => {
         },
         onSubmit: async (values) => {
             console.log(values);
-            await login(values,{
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${localStorage.getItem('token')}`
-                }
-            });
+            // await login(values,{
+            //     headers: {
+            //         'Content-Type': 'application/json',
+            //         'Authorization': `Bearer ${localStorage.getItem('token')}`
+            //     }
+            // });
         },
         validationSchema: loginSchema
     })

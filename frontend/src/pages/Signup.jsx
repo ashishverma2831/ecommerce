@@ -20,7 +20,7 @@ import { useFormik } from 'formik'
 import * as yup from 'yup'
 import { enqueueSnackbar } from 'notistack'
 import { useNavigate } from 'react-router-dom'
-import { useRegisterMutation } from '@/redux/api/authApi'
+// import { useRegisterMutation } from '@/redux/api/authApi'
 import { useSelector } from 'react-redux'
 
 const registerSchema = yup.object().shape({
@@ -32,23 +32,23 @@ const registerSchema = yup.object().shape({
 
 const Signup = () => {
 
-    const [register, {isLoading,data,error}] = useRegisterMutation();
-    const [registerPassword, setRegisterPassword] = useState(true);
-    const navigate = useNavigate();
-    const { isAuthenticated } = useSelector((state) => state.auth);
+    // const [register, {isLoading,data,error}] = useRegisterMutation();
+    // const [registerPassword, setRegisterPassword] = useState(true);
+    // const navigate = useNavigate();
+    // const { isAuthenticated } = useSelector((state) => state.auth);
 
-    useEffect(() => {
-        // if(data){
-        //     enqueueSnackbar('User Registered Successfully!',{variant:'success'})
-        //     navigate('/');
-        // }
-        if (isAuthenticated) {
-            navigate("/");
-        }
-        if(error){
-            enqueueSnackbar(`${error?.data?.message}`,{variant:'error'})
-        }
-    }, [error,isAuthenticated])
+    // useEffect(() => {
+    //     // if(data){
+    //     //     enqueueSnackbar('User Registered Successfully!',{variant:'success'})
+    //     //     navigate('/');
+    //     // }
+    //     if (isAuthenticated) {
+    //         navigate("/");
+    //     }
+    //     if(error){
+    //         enqueueSnackbar(`${error?.data?.message}`,{variant:'error'})
+    //     }
+    // }, [error,isAuthenticated])
 
     const registerForm = useFormik({
         initialValues: {
@@ -58,7 +58,7 @@ const Signup = () => {
         },
         onSubmit: async (values,{setSubmitting,resetForm}) => {
             console.log(values);
-            register(values);
+            // register(values);
         },
         validationSchema: registerSchema
     })
