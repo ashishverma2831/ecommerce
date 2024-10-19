@@ -99,6 +99,8 @@ const userController = {
     }),
     getUserProfile: catchAsyncErrors(async (req, res, next) => {
         const user = await User.findById(req?.user?._id);
+        console.log('user:',user);
+        if (!user) return next(new ErrorHandler('User not found', 404));
         res.status(200).json({
             message: 'User profile',
             user

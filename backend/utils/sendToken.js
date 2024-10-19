@@ -1,4 +1,3 @@
-const { signedCookies } = require("cookie-parser");
 
 // Create token and save in the cookie
 const sendToken = (user, statusCode, res) => {

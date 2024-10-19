@@ -4,20 +4,23 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/userModel');
 
 const isAuthenticatedUser = catchAsyncErrors(async (req, res, next) => {
-    const token  = req.cookies.token;
+    let token;
+    token = req.cookies.token;
     console.log("adsas "+token);
-    
-    if (!token) {
+
+    if(token){
+        try {
+            const decoded = jwt.verify(token, process.env.JWT_SECRET);
+            req.user = await User.findById(decoded.id);
+            console.log("user"+req.user);
+            next();
+        } catch (error) {
+            console.log(error);
+            return next(new ErrorHandler('Token failed, you can\'t have access.', 401));
+        }
+    }else{
         return next(new ErrorHandler('Login first to access this resource.', 401));
     }
-
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    // console.log(decoded);
-    req.user = await User.findById(decoded.id);
-    console.log(req.user);
-    
-    // req.user = user;
-    next();
 });
 
 // Handling user roles

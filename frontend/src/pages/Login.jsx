@@ -20,10 +20,9 @@ import { useFormik } from 'formik'
 import * as yup from 'yup'
 import { enqueueSnackbar } from 'notistack'
 import { useNavigate } from 'react-router-dom'
-// import { useLoginMutation } from '@/redux/api/authApi'
 import Register from './Signup'
 import { useSelector } from 'react-redux'
-import { Cookies, useCookies } from 'react-cookie'
+import { useLoginMutation } from '@/redux/api/authApi'
 
 const loginSchema = yup.object().shape({
     email: yup.string().email().required('Email is required'),
@@ -51,6 +50,20 @@ const Login = () => {
     //     }
     // }, [error,isAuthenticated,data])
 
+
+    const [login, { isLoading, error, data }] = useLoginMutation();
+    
+
+    useEffect(() => {
+        if(data){
+            enqueueSnackbar('User Logged In Successfully!',{variant:'success'})
+            navigate('/');
+        }
+        if(error){
+            enqueueSnackbar(`${error?.data?.message}`,{variant:'error'})
+        }
+    }, [error,data])
+
     const loginForm = useFormik({
         initialValues: {
             email: '',
@@ -58,15 +71,31 @@ const Login = () => {
         },
         onSubmit: async (values) => {
             console.log(values);
-            // await login(values,{
+            login(values);
+            // login(values);
+            // const res = await fetch('http://localhost:3000/api/users/login',{
+            //     method: 'POST',
             //     headers: {
             //         'Content-Type': 'application/json',
-            //         'Authorization': `Bearer ${localStorage.getItem('token')}`
-            //     }
-            // });
+            //     },
+            //     body: JSON.stringify(values)
+            // })
+
+            // const data = await res.json();
+            // console.log(data);
+
+            // if(res.status === 200){
+            //     enqueueSnackbar('User Logged In Successfully!',{variant:'success'})
+            //     localStorage.setItem('token',data?.token);
+            //     navigate('/');
+            // }else{
+            //     enqueueSnackbar(`${data?.message}`,{variant:'error'})
+            // }
         },
         validationSchema: loginSchema
     })
+
+
 
     return (
         <>
