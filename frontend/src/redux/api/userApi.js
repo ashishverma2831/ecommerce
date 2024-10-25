@@ -3,7 +3,7 @@ import { setIsAuthenticated, setUser } from "../features/userSlice";
 
 export const userApi = createApi({
   reducerPath: "userApi",
-  tagTypes: ['User'],
+  // tagTypes: ['User'],
   baseQuery: fetchBaseQuery({
     baseUrl: 'http://localhost:3000/api/users',
   }),

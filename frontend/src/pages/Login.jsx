@@ -21,7 +21,7 @@ import * as yup from 'yup'
 import { enqueueSnackbar } from 'notistack'
 import { useNavigate } from 'react-router-dom'
 import Register from './Signup'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useLoginMutation } from '@/redux/api/authApi'
 
 const loginSchema = yup.object().shape({
@@ -34,21 +34,7 @@ const Login = () => {
     const [loginPassword, setLoginPassword] = useState(true);
     const navigate = useNavigate();
 
-    // useEffect(() => {
-    //     // if(data){
-    //     //     enqueueSnackbar('User Logged In Successfully!',{variant:'success'})
-    //     //     navigate('/');
-    //     // }
-    //     // localStorage.setItem('token',data?.token);
-    //     // sessionStorage.setItem('token',data?.token);
-
-    //     if(isAuthenticated){
-    //         navigate('/');
-    //     }
-    //     if(error){
-    //         enqueueSnackbar(`${error?.data?.message}`,{variant:'error'})
-    //     }
-    // }, [error,isAuthenticated,data])
+    // const dispatch = useDispatch();
 
 
     const [login, { isLoading, error, data }] = useLoginMutation();
@@ -72,25 +58,6 @@ const Login = () => {
         onSubmit: async (values) => {
             console.log(values);
             login(values);
-            // login(values);
-            // const res = await fetch('http://localhost:3000/api/users/login',{
-            //     method: 'POST',
-            //     headers: {
-            //         'Content-Type': 'application/json',
-            //     },
-            //     body: JSON.stringify(values)
-            // })
-
-            // const data = await res.json();
-            // console.log(data);
-
-            // if(res.status === 200){
-            //     enqueueSnackbar('User Logged In Successfully!',{variant:'success'})
-            //     localStorage.setItem('token',data?.token);
-            //     navigate('/');
-            // }else{
-            //     enqueueSnackbar(`${data?.message}`,{variant:'error'})
-            // }
         },
         validationSchema: loginSchema
     })

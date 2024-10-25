@@ -62,6 +62,7 @@ const Navbar = ({ typeTshirt, setTypeTshirt }) => {
                         <NavLink to={`/shop`} >Shop</NavLink>
                         {/* <NavLink>{user?'User':'No User'}</NavLink> */}
                         <NavLink to={'/design-your-tshirt'} >Design </NavLink>
+                        <NavLink to={'/contact-us'}>Contact Us</NavLink>
                     </ul>
                 </div>
                 <div className='hidden md:block text-color_2'>
@@ -121,6 +122,7 @@ const Navbar = ({ typeTshirt, setTypeTshirt }) => {
                                             {/* <NavLink to={'/login'} >Login</NavLink> */}
                                             <NavLink to={'/shop'} >Shop</NavLink>
                                             <NavLink to={'/design-your-tshirt'} >Design </NavLink>
+                                            <NavLink to={'/contact-us'}>Contact Us</NavLink>
                                         </ul>
                                     </div>
                                     <div className=''>
@@ -138,6 +140,7 @@ const Navbar = ({ typeTshirt, setTypeTshirt }) => {
                                             }
                                             <Link to={'/cart'}><i className="fa-solid fa-cart-shopping"></i></Link>
                                             <Link to={'/login'}><i className="fa-solid fa-user"></i></Link>
+                                            
                                         </ul>
                                     </div>
                                 </SheetDescription>

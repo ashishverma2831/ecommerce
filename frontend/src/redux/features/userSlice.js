@@ -7,8 +7,8 @@ const initialState = {
 };
 
 export const userSlice = createSlice({
-  name: "userSlice",
-  initialState,
+  name: "user",
+  initialState: initialState,
   reducers: {
     setToken: (state, action) => {
       state.token = action.payload;
