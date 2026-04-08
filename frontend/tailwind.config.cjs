@@ -9,8 +9,12 @@ module.exports = {
   ],
   prefix: "",
   theme: {
-    listStyleType:{
-      number:'listStyleType',
+    listStyleType: {
+      number: 'decimal',  // Fixed: Use valid CSS value
+      // Or alternatively:
+      // number: 'decimal-leading-zero',
+      // disc: 'disc',
+      // square: 'square',
     },
     container: {
       center: true,
